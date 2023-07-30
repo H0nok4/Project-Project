@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rnzSElhp5g+rxhFYWW06a0wx/Kh5Ym8h4lvYaecwhA2fZWMDOYFN2MrIbMzY6RkojqR71PDR4yza4Z9CN3LHng==",
+  "dgSpecHash": "s44E4m8UrZWUcScW/0YyZGFNLwrPI07jiQ4WzDn6vzy7pXCpLXYjP90apKoDvDlcHlLyWdjF4c5T8a+dNoRnhg==",
   "success": true,
-  "projectFilePath": "D:\\UnityProject\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
+  "projectFilePath": "D:\\UnityProject\\Project-Project.git\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\H0nok4\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\H0nok4\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

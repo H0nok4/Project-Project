@@ -12,11 +12,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace CsvParser {
     class Program {
         //临时，等晚上后打包成程序去运行的话，需要改成相对路径
-
-        static string csvDir = @"..\..\..\..\..\Table"; // 指定CSV文件所在目录
-        static string configTypeCSDir = @"..\..\..\..\..\Output\ConfigType.cs";
-        static string outputDir = @"..\..\..\..\..\Output"; // 指定输出目录
-        static string outputXMLDir = @"..\..\..\..\..\Output\xml";// 指定XML输出目录
+        static string _csvDir = @"..\..\..\..\..\Table"; // 指定CSV文件所在目录
+        static string _configTypeCSDir = @"..\..\..\..\..\Output\ConfigType.cs";
+        static string _outputDir = @"..\..\..\..\..\Output"; // 指定输出目录
+        static string _outputXMLDir = @"..\..\..\..\..\Output\xml";// 指定XML输出目录
+        static string _gameXMLDir = @"..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
+        static string _gameConfigTypeDir = @"..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
         static void Main(string[] args) {
             Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
             //先生成Type的文件
@@ -24,6 +25,33 @@ namespace CsvParser {
 
             //根据生成的Type文件，使用Roslyn来生成对应的List数据
             GenerateData();
+
+            //将生成出来的代码和XML文件拷贝到游戏工程中
+            CopyToGameProject();
+        }
+
+        private static void CopyToGameProject()
+        {
+            //先删除游戏工程中的文件
+            if (Directory.Exists(_gameXMLDir))
+            {
+                Directory.Delete(_gameXMLDir,true);
+            }
+
+            if (File.Exists(_gameConfigTypeDir + "ConfigType.cs"))
+            {
+                File.Delete(_gameConfigTypeDir + "ConfigType.cs");
+            }
+
+            //拷贝文件
+            Directory.CreateDirectory(_gameXMLDir);
+            foreach (var file in Directory.GetFiles(_outputXMLDir))
+            {
+                File.Copy(file, _gameXMLDir + Path.GetFileName(file));
+            }
+
+            Directory.CreateDirectory(_gameConfigTypeDir);
+            File.Copy(_configTypeCSDir,_gameConfigTypeDir + "ConfigType.cs");
         }
 
         static void GenerateConfigTypeScriptFile()
@@ -32,7 +60,7 @@ namespace CsvParser {
 
             List<ClassDeclarationSyntax> classes = new List<ClassDeclarationSyntax>();
 
-            foreach (string csvFile in Directory.GetFiles(csvDir, "*.csv")) {
+            foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
                 string className = Path.GetFileNameWithoutExtension(csvFile);
                 var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
                 // 解析CSV文件
@@ -82,7 +110,7 @@ namespace CsvParser {
                 .WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType")).WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(classes))))
                 .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
 
-            string outputFile = Path.Combine(outputDir, "ConfigType.cs");
+            string outputFile = Path.Combine(_outputDir, "ConfigType.cs");
             using (var writer = new StreamWriter(outputFile)) {
                 output.NormalizeWhitespace().WriteTo(writer);
             }
@@ -92,7 +120,7 @@ namespace CsvParser {
 
         static void GenerateData() {
             //通过Roslyn加载ConfigType.cs的所有的类，生成对应类的数值
-            var configType = File.ReadAllText(configTypeCSDir);
+            var configType = File.ReadAllText(_configTypeCSDir);
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(configType);
             CSharpCompilation compilation = CSharpCompilation.Create("MyCompilation")
                 .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
@@ -115,7 +143,7 @@ namespace CsvParser {
 
                 Assembly assembly = Assembly.Load(ms.ToArray());
 
-                foreach (string csvFile in Directory.GetFiles(csvDir, "*.csv")) {
+                foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
                     var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
                     //读取CSV文件，然后再在ConfigType.cs中找到对应的类，然后生成对应的数据
                     string className = Path.GetFileNameWithoutExtension(csvFile);
@@ -144,11 +172,11 @@ namespace CsvParser {
                             using (XmlWriter writer = XmlWriter.Create(xmlMs, new XmlWriterSettings() { Indent = true, IndentChars = "\t" })) {
                                 serializer.Serialize(writer, obj);
                                 string xml = writer.ToString();
-                                if (!Directory.Exists(outputXMLDir)) {
-                                    Directory.CreateDirectory(outputXMLDir);
+                                if (!Directory.Exists(_outputXMLDir)) {
+                                    Directory.CreateDirectory(_outputXMLDir);
                                 }
 
-                                File.WriteAllBytes(outputXMLDir + $"//{className}.xml", xmlMs.ToArray());
+                                File.WriteAllBytes(_outputXMLDir + $"//{className}.xml", xmlMs.ToArray());
                             }
                         }
 

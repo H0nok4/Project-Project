@@ -1892,11 +1892,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UnityProject\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
+      "projectUniqueName": "D:\\UnityProject\\Project-Project.git\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
       "projectName": "DataManager",
-      "projectPath": "D:\\UnityProject\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
+      "projectPath": "D:\\UnityProject\\Project-Project.git\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\DataManager.csproj",
       "packagesPath": "C:\\Users\\H0nok4\\.nuget\\packages\\",
-      "outputPath": "D:\\UnityProject\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\obj\\",
+      "outputPath": "D:\\UnityProject\\Project-Project.git\\TurnBaseRPG\\DataManager\\DataManager\\DataManager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
