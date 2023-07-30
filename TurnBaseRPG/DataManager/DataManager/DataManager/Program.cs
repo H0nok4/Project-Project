@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -59,6 +60,11 @@ namespace CsvParser {
 
         static void GenerateConfigTypeScriptFile()
         {
+            //CSV表的第一行为数据类型
+            //CSV表的第二行为字段名
+            //CSV表的第三行为注释
+            //CSV表的第四行为若未填写数据时，使用的默认值
+            //CSV表的第五行开始为数据
 
             List<ClassDeclarationSyntax> classes = new List<ClassDeclarationSyntax>();
 
@@ -164,7 +170,27 @@ namespace CsvParser {
                             var typeName = csvFileInstance.Data[1];
                             for (int j = 0; j < typeName.Count; j++) {
                                 FieldInfo property = classType.GetField(typeName[j]);
-                                property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[i][j], property.FieldType));
+                                if (!string.IsNullOrEmpty(csvFileInstance.Data[i][j]))
+                                {
+                                    //有填值，用填的值
+                                    property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[i][j], property.FieldType));
+      
+                                }
+                                else
+                                {
+                                    //没填值，尝试用默认值
+                                    if (!string.IsNullOrEmpty(csvFileInstance.Data[3][j])) {
+                                        //使用默认值
+                                        property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[3][j], property.FieldType));
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"没有找到对应的默认值，{className}的{typeName[j]}，使用类型的默认值");
+                                        object defaultValue = Activator.CreateInstance(property.FieldType);
+                                        property.SetValue(instance, Convert.ChangeType(defaultValue, property.FieldType));
+                                    }
+                                }
+
                             }
 
                             obj.Add(instance);
