@@ -151,9 +151,6 @@ namespace CsvParser {
 
                 Assembly assembly = Assembly.Load(ms.ToArray());
 
-                 var files = Directory.GetFiles(_csvDir, "*.csv");
-
-
                 foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
                     var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
                     //读取CSV文件，然后再在ConfigType.cs中找到对应的类，然后生成对应的数据
