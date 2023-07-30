@@ -199,7 +199,6 @@ namespace CsvParser {
                         using (MemoryStream xmlMs = new MemoryStream()) {
                             using (XmlWriter writer = XmlWriter.Create(xmlMs, new XmlWriterSettings() { Indent = true, IndentChars = "\t" })) {
                                 serializer.Serialize(writer, obj);
-                                string xml = writer.ToString();
                                 if (!Directory.Exists(_outputXMLDir)) {
                                     Directory.CreateDirectory(_outputXMLDir);
                                 }
