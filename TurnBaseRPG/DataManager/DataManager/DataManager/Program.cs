@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis;
@@ -11,7 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CsvParser {
     class Program {
-        //临时，等晚上后打包成程序去运行的话，需要改成相对路径
+        //临时，等完善后打包成程序去运行的话，需要改成相对路径
         static string _csvDir = @"..\..\..\..\..\Table"; // 指定CSV文件所在目录
         static string _configTypeCSDir = @"..\..\..\..\..\Output\ConfigType.cs";
         static string _outputDir = @"..\..\..\..\..\Output"; // 指定输出目录
@@ -19,6 +20,8 @@ namespace CsvParser {
         static string _gameXMLDir = @"..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
         static string _gameConfigTypeDir = @"..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
         static void Main(string[] args) {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
             //先生成Type的文件
             GenerateConfigTypeScriptFile();
@@ -56,7 +59,6 @@ namespace CsvParser {
 
         static void GenerateConfigTypeScriptFile()
         {
-
 
             List<ClassDeclarationSyntax> classes = new List<ClassDeclarationSyntax>();
 
@@ -143,12 +145,15 @@ namespace CsvParser {
 
                 Assembly assembly = Assembly.Load(ms.ToArray());
 
+                 var files = Directory.GetFiles(_csvDir, "*.csv");
+
+
                 foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
                     var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
                     //读取CSV文件，然后再在ConfigType.cs中找到对应的类，然后生成对应的数据
                     string className = Path.GetFileNameWithoutExtension(csvFile);
 
-                    Type classType = assembly.GetType(className);
+                    Type classType = assembly.GetType("ConfigType." + className);
 
 
                     if (classType != null) {
@@ -231,10 +236,14 @@ namespace CsvParser {
             csvFile.FileName = Path.GetFileNameWithoutExtension(path);
             csvFile.Data = new List<List<string>>();
 
-            var dataArray = File.ReadAllLines(path);
-            foreach (var data in dataArray)
-            {
-                var splitData = data.Split(',');
+            var dataArray = File.ReadAllLines(path,Encoding.GetEncoding("GB2312"));
+
+            foreach (var data in dataArray) {            
+                //WPS会把中文变为GB2312，很烦,把WPS的妈妈偷走，这边手动转一下UTF8
+                byte[] gb2312Bytes = Encoding.GetEncoding("GB2312").GetBytes(data);
+                byte[] utf8Bytes = Encoding.Convert(Encoding.GetEncoding("GB2312"), Encoding.UTF8, gb2312Bytes);
+
+                var splitData = Encoding.UTF8.GetString(utf8Bytes).Split(',');
                 
                 csvFile.Data.Add(splitData.ToList());
             }

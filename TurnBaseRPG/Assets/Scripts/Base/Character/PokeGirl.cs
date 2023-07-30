@@ -19,4 +19,6 @@ public class PokeGirl
     /// 基础属性和种族值相关
     /// </summary>
     public PokeGirlAttributeBase AttributeBase;
+
+
 }

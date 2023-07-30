@@ -25,4 +25,12 @@ namespace ConfigType
         public int SpDefenseGrow; // 每级成长的特殊防御力 
         public int SpeedGrow; // 每级成长的速度 
     }
+
+    public class PokeGirlBase
+    {
+        public int ID; // ID 
+        public string Name; // 名称 
+        public string Describe; // 描述 
+        public int AttributeID; // 使用的属性基础ID 
+    }
 }

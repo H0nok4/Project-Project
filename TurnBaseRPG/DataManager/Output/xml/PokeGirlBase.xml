@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<anyType xsi:type="PokeGirlBase">
+		<ID>1</ID>
+		<Name>测试001</Name>
+		<Describe>这是用来测试的001号角色</Describe>
+		<AttributeID>1</AttributeID>
+	</anyType>
+	<anyType xsi:type="PokeGirlBase">
+		<ID>2</ID>
+		<Name>Test002</Name>
+		<Describe>这是用来测试的001号角色</Describe>
+		<AttributeID>2</AttributeID>
+	</anyType>
+</ArrayOfAnyType>
