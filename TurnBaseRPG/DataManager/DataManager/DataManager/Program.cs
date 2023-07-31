@@ -20,10 +20,16 @@ namespace CsvParser {
         static string _outputXMLDir = @"..\..\..\..\..\Output\xml";// 指定XML输出目录
         static string _gameXMLDir = @"..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
         static string _gameConfigTypeDir = @"..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
+        static string _dataManagerScriptDir = @"..\..\..\..\..\..\Assets\Scripts\Config\"; //游戏的配置代码目录
+        private static List<CSVFile> csvFiles = new List<CSVFile>();
         static void Main(string[] args) {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+            //校验CSV表的主键
+            VerifyCSV();
+
+            //TODO:可能还得校验数据的有效性，比如所填的数据是否是对应的类型
+
             //先生成Type的文件
             GenerateConfigTypeScriptFile();
 
@@ -32,6 +38,176 @@ namespace CsvParser {
 
             //将生成出来的代码和XML文件拷贝到游戏工程中
             CopyToGameProject();
+
+            //开始生成一个DataManager.cs文件，用于游戏内获取所有的游戏配置
+            GenerateDataManagerScriptFile();
+        }
+
+        /// <summary>
+        /// 校验CSV文件
+        /// </summary>
+        private static void VerifyCSV()
+        {
+            foreach (var file in Directory.GetFiles(_csvDir, "*.csv"))
+            {
+                var csvFileInstance = CSVFile.ReadCSVFile(file);
+                csvFiles.Add(csvFileInstance);
+
+                if (!ValidateKeyData(csvFileInstance,out int position))
+                {
+                    Console.WriteLine(csvFileInstance.FileName + $"的主键有重复的，请检查，位置为{position}");
+                }
+
+            }
+
+            bool ValidateKeyData(CSVFile csvFile,out int position)
+            {
+                if (!csvFile.HasKey) {
+                    // 如果没有键列，则直接返回true
+                    position = -2;
+                    return true;
+                }
+
+                HashSet<string> uniqueKeys = new HashSet<string>();
+
+                for (int i = 5; i < csvFile.Data.Count; i++) {
+                    List<string> rowData = csvFile.Data[i];
+                    string key = string.Empty;
+
+                    if (csvFile.SingleKey) {
+                        // 如果只有一个键列，则直接取对应列的数据作为键值
+                        key = rowData[csvFile.Key];
+                    }
+                    else {
+                        // 如果有多个键列，则将所有键列的数据拼接成一个字符串作为键值
+                        foreach (int keyIndex in csvFile.Keys) {
+                            key += rowData[keyIndex];
+                        }
+                    }
+
+                    if (uniqueKeys.Contains(key)) {
+                        // 如果存在重复的键值，则校验失败
+                        position = i;
+                        return false;
+                    }
+
+                    uniqueKeys.Add(key);
+                }
+
+                // 所有键值都是唯一的，校验通过
+                position = -1;
+                return true;
+            }
+        }
+
+        private static void GenerateDataManagerScriptFile()
+        {
+            //CSV的主键代表了唯一性，单个主键的CSV文件可以使用Dictionary来管理，多个的得需要多键字典，不过现在应该只有单键的表，等用到了多键在添加
+            var root = SyntaxFactory.CompilationUnit();
+
+            //需要用到的Using语句
+            var usingDeclarations = new UsingDirectiveSyntax[]
+            {
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic"))
+            };
+
+            //得放在一个命名空间下
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType")).NormalizeWhitespace();
+
+            //DataManager类声明
+            var classDeclaration = SyntaxFactory.ClassDeclaration("DataManager")
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword),SyntaxFactory.Token(SyntaxKind.PartialKeyword)));
+
+            //每个csv文件都要生成一套
+            foreach (var csvFile in csvFiles) {
+                var listType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("List"))
+                    .WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName(csvFile.FileName))));
+
+                //最基础的List字段,初始化时需要将XML的数据反序列化出来赋值给List
+                var listField = SyntaxFactory.FieldDeclaration(
+                    SyntaxFactory.VariableDeclaration(listType)
+                        .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator($"{csvFile.FileName}List")
+                            .WithInitializer(SyntaxFactory.EqualsValueClause(SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("List")).WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(new SyntaxNodeOrToken[]
+                            {
+                                SyntaxFactory.IdentifierName(csvFile.FileName)
+                            })))).WithArgumentList(SyntaxFactory.ArgumentList())))//初始化声明
+                        )))//字段声明
+                    .NormalizeWhitespace()
+                    .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
+
+
+                //降低复杂度的字典,也可以不要然后通过遍历List来查，这个就是用空间换时间了
+                var dictionaryField = SyntaxFactory.FieldDeclaration(
+                    SyntaxFactory.VariableDeclaration(
+                            SyntaxFactory.GenericName(
+                                    SyntaxFactory.Identifier("Dictionary"))
+                        .WithTypeArgumentList(
+                            SyntaxFactory.TypeArgumentList(
+                                SyntaxFactory.SeparatedList<TypeSyntax>(
+                                    new SyntaxNodeOrToken[]{
+                                        SyntaxFactory.IdentifierName(GetTypeSyntax(csvFile.Data[1][csvFile.Key]).ToString()),
+                                        SyntaxFactory.Token(SyntaxKind.CommaToken),
+                                        SyntaxFactory.IdentifierName(csvFile.FileName)}))))
+                    .WithVariables(
+                        SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
+                            SyntaxFactory.VariableDeclarator(
+                                    SyntaxFactory.Identifier($"{csvFile.FileName}Dic"))
+                            .WithInitializer(
+                                SyntaxFactory.EqualsValueClause(
+                                    SyntaxFactory.ObjectCreationExpression(
+                                            SyntaxFactory.GenericName(
+                                                    SyntaxFactory.Identifier("Dictionary"))
+                                        .WithTypeArgumentList(
+                                            SyntaxFactory.TypeArgumentList(
+                                                SyntaxFactory.SeparatedList<TypeSyntax>(
+                                                    new SyntaxNodeOrToken[]{
+                                                        SyntaxFactory.IdentifierName(GetTypeSyntax(csvFile.Data[1][csvFile.Key]).ToString()),
+                                                        SyntaxFactory.Token(SyntaxKind.CommaToken),
+                                                        SyntaxFactory.IdentifierName(csvFile.FileName)}))))
+                                    .WithArgumentList(
+                                        SyntaxFactory.ArgumentList()))))))
+                    .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
+
+
+                //通过主键获得数据的方法
+                var methodDeclaration = SyntaxFactory.MethodDeclaration(
+                        SyntaxFactory.IdentifierName(csvFile.FileName),
+                    $"Get{csvFile.FileName}By{csvFile.Data[2][csvFile.Key]}")
+                    .WithParameterList(
+                        SyntaxFactory.ParameterList(
+                            SyntaxFactory.SingletonSeparatedList(
+                                SyntaxFactory.Parameter(SyntaxFactory.Identifier(csvFile.Data[2][csvFile.Key]))
+                                .WithType(SyntaxFactory.IdentifierName(GetTypeSyntax(csvFile.Data[1][csvFile.Key]).ToString())))))
+                    .WithBody(
+                        SyntaxFactory.Block(
+                            SyntaxFactory.SingletonList<StatementSyntax>(
+                                SyntaxFactory.ReturnStatement(
+                                    SyntaxFactory.ElementAccessExpression(
+                                        SyntaxFactory.IdentifierName($"{csvFile.FileName}Dic"))
+                                    .WithArgumentList(
+                                        SyntaxFactory.BracketedArgumentList(
+                                            SyntaxFactory.SingletonSeparatedList(
+                                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(csvFile.Data[2][csvFile.Key])))))))))
+                    .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
+
+                classDeclaration = classDeclaration.AddMembers(listField,dictionaryField,methodDeclaration);
+            }
+
+            namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclaration);
+
+            root = root.AddUsings(usingDeclarations);
+
+            root = root.AddMembers(namespaceDeclaration);
+
+            var code = root.NormalizeWhitespace().ToFullString();
+
+            if (!Directory.Exists(_dataManagerScriptDir))
+            {
+                Directory.CreateDirectory(_dataManagerScriptDir);
+            }
+
+
+            File.WriteAllText(_dataManagerScriptDir + "DataManager.cs", code);
         }
 
         private static void CopyToGameProject()
@@ -60,21 +236,23 @@ namespace CsvParser {
 
         static void GenerateConfigTypeScriptFile()
         {
-            //CSV表的第一行为数据类型
-            //CSV表的第二行为字段名
-            //CSV表的第三行为注释
-            //CSV表的第四行为若未填写数据时，使用的默认值
-            //CSV表的第五行开始为数据
+            //CSV表的第二行为数据类型
+            //CSV表的第三行为字段名
+            //CSV表的第四行为注释
+            //CSV表的第五行为若未填写数据时，使用的默认值
+            //CSV表的第六行开始为数据
 
             List<ClassDeclarationSyntax> classes = new List<ClassDeclarationSyntax>();
 
-            foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
-                string className = Path.GetFileNameWithoutExtension(csvFile);
-                var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
+            foreach (CSVFile csvFile in csvFiles)
+            {
+                string className = csvFile.FileName;
+
+
                 // 解析CSV文件
-                List<string> types = csvFileInstance.Data[0];
-                List<string> names = csvFileInstance.Data[1];
-                List<string> comments = csvFileInstance.Data[2];
+                List<string> types = csvFile.Data[1];
+                List<string> names = csvFile.Data[2];
+                List<string> comments = csvFile.Data[3];
 
                 // 生成类的属性
                 List<PropertyDeclarationSyntax> properties = new List<PropertyDeclarationSyntax>();
@@ -161,10 +339,10 @@ namespace CsvParser {
 
                     if (classType != null) {
                         List<object> obj = new List<object>();
-                        for (int i = 4; i < csvFileInstance.Data.Count; i++) {
+                        for (int i = 5; i < csvFileInstance.Data.Count; i++) {
                             //每一行都代表一个实例
                             object instance = Activator.CreateInstance(classType);
-                            var typeName = csvFileInstance.Data[1];
+                            var typeName = csvFileInstance.Data[2];
                             for (int j = 0; j < typeName.Count; j++) {
                                 FieldInfo property = classType.GetField(typeName[j]);
                                 if (!string.IsNullOrEmpty(csvFileInstance.Data[i][j]))
@@ -176,9 +354,9 @@ namespace CsvParser {
                                 else
                                 {
                                     //没填值，尝试用默认值
-                                    if (!string.IsNullOrEmpty(csvFileInstance.Data[3][j])) {
+                                    if (!string.IsNullOrEmpty(csvFileInstance.Data[4][j])) {
                                         //使用默认值
-                                        property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[3][j], property.FieldType));
+                                        property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[4][j], property.FieldType));
                                     }
                                     else
                                     {
@@ -241,6 +419,17 @@ namespace CsvParser {
 
         public List<List<string>> Data = new List<List<string>>();
 
+        public List<int> Keys;
+
+        /// <summary>
+        /// 大部分表都是单个主键，所以弄个方法方便点
+        /// </summary>
+        public int Key => Keys[0];
+
+        public bool HasKey => Keys.Count > 0;
+
+        public bool SingleKey => Keys.Count == 1;
+
         public string GetData(int row, int col)
         {
             return Data[row][col];
@@ -270,7 +459,23 @@ namespace CsvParser {
                 csvFile.Data.Add(splitData.ToList());
             }
 
+            csvFile.SetKeys();
+
             return csvFile;
         }
+
+        private void SetKeys()
+        {
+            //找到Data中第一行为*号的列
+            Keys = new List<int>();
+            for (int i = 0; i < Data[0].Count; i++)
+            {
+                if (Data[0][i].StartsWith("*"))
+                {
+                    Keys.Add(i);
+                }
+            }
+        }
+
     }
 }

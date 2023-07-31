@@ -1,3 +1,4 @@
+*,,,,,,,,,,,,,,,,,
 int32,int32,int32,int32,int32,int32,int32,int32,float,float,float,float,int32,int32,int32,int32,int32,int32
 ID,SkillPointNum,MaxHpBase,AttackBase,DefenseBase,SpAttackBase,SpDefenseBase,SpeedBase,CriticalChanceBase,CriticalDamageBase,InjuryReductionRateBase,InjuryDamageBase,MaxHpGrow,AttackGrow,DefenseGrow,SpAttackGrow,SpDefenseGrow,SpeedGrow
 ID,基础的技能点数量,1级时的最大生命值,1级时的基础攻击力,1级时的基础防御力,1级时的基础特殊攻击力,1级时的基础特殊防御力,1级时的基础速度,1级时的暴击率,1级时的暴击伤害,1级时的减伤率,1级时的增伤率,每级成长的生命值,每级成长的攻击力,每级成长的防御力,每级成长的特殊攻击力,每级成长的特殊防御力,每级成长的速度
