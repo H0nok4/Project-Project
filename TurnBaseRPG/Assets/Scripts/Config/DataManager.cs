@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace ConfigType
 {
@@ -16,6 +18,17 @@ namespace ConfigType
         public PokeGirlBase GetPokeGirlBaseByID(int ID)
         {
             return PokeGirlBaseDic[ID];
+        }
+
+        public void InitConfigs()
+        {
+            string ConfigPath = "Resources/Config";
+            FileStream PokeGirlAttributeBaseStream = File.OpenRead(ConfigPath + "PokeGirlAttributeBase.xml");
+            XmlSerializer PokeGirlAttributeBaseserializer = new XmlSerializer(typeof(List<PokeGirlAttributeBase>));
+            PokeGirlAttributeBaseList = (List<PokeGirlAttributeBase>)PokeGirlAttributeBaseserializer.Deserialize(PokeGirlAttributeBaseStream);
+            FileStream PokeGirlBaseStream = File.OpenRead(ConfigPath + "PokeGirlBase.xml");
+            XmlSerializer PokeGirlBaseserializer = new XmlSerializer(typeof(List<PokeGirlBase>));
+            PokeGirlBaseList = (List<PokeGirlBase>)PokeGirlBaseserializer.Deserialize(PokeGirlBaseStream);
         }
     }
 }

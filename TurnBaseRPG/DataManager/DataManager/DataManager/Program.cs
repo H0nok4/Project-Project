@@ -108,7 +108,9 @@ namespace CsvParser {
             //需要用到的Using语句
             var usingDeclarations = new UsingDirectiveSyntax[]
             {
-                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic"))
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic")),
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.IO")),
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Xml.Serialization")),
             };
 
             //得放在一个命名空间下
@@ -193,6 +195,14 @@ namespace CsvParser {
                 classDeclaration = classDeclaration.AddMembers(listField,dictionaryField,methodDeclaration);
             }
 
+            //TODO：将XML文件反序列化成数据并且赋值给对应的字段方法
+            var serializerMethodDeclaration = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "InitConfigs")
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
+                .WithBody(SyntaxFactory.Block(GenerateSerializerCode()));
+
+            classDeclaration = classDeclaration.AddMembers(serializerMethodDeclaration);
+
+
             namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclaration);
 
             root = root.AddUsings(usingDeclarations);
@@ -208,6 +218,28 @@ namespace CsvParser {
 
 
             File.WriteAllText(_dataManagerScriptDir + "DataManager.cs", code);
+        }
+
+        private static List<StatementSyntax> GenerateSerializerCode() {
+            var statements = new List<StatementSyntax>
+            {
+                SyntaxFactory.ParseStatement("string ConfigPath = \"Resources/Config\";")
+            };
+
+            foreach (var file in csvFiles)
+            {
+                var variableName = file.FileName;
+
+                var fileStreamLine = SyntaxFactory.ParseStatement($"FileStream {variableName}Stream = File.OpenRead(ConfigPath + \"{file.FileName}.xml\");");
+                var serializerLine = SyntaxFactory.ParseStatement($"XmlSerializer {variableName}serializer = new XmlSerializer(typeof(List<{variableName}>));");
+                var deserializeLine = SyntaxFactory.ParseStatement($"{variableName}List = (List<{variableName}>){variableName}serializer.Deserialize({variableName}Stream);");
+
+                statements.Add(fileStreamLine);
+                statements.Add(serializerLine);
+                statements.Add(deserializeLine);
+            }
+
+            return statements;
         }
 
         private static void CopyToGameProject()
