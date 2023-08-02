@@ -118,7 +118,13 @@ namespace CsvParser {
 
             //DataManager类声明
             var classDeclaration = SyntaxFactory.ClassDeclaration("DataManager")
-                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword),SyntaxFactory.Token(SyntaxKind.PartialKeyword)));
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                    SyntaxFactory.Token(SyntaxKind.PartialKeyword)))
+                .WithBaseList(SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
+                    SyntaxFactory.SimpleBaseType(SyntaxFactory.GenericName(SyntaxFactory.Identifier("Singleton"))
+                        .WithTypeArgumentList(SyntaxFactory.TypeArgumentList(
+                            SyntaxFactory.SingletonSeparatedList<TypeSyntax>(
+                                SyntaxFactory.IdentifierName("DataManager"))))))));
 
             //每个csv文件都要生成一套
             foreach (var csvFile in csvFiles) {
@@ -237,10 +243,15 @@ namespace CsvParser {
 
             foreach (var csvFile in csvFiles)
             {
-                var foreachStatement = SyntaxFactory.ForEachStatement(SyntaxFactory.Token(SyntaxKind.ForEachKeyword),SyntaxFactory.Token(SyntaxKind.OpenParenToken),SyntaxFactory.ParseTypeName("var"),SyntaxFactory.Identifier("i"),SyntaxFactory.Token(SyntaxKind.InKeyword),SyntaxFactory.ParseExpression($"{csvFile.FileName}List"),SyntaxFactory.Token(SyntaxKind.CloseParenToken),SyntaxFactory.Block(
+                var foreachStatement = SyntaxFactory.ForEachStatement(SyntaxFactory.Token(SyntaxKind.ForEachKeyword),
+                    SyntaxFactory.Token(SyntaxKind.OpenParenToken), SyntaxFactory.ParseTypeName("var"),
+                    SyntaxFactory.Identifier("i"), SyntaxFactory.Token(SyntaxKind.InKeyword),
+                    SyntaxFactory.ParseExpression($"{csvFile.FileName}List"),
+                    SyntaxFactory.Token(SyntaxKind.CloseParenToken), SyntaxFactory.Block(
                         new List<StatementSyntax>()
                         {
-                            SyntaxFactory.ParseStatement($"{csvFile.FileName}Dic.Add(i.{csvFile.Data[2][csvFile.Key]},i);")
+                            SyntaxFactory.ParseStatement(
+                                $"{csvFile.FileName}Dic.Add(i.{csvFile.Data[2][csvFile.Key]},i);")
                         }
                     ));
 

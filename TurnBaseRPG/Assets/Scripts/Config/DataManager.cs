@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace ConfigType
 {
-    public partial class DataManager
+    public partial class DataManager : Singleton<DataManager>
     {
         public List<PokeGirlAttributeBase> PokeGirlAttributeBaseList = new List<PokeGirlAttributeBase>();
         public Dictionary<int, PokeGirlAttributeBase> PokeGirlAttributeBaseDic = new Dictionary<int, PokeGirlAttributeBase>();
