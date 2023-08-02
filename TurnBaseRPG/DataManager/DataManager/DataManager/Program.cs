@@ -200,7 +200,18 @@ namespace CsvParser {
                 .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
                 .WithBody(SyntaxFactory.Block(GenerateSerializerCode()));
 
+            //初始化辅助字典方法
+            var initializeDictionaryMethodDeclaration = SyntaxFactory
+                .MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "InitDictionary")
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
+                .WithBody(SyntaxFactory.Block(GenerateInitDictionaryCode()));
+
+
             classDeclaration = classDeclaration.AddMembers(serializerMethodDeclaration);
+
+
+            classDeclaration = classDeclaration.AddMembers(initializeDictionaryMethodDeclaration);
+
 
 
             namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclaration);
@@ -218,6 +229,25 @@ namespace CsvParser {
 
 
             File.WriteAllText(_dataManagerScriptDir + "DataManager.cs", code);
+        }
+
+        private static List<StatementSyntax> GenerateInitDictionaryCode()
+        {
+            var statements = new List<StatementSyntax>();
+
+            foreach (var csvFile in csvFiles)
+            {
+                var foreachStatement = SyntaxFactory.ForEachStatement(SyntaxFactory.Token(SyntaxKind.ForEachKeyword),SyntaxFactory.Token(SyntaxKind.OpenParenToken),SyntaxFactory.ParseTypeName("var"),SyntaxFactory.Identifier("i"),SyntaxFactory.Token(SyntaxKind.InKeyword),SyntaxFactory.ParseExpression($"{csvFile.FileName}List"),SyntaxFactory.Token(SyntaxKind.CloseParenToken),SyntaxFactory.Block(
+                        new List<StatementSyntax>()
+                        {
+                            SyntaxFactory.ParseStatement($"{csvFile.FileName}Dic.Add(i.{csvFile.Data[2][csvFile.Key]},i);")
+                        }
+                    ));
+
+                statements.Add(foreachStatement);
+            }
+
+            return statements;
         }
 
         private static List<StatementSyntax> GenerateSerializerCode() {
@@ -238,6 +268,8 @@ namespace CsvParser {
                 statements.Add(serializerLine);
                 statements.Add(deserializeLine);
             }
+
+            statements.Add(SyntaxFactory.ParseStatement("InitDictionary();"));
 
             return statements;
         }

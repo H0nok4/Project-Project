@@ -29,6 +29,20 @@ namespace ConfigType
             FileStream PokeGirlBaseStream = File.OpenRead(ConfigPath + "PokeGirlBase.xml");
             XmlSerializer PokeGirlBaseserializer = new XmlSerializer(typeof(List<PokeGirlBase>));
             PokeGirlBaseList = (List<PokeGirlBase>)PokeGirlBaseserializer.Deserialize(PokeGirlBaseStream);
+            InitDictionary();
+        }
+
+        public void InitDictionary()
+        {
+            foreach (var i in PokeGirlAttributeBaseList)
+            {
+                PokeGirlAttributeBaseDic.Add(i.ID, i);
+            }
+
+            foreach (var i in PokeGirlBaseList)
+            {
+                PokeGirlBaseDic.Add(i.ID, i);
+            }
         }
     }
 }
