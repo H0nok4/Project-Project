@@ -23,7 +23,7 @@ namespace ConfigType
         public int DefenseGrow; // 每级成长的防御力 
         public int SpAttackGrow; // 每级成长的特殊攻击力 
         public int SpDefenseGrow; // 每级成长的特殊防御力 
-        public int SpeedGrow; // 每级成长的速度 
+        //public int SpeedGrow; // 每级成长的速度 
     }
 
     public class PokeGirlBase
