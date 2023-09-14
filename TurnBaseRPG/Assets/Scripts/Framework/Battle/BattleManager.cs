@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleManager : MonoSingleton<BattleManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //TODO:一场战斗一般由俩名玩家，俩个队伍组成
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

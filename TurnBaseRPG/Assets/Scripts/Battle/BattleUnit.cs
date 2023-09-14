@@ -20,5 +20,15 @@ public class BattleUnit : BattleBaseUnit
     /// </summary>
     public bool IsDead;
 
+    /// <summary>
+    /// 当前的生命值
+    /// </summary>
+    public int CurrentHp;
+
+    public BattleUnit(PokeGirl pokeGirl)
+    {
+        PokeGirl = pokeGirl;
+    }
+
     
 }
