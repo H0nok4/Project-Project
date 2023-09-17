@@ -6,42 +6,57 @@ namespace ConfigType
 {
     public partial class DataManager : Singleton<DataManager>
     {
-        public List<PokeGirlAttributeBase> PokeGirlAttributeBaseList = new List<PokeGirlAttributeBase>();
-        public Dictionary<int, PokeGirlAttributeBase> PokeGirlAttributeBaseDic = new Dictionary<int, PokeGirlAttributeBase>();
-        public PokeGirlAttributeBase GetPokeGirlAttributeBaseByID(int ID)
+        public List<NPCBaseDefine> NPCBaseDefineList = new List<NPCBaseDefine>();
+        public Dictionary<int, NPCBaseDefine> NPCBaseDefineDic = new Dictionary<int, NPCBaseDefine>();
+        public NPCBaseDefine GetNPCBaseDefineByID(int ID)
         {
-            return PokeGirlAttributeBaseDic[ID];
+            return NPCBaseDefineDic[ID];
         }
 
-        public List<PokeGirlBase> PokeGirlBaseList = new List<PokeGirlBase>();
-        public Dictionary<int, PokeGirlBase> PokeGirlBaseDic = new Dictionary<int, PokeGirlBase>();
-        public PokeGirlBase GetPokeGirlBaseByID(int ID)
+        public List<PokeGirlAttributeBaseDefine> PokeGirlAttributeBaseDefineList = new List<PokeGirlAttributeBaseDefine>();
+        public Dictionary<int, PokeGirlAttributeBaseDefine> PokeGirlAttributeBaseDefineDic = new Dictionary<int, PokeGirlAttributeBaseDefine>();
+        public PokeGirlAttributeBaseDefine GetPokeGirlAttributeBaseDefineByID(int ID)
         {
-            return PokeGirlBaseDic[ID];
+            return PokeGirlAttributeBaseDefineDic[ID];
+        }
+
+        public List<PokeGirlBaseDefine> PokeGirlBaseDefineList = new List<PokeGirlBaseDefine>();
+        public Dictionary<int, PokeGirlBaseDefine> PokeGirlBaseDefineDic = new Dictionary<int, PokeGirlBaseDefine>();
+        public PokeGirlBaseDefine GetPokeGirlBaseDefineByID(int ID)
+        {
+            return PokeGirlBaseDefineDic[ID];
         }
 
         public void InitConfigs()
         {
             string ConfigPath = "Resources/Config";
+            FileStream NPCBaseStream = File.OpenRead(ConfigPath + "NPCBase.xml");
+            XmlSerializer NPCBaseDefineserializer = new XmlSerializer(typeof(List<NPCBaseDefine>));
+            NPCBaseDefineList = (List<NPCBaseDefine>)NPCBaseDefineserializer.Deserialize(NPCBaseStream);
             FileStream PokeGirlAttributeBaseStream = File.OpenRead(ConfigPath + "PokeGirlAttributeBase.xml");
-            XmlSerializer PokeGirlAttributeBaseserializer = new XmlSerializer(typeof(List<PokeGirlAttributeBase>));
-            PokeGirlAttributeBaseList = (List<PokeGirlAttributeBase>)PokeGirlAttributeBaseserializer.Deserialize(PokeGirlAttributeBaseStream);
+            XmlSerializer PokeGirlAttributeBaseDefineserializer = new XmlSerializer(typeof(List<PokeGirlAttributeBaseDefine>));
+            PokeGirlAttributeBaseDefineList = (List<PokeGirlAttributeBaseDefine>)PokeGirlAttributeBaseDefineserializer.Deserialize(PokeGirlAttributeBaseStream);
             FileStream PokeGirlBaseStream = File.OpenRead(ConfigPath + "PokeGirlBase.xml");
-            XmlSerializer PokeGirlBaseserializer = new XmlSerializer(typeof(List<PokeGirlBase>));
-            PokeGirlBaseList = (List<PokeGirlBase>)PokeGirlBaseserializer.Deserialize(PokeGirlBaseStream);
+            XmlSerializer PokeGirlBaseDefineserializer = new XmlSerializer(typeof(List<PokeGirlBaseDefine>));
+            PokeGirlBaseDefineList = (List<PokeGirlBaseDefine>)PokeGirlBaseDefineserializer.Deserialize(PokeGirlBaseStream);
             InitDictionary();
         }
 
         public void InitDictionary()
         {
-            foreach (var i in PokeGirlAttributeBaseList)
+            foreach (var i in NPCBaseDefineList)
             {
-                PokeGirlAttributeBaseDic.Add(i.ID, i);
+                NPCBaseDefineDic.Add(i.ID, i);
             }
 
-            foreach (var i in PokeGirlBaseList)
+            foreach (var i in PokeGirlAttributeBaseDefineList)
             {
-                PokeGirlBaseDic.Add(i.ID, i);
+                PokeGirlAttributeBaseDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in PokeGirlBaseDefineList)
+            {
+                PokeGirlBaseDefineDic.Add(i.ID, i);
             }
         }
     }

@@ -4,7 +4,13 @@ using System.Linq;
 
 namespace ConfigType
 {
-    public class PokeGirlAttributeBase
+    public class NPCBaseDefine
+    {
+        public int ID; // ID 
+        public string Name; // 名称 
+    }
+
+    public class PokeGirlAttributeBaseDefine
     {
         public int ID; // ID 
         public int SkillPointNum; // 基础的技能点数量 
@@ -26,7 +32,7 @@ namespace ConfigType
         public int SpeedGrow; // 每级成长的速度 
     }
 
-    public class PokeGirlBase
+    public class PokeGirlBaseDefine
     {
         public int ID; // ID 
         public string Name; // 名称 

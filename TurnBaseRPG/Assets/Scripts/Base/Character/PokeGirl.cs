@@ -18,10 +18,10 @@ public class PokeGirl
     /// <summary>
     /// 基础属性和种族值相关
     /// </summary>
-    public PokeGirlAttributeBase AttributeBase =>
-        DataManager.Instance.GetPokeGirlAttributeBaseByID(BaseDefine.AttributeID);
+    public PokeGirlAttributeBaseDefine AttributeBase =>
+        DataManager.Instance.GetPokeGirlAttributeBaseDefineByID(BaseDefine.AttributeID);
 
-    public PokeGirlBase BaseDefine => DataManager.Instance.GetPokeGirlBaseByID(Id);
+    public PokeGirlBaseDefine BaseDefine => DataManager.Instance.GetPokeGirlBaseDefineByID(Id);
     
     public float Attack
     {

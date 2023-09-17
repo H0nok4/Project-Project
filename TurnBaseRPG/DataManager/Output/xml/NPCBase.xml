@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<anyType xsi:type="NPCBaseDefine">
+		<ID>1</ID>
+		<Name>测试NPC1</Name>
+	</anyType>
+	<anyType xsi:type="NPCBaseDefine">
+		<ID>2</ID>
+		<Name>测试NPC2</Name>
+	</anyType>
+	<anyType xsi:type="NPCBaseDefine">
+		<ID>3</ID>
+		<Name>默认的空值</Name>
+	</anyType>
+</ArrayOfAnyType>

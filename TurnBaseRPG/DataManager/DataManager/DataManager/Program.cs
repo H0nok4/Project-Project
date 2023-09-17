@@ -18,9 +18,9 @@ namespace CsvParser {
         static string _configTypeCSDir = @"..\..\..\..\..\Output\ConfigType.cs";
         static string _outputDir = @"..\..\..\..\..\Output"; // 指定输出目录
         static string _outputXMLDir = @"..\..\..\..\..\Output\xml";// 指定XML输出目录
-        static string _gameXMLDir = @"..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
-        static string _gameConfigTypeDir = @"..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
-        static string _dataManagerScriptDir = @"..\..\..\..\..\..\Assets\Scripts\Config\"; //游戏的配置代码目录
+        static string _gameXMLDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
+        static string _gameConfigTypeDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
+        static string _dataManagerScriptDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Scripts\Config\"; //游戏的配置代码目录
         private static List<CSVFile> csvFiles = new List<CSVFile>();
         static void Main(string[] args) {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -129,15 +129,15 @@ namespace CsvParser {
             //每个csv文件都要生成一套
             foreach (var csvFile in csvFiles) {
                 var listType = SyntaxFactory.GenericName(SyntaxFactory.Identifier("List"))
-                    .WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName(csvFile.FileName))));
+                    .WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName(NameToDefine(csvFile.FileName)))));
 
                 //最基础的List字段,初始化时需要将XML的数据反序列化出来赋值给List
                 var listField = SyntaxFactory.FieldDeclaration(
                     SyntaxFactory.VariableDeclaration(listType)
-                        .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator($"{csvFile.FileName}List")
+                        .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator($"{NameToDefine(csvFile.FileName)}List")
                             .WithInitializer(SyntaxFactory.EqualsValueClause(SyntaxFactory.ObjectCreationExpression(SyntaxFactory.GenericName(SyntaxFactory.Identifier("List")).WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList<TypeSyntax>(new SyntaxNodeOrToken[]
                             {
-                                SyntaxFactory.IdentifierName(csvFile.FileName)
+                                SyntaxFactory.IdentifierName(NameToDefine(csvFile.FileName))
                             })))).WithArgumentList(SyntaxFactory.ArgumentList())))//初始化声明
                         )))//字段声明
                     .NormalizeWhitespace()
@@ -155,11 +155,11 @@ namespace CsvParser {
                                     new SyntaxNodeOrToken[]{
                                         SyntaxFactory.IdentifierName(GetTypeSyntax(csvFile.Data[1][csvFile.Key]).ToString()),
                                         SyntaxFactory.Token(SyntaxKind.CommaToken),
-                                        SyntaxFactory.IdentifierName(csvFile.FileName)}))))
+                                        SyntaxFactory.IdentifierName(NameToDefine(csvFile.FileName))}))))
                     .WithVariables(
                         SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
                             SyntaxFactory.VariableDeclarator(
-                                    SyntaxFactory.Identifier($"{csvFile.FileName}Dic"))
+                                    SyntaxFactory.Identifier($"{NameToDefine(csvFile.FileName)}Dic"))
                             .WithInitializer(
                                 SyntaxFactory.EqualsValueClause(
                                     SyntaxFactory.ObjectCreationExpression(
@@ -171,7 +171,7 @@ namespace CsvParser {
                                                     new SyntaxNodeOrToken[]{
                                                         SyntaxFactory.IdentifierName(GetTypeSyntax(csvFile.Data[1][csvFile.Key]).ToString()),
                                                         SyntaxFactory.Token(SyntaxKind.CommaToken),
-                                                        SyntaxFactory.IdentifierName(csvFile.FileName)}))))
+                                                        SyntaxFactory.IdentifierName(NameToDefine(csvFile.FileName))}))))
                                     .WithArgumentList(
                                         SyntaxFactory.ArgumentList()))))))
                     .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
@@ -179,8 +179,8 @@ namespace CsvParser {
 
                 //通过主键获得数据的方法
                 var methodDeclaration = SyntaxFactory.MethodDeclaration(
-                        SyntaxFactory.IdentifierName(csvFile.FileName),
-                    $"Get{csvFile.FileName}By{csvFile.Data[2][csvFile.Key]}")
+                        SyntaxFactory.IdentifierName(NameToDefine(csvFile.FileName)),
+                    $"Get{NameToDefine(csvFile.FileName)}By{csvFile.Data[2][csvFile.Key]}")
                     .WithParameterList(
                         SyntaxFactory.ParameterList(
                             SyntaxFactory.SingletonSeparatedList(
@@ -191,7 +191,7 @@ namespace CsvParser {
                             SyntaxFactory.SingletonList<StatementSyntax>(
                                 SyntaxFactory.ReturnStatement(
                                     SyntaxFactory.ElementAccessExpression(
-                                        SyntaxFactory.IdentifierName($"{csvFile.FileName}Dic"))
+                                        SyntaxFactory.IdentifierName($"{NameToDefine(csvFile.FileName)}Dic"))
                                     .WithArgumentList(
                                         SyntaxFactory.BracketedArgumentList(
                                             SyntaxFactory.SingletonSeparatedList(
@@ -246,12 +246,12 @@ namespace CsvParser {
                 var foreachStatement = SyntaxFactory.ForEachStatement(SyntaxFactory.Token(SyntaxKind.ForEachKeyword),
                     SyntaxFactory.Token(SyntaxKind.OpenParenToken), SyntaxFactory.ParseTypeName("var"),
                     SyntaxFactory.Identifier("i"), SyntaxFactory.Token(SyntaxKind.InKeyword),
-                    SyntaxFactory.ParseExpression($"{csvFile.FileName}List"),
+                    SyntaxFactory.ParseExpression($"{NameToDefine(csvFile.FileName)}List"),
                     SyntaxFactory.Token(SyntaxKind.CloseParenToken), SyntaxFactory.Block(
                         new List<StatementSyntax>()
                         {
                             SyntaxFactory.ParseStatement(
-                                $"{csvFile.FileName}Dic.Add(i.{csvFile.Data[2][csvFile.Key]},i);")
+                                $"{NameToDefine(csvFile.FileName)}Dic.Add(i.{csvFile.Data[2][csvFile.Key]},i);")
                         }
                     ));
 
@@ -272,8 +272,8 @@ namespace CsvParser {
                 var variableName = file.FileName;
 
                 var fileStreamLine = SyntaxFactory.ParseStatement($"FileStream {variableName}Stream = File.OpenRead(ConfigPath + \"{file.FileName}.xml\");");
-                var serializerLine = SyntaxFactory.ParseStatement($"XmlSerializer {variableName}serializer = new XmlSerializer(typeof(List<{variableName}>));");
-                var deserializeLine = SyntaxFactory.ParseStatement($"{variableName}List = (List<{variableName}>){variableName}serializer.Deserialize({variableName}Stream);");
+                var serializerLine = SyntaxFactory.ParseStatement($"XmlSerializer {NameToDefine(variableName)}serializer = new XmlSerializer(typeof(List<{NameToDefine(variableName)}>));");
+                var deserializeLine = SyntaxFactory.ParseStatement($"{NameToDefine(variableName)}List = (List<{NameToDefine(variableName)}>){NameToDefine(variableName)}serializer.Deserialize({variableName}Stream);");
 
                 statements.Add(fileStreamLine);
                 statements.Add(serializerLine);
@@ -352,7 +352,7 @@ namespace CsvParser {
                 }
 
                 // 生成类
-                ClassDeclarationSyntax classDecl = SyntaxFactory.ClassDeclaration(className)
+                ClassDeclarationSyntax classDecl = SyntaxFactory.ClassDeclaration(className + "Define")
                     .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
                     .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(properties))
                     .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
@@ -409,7 +409,7 @@ namespace CsvParser {
                     //读取CSV文件，然后再在ConfigType.cs中找到对应的类，然后生成对应的数据
                     string className = Path.GetFileNameWithoutExtension(csvFile);
 
-                    Type classType = assembly.GetType("ConfigType." + className);
+                    Type classType = assembly.GetType("ConfigType." + NameToDefine(className));
 
 
                     if (classType != null) {
@@ -485,6 +485,11 @@ namespace CsvParser {
                 default:
                     throw new ArgumentException($"Unknown type: {type}");
             }
+        }
+
+        private static string NameToDefine(string name)
+        {
+            return name + "Define";
         }
     }
 

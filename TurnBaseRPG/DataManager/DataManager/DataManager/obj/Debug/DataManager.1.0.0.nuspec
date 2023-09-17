@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DataManager</id>
+    <version>1.0.0</version>
+    <authors>DataManager</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.CodeAnalysis" version="4.6.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.CodeAnalysis.CSharp" version="4.6.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\UnityProject\Project-Project.git\TurnBaseRPG\DataManager\DataManager\DataManager\bin\Debug\net6.0\DataManager.runtimeconfig.json" target="lib\net6.0\DataManager.runtimeconfig.json" />
+    <file src="D:\UnityProject\Project-Project.git\TurnBaseRPG\DataManager\DataManager\DataManager\bin\Debug\net6.0\DataManager.dll" target="lib\net6.0\DataManager.dll" />
+  </files>
+</package>

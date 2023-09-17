@@ -1,0 +1,8 @@
+*,
+int32,string
+ID,Name
+ID,名称
+,默认的空值
+1,测试NPC1
+2,测试NPC2
+3,
