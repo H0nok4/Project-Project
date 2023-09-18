@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBase : ICharacterBase
+public class PlayerBase : ICharacterBase,IHandleBattleUnit
 {
     public string Name { get; set; }
     public List<BattleUnit> BattleUnits { get; set; } = new List<BattleUnit>();

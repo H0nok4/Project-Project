@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ConfigType;
 using UnityEngine;
 
-public class NPCBase : MonoBehaviour , ICharacterBase
+public class NPCBase : MonoBehaviour , ICharacterBase, IHandleBattleUnit
 {
     public int ID { get; }
     public string Name { get; set; }
