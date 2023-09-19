@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BaseWalkable
+    uniqueID: 2787435495
+    locked: 0
+  - name: Unwalkable
+    uniqueID: 1082041291
+    locked: 0
+  - name: Object
+    uniqueID: 2315337211
+    locked: 0
