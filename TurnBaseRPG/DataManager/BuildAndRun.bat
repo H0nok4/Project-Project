@@ -1,4 +1,5 @@
 @echo off
+   cd /d 
    echo Compiling C# solution...
    "MSBuild.exe" "DataManager\DataManager.sln" /t:Rebuild /p:Configuration=Release
    echo Compilation complete.

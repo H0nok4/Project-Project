@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class NPCGameObject : MonoBehaviour
     private void Start()
     {
         Init(ID);
+
+        Console.WriteLine($"NPC Name = {NPCBase.Define.Name}");
     }
 
     public void Init(int id)

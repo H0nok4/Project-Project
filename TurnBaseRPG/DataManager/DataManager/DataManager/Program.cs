@@ -14,13 +14,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace CsvParser {
     class Program {
         //临时，等完善后打包成程序去运行的话，需要改成相对路径
-        static string _csvDir = @"..\..\..\..\..\Table"; // 指定CSV文件所在目录
-        static string _configTypeCSDir = @"..\..\..\..\..\Output\ConfigType.cs";
-        static string _outputDir = @"..\..\..\..\..\Output"; // 指定输出目录
-        static string _outputXMLDir = @"..\..\..\..\..\Output\xml";// 指定XML输出目录
-        static string _gameXMLDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Resources\Config\xml\";//游戏的配置目录
-        static string _gameConfigTypeDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Resources\Config\"; //游戏的配置代码目录
-        static string _dataManagerScriptDir = @"..\..\..\..\..\..\..\..\..\..\Assets\Scripts\Config\"; //游戏的配置代码目录
+        static string _csvDir = @"Table"; // 指定CSV文件所在目录
+        static string _configTypeCSDir = @"Output\ConfigType.cs";
+        static string _outputDir = @"Output"; // 指定输出目录
+        static string _outputXMLDir = @"Output\xml";// 指定XML输出目录
+        static string _gameXMLDir = @"..\Assets\Resources\Config\xml\";//游戏的配置目录
+        static string _gameConfigTypeDir = @"..\Assets\Resources\Config\"; //游戏的配置代码目录
+        static string _dataManagerScriptDir = @"..\Assets\Scripts\Config\"; //游戏的配置代码目录
         private static List<CSVFile> csvFiles = new List<CSVFile>();
         static void Main(string[] args) {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -264,7 +264,7 @@ namespace CsvParser {
         private static List<StatementSyntax> GenerateSerializerCode() {
             var statements = new List<StatementSyntax>
             {
-                SyntaxFactory.ParseStatement("string ConfigPath = \"Resources/Config\";")
+                SyntaxFactory.ParseStatement("string ConfigPath = \"Assets/Resources/Config/xml/\";")
             };
 
             foreach (var file in csvFiles)

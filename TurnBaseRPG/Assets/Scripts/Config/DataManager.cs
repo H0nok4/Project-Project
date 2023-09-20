@@ -29,7 +29,7 @@ namespace ConfigType
 
         public void InitConfigs()
         {
-            string ConfigPath = "Resources/Config";
+            string ConfigPath = "Assets/Resources/Config/xml/";
             FileStream NPCBaseStream = File.OpenRead(ConfigPath + "NPCBase.xml");
             XmlSerializer NPCBaseDefineserializer = new XmlSerializer(typeof(List<NPCBaseDefine>));
             NPCBaseDefineList = (List<NPCBaseDefine>)NPCBaseDefineserializer.Deserialize(NPCBaseStream);
