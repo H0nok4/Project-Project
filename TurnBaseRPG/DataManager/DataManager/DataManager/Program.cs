@@ -412,8 +412,10 @@ namespace CsvParser {
                     Type classType = assembly.GetType("ConfigType." + NameToDefine(className));
 
 
-                    if (classType != null) {
-                        List<object> obj = new List<object>();
+                    if (classType != null)
+                    {
+                        var listType = typeof(List<>).MakeGenericType(classType);
+                        var listObj = Activator.CreateInstance(listType);
                         for (int i = 5; i < csvFileInstance.Data.Count; i++) {
                             //每一行都代表一个实例
                             object instance = Activator.CreateInstance(classType);
@@ -443,15 +445,17 @@ namespace CsvParser {
 
                             }
 
-                            obj.Add(instance);
+                            MethodInfo addMethod = listType.GetMethod("Add");
+                            addMethod.Invoke(listObj,  new object?[]{ instance });
+       
                         }
 
                         //序列化后写入文件
-                        XmlSerializer serializer = new XmlSerializer(obj.GetType(), new Type[] { classType });
+                        XmlSerializer serializer = new XmlSerializer(listType, new Type[] { classType });
 
                         using (MemoryStream xmlMs = new MemoryStream()) {
                             using (XmlWriter writer = XmlWriter.Create(xmlMs, new XmlWriterSettings() { Indent = true, IndentChars = "\t" })) {
-                                serializer.Serialize(writer, obj);
+                                serializer.Serialize(writer, listObj);
                                 if (!Directory.Exists(_outputXMLDir)) {
                                     Directory.CreateDirectory(_outputXMLDir);
                                 }

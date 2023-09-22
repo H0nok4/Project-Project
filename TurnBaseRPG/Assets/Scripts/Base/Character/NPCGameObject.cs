@@ -13,7 +13,7 @@ public class NPCGameObject : MonoBehaviour
     {
         Init(ID);
 
-        Console.WriteLine($"NPC Name = {NPCBase.Define.Name}");
+        Debug.Log($"NPC Name = {NPCBase.Define.Name}");
     }
 
     public void Init(int id)
