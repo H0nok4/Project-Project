@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public partial class BattlePanel : UIPanel
+{
+    public BattleTopBar PlayerTopBar;
+    public BattleTopBar EnemyTopBar;
+    public override void InitInstance()
+    {
+        PlayerTopBar = (BattleTopBar)GetUIComponentAtChildIndex(7);
+        EnemyTopBar = (BattleTopBar)GetUIComponentAtChildIndex(8);
+    }
+}
+
+public partial class BattlePanel : UIPanel
+{
+    public override void OnInit()
+    {
+        Debug.Log("≥ı ºªØBattlePanel");
+    }
+}

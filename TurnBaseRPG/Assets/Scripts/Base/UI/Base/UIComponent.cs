@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public abstract class UIComponent : MonoBehaviour
 {
-
-    private void Awake()
-    {
-        InitInstance();
-    }
+    protected bool _inited = false;
 
     public Image GetImageAtChildIndex(int index)
     {
@@ -22,9 +18,21 @@ public abstract class UIComponent : MonoBehaviour
         return transform.GetChild(index).GetComponent<TMP_Text>();
     }
 
-    public UIComponent GetUIComponentAtChildIndex(int index)
+    public UIComponent GetUIComponentAtChildIndex(int index) {
+        var uiComponent = transform.GetChild(index).GetComponent<UIComponent>();
+        uiComponent.Init();
+        return uiComponent;
+    }
+
+    public void Init()
     {
-        return transform.GetChild(index).GetComponent<UIComponent>();
+        if (_inited)
+        {
+            return;
+        }
+
+        InitInstance();
+        _inited = true;
     }
 
     public abstract void InitInstance();

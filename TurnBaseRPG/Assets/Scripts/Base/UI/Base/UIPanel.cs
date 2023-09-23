@@ -18,7 +18,7 @@ public abstract class UIPanel : MonoBehaviour
         }
     }
 
-    private void Show()
+    public void Show()
     {
         if (!_inited)
         {
@@ -29,7 +29,7 @@ public abstract class UIPanel : MonoBehaviour
         OnShow();
     }
 
-    private void Hide()
+    public void Hide()
     {
         OnHide();
 
@@ -38,12 +38,13 @@ public abstract class UIPanel : MonoBehaviour
 
     private void Init()
     {
+        InitInstance();
         OnInit();
 
         _inited = true;
     }
 
-    private void Dispose()
+    public void Dispose()
     {
         OnDispose();
         Destroy(gameObject);
@@ -79,7 +80,9 @@ public abstract class UIPanel : MonoBehaviour
     }
 
     public UIComponent GetUIComponentAtChildIndex(int index) {
-        return transform.GetChild(index).GetComponent<UIComponent>();
+        var uiComponent = transform.GetChild(index).GetComponent<UIComponent>();
+        uiComponent.Init();
+        return uiComponent;
     }
 
     public abstract void InitInstance();
