@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -80,9 +81,18 @@ public abstract class UIPanel : MonoBehaviour
     }
 
     public UIComponent GetUIComponentAtChildIndex(int index) {
-        var uiComponent = transform.GetChild(index).GetComponent<UIComponent>();
-        uiComponent.Init();
-        return uiComponent;
+        try
+        {
+            var uiComponent = transform.GetChild(index).GetComponent<UIComponent>();
+            uiComponent.Init();
+            return uiComponent;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"获取UIComponent时出现错误，错误Index为：{index},{e}");
+            throw;
+        }
+
     }
 
     public abstract void InitInstance();

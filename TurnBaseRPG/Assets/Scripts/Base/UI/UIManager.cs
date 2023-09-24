@@ -5,6 +5,12 @@ using UnityEngine;
 public class UIManager : MonoSingleton<UIManager>
 {
     public readonly Stack<UIPanel> UIStack = new Stack<UIPanel>();
+    public Canvas UICanvas;
+
+    public void Init()
+    {
+        UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
+    }
 
     public void Show(int uiUID)
     {

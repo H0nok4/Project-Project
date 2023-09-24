@@ -24,6 +24,13 @@ public abstract class UIComponent : MonoBehaviour
         return uiComponent;
     }
 
+    public UIList GetUIListAtChildIndex(int index)
+    {
+        var uiList = transform.GetChild(index).GetComponent<UIList>();
+        uiList.Init();
+        return uiList;
+    }
+
     public void Init()
     {
         if (_inited)
