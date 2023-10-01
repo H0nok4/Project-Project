@@ -9,11 +9,67 @@ public class UIList : UIComponent
     public List<UIComponent> ChildList = new List<UIComponent>();
     private GameObject _contentGameObject;
     private GridLayoutGroup _contentLayoutGroup;
+
+    [Header("列表使用的子物体（临时）")]
+    public GameObject ListChildrenInstance;
+
+    public int ChildCount
+    {
+        get => ChildList.Count;
+        set
+        {
+            if (ChildCount > value)
+            {
+                int num = ChildCount - value;
+                for (int i = 0; i < num; i++)
+                {
+                    RemoveChildAt(ChildCount - 1);
+                }
+            }
+            else
+            {
+                int num = value - ChildCount;
+                for (int i = 0; i < num; i++)
+                {
+                    AddChild();
+                }
+            }
+        }
+    }
+
     public void AddChild(UIComponent child)
     {
         ChildList.Add(child);
         //TODO:需要加到Context物体下
         child.transform.SetParent(_contentGameObject.transform);
+        child.transform.localScale = Vector3.one;
+    }
+
+    public void AddChild()
+    {
+        if (ListChildrenInstance == null)
+        {
+            return;
+        }
+
+        var component = GameObject.Instantiate(ListChildrenInstance).GetComponent<UIComponent>();
+        AddChild(component);
+    }
+
+    public void AddChildAt(UIComponent child, int index)
+    {
+        ChildList.Insert(index, child);
+    }
+
+    public void AddChildAt(int index)
+    {
+        if (ListChildrenInstance == null)
+        {
+            return;
+        }
+        var component = GameObject.Instantiate(ListChildrenInstance).GetComponent<UIComponent>();
+        ChildList.Insert(index, component);
+        component.transform.SetParent(_contentGameObject.transform);
     }
 
     public void RemoveChild(UIComponent child)

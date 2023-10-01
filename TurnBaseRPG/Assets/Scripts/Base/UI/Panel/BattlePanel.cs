@@ -20,5 +20,6 @@ public partial class BattlePanel : UIPanel
     public override void OnInit()
     {
         Debug.Log("≥ı ºªØBattlePanel");
+        BattleSelector.ListSkillMove.ChildCount = 5;
     }
 }
