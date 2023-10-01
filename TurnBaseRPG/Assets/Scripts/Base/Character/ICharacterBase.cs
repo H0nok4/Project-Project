@@ -6,8 +6,6 @@ public interface ICharacterBase
 {
     public string Name { get; set; }
 
-    public List<BattleUnit> BattleUnits { get; set; }
-    
     public void OnDefeated();
 
     public void OnVictory();

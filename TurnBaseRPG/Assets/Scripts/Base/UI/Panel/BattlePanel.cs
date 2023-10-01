@@ -17,6 +17,11 @@ public partial class BattlePanel : UIPanel
 
 public partial class BattlePanel : UIPanel
 {
+
+    public override void OnShow()
+    {
+        BattleManager.Instance.
+    }
     public override void OnInit()
     {
         Debug.Log("≥ı ºªØBattlePanel");
