@@ -53,5 +53,6 @@ namespace ConfigType
     {
         public int ID; // ID 
         public string SkillName; // 技能名称 
+        public SkillType SkillType; // 技能类型 
     }
 }

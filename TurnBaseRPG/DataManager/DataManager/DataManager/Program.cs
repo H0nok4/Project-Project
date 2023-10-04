@@ -501,7 +501,7 @@ namespace CsvParser {
                                 if (!string.IsNullOrEmpty(csvFileInstance.Data[i][j]))
                                 {
                                     //有填值，用填的值
-                                    property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[i][j], property.FieldType));
+                                    property.SetValue(instance, ConverPropertyType(csvFileInstance.Data[i][j], property.FieldType));
       
                                 }
                                 else
@@ -509,13 +509,13 @@ namespace CsvParser {
                                     //没填值，尝试用默认值
                                     if (!string.IsNullOrEmpty(csvFileInstance.Data[4][j])) {
                                         //使用默认值
-                                        property.SetValue(instance, Convert.ChangeType(csvFileInstance.Data[4][j], property.FieldType));
+                                        property.SetValue(instance, ConverPropertyType(csvFileInstance.Data[4][j], property.FieldType));
                                     }
                                     else
                                     {
                                         Console.WriteLine($"没有找到对应的默认值，{className}的{typeName[j]}，使用类型的默认值");
                                         object defaultValue = Activator.CreateInstance(property.FieldType);
-                                        property.SetValue(instance, Convert.ChangeType(defaultValue, property.FieldType));
+                                        property.SetValue(instance, ConverPropertyType((string)defaultValue, property.FieldType));
                                     }
                                 }
 
@@ -552,6 +552,34 @@ namespace CsvParser {
             Console.WriteLine("已将生成了对应的XML数据");
         }
 
+        public static object ConverPropertyType(string value, Type type)
+        {
+            if (type == typeof(int))
+            {
+                return int.Parse(value);
+            }
+            else if (type == typeof(float))
+            {
+                return float.Parse(value);
+            }
+            else if (type == typeof(bool))
+            {
+                return bool.Parse(value);
+            }
+            else if (type == typeof(string))
+            {
+                return value;
+            }
+            else if (type.IsEnum)
+            {
+                return Enum.Parse(type, value);
+            }
+            else
+            {
+                throw new Exception("不支持的类型");
+            }
+        }
+
         static TypeSyntax GetTypeSyntax(string type) {
             switch (type.ToLower()) {
                 case "string":
@@ -563,7 +591,12 @@ namespace CsvParser {
                 case "bool":
                     return SyntaxFactory.ParseTypeName("bool");
                 default:
+                    if (EnumTypes.ContainsKey(type))
+                    {
+                        return SyntaxFactory.ParseTypeName(type);
+                    }
                     throw new ArgumentException($"Unknown type: {type}");
+                    
             }
         }
 

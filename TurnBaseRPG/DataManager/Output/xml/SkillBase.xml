@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfSkillBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfSkillBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SkillBaseDefine>
+		<ID>1</ID>
+		<SkillName>打击</SkillName>
+		<SkillType>Physics</SkillType>
+	</SkillBaseDefine>
+	<SkillBaseDefine>
+		<ID>2</ID>
+		<SkillName>心灵打击</SkillName>
+		<SkillType>Psyche</SkillType>
+	</SkillBaseDefine>
+</ArrayOfSkillBaseDefine>
