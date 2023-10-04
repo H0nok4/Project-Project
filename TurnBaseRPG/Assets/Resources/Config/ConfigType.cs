@@ -4,6 +4,15 @@ using System.Linq;
 
 namespace ConfigType
 {
+    public enum SkillType
+    {
+        Physics,
+        Fire,
+        Cold,
+        Nature,
+        Psyche
+    }
+
     public class NPCBaseDefine
     {
         public int ID; // ID 

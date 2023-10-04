@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -15,6 +16,7 @@ namespace CsvParser {
     class Program {
         //临时，等完善后打包成程序去运行的话，需要改成相对路径
         static string _csvDir = @"Table"; // 指定CSV文件所在目录
+        static string _keyValueTableDir = @"KeyValueTable"; // 指定KeyValueTable文件所在目录
         static string _configTypeCSDir = @"Output\ConfigType.cs";
         static string _outputDir = @"Output"; // 指定输出目录
         static string _outputXMLDir = @"Output\xml";// 指定XML输出目录
@@ -22,12 +24,14 @@ namespace CsvParser {
         static string _gameConfigTypeDir = @"..\Assets\Resources\Config\"; //游戏的配置代码目录
         static string _dataManagerScriptDir = @"..\Assets\Scripts\Config\"; //游戏的配置代码目录
         private static List<CSVFile> csvFiles = new List<CSVFile>();
+        private static Dictionary<string,Type> EnumTypes = new Dictionary<string, Type>();
         static void Main(string[] args) {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             //校验CSV表的主键
             VerifyCSV();
 
+            GenerateKeyValueTable();
             //TODO:可能还得校验数据的有效性，比如所填的数据是否是对应的类型
 
             //先生成Type的文件
@@ -41,6 +45,57 @@ namespace CsvParser {
 
             //开始生成一个DataManager.cs文件，用于游戏内获取所有的游戏配置
             GenerateDataManagerScriptFile();
+        }
+
+        private static void GenerateKeyValueTable()
+        {
+            //TODO:Enum表
+            GenerateEnums();
+            //TODO:Localization表
+            GenerateLocalization();
+        }
+
+        private static void GenerateLocalization()
+        {
+            //TODO:多语言默认只会填ID或者中文会生成俩个字典，一个字典以ID为主键，多语言配置为值，一个字典以中文为主键多语言配置为值
+        }
+
+        private static void GenerateEnums()
+        {
+            var enumTable = CSVFile.ReadCSVFile(Path.Combine(_keyValueTableDir, "Enum.csv"));
+            if (enumTable == null)
+            {
+                Console.WriteLine("Enum表不存在");
+                return;
+            }
+
+            for (int i = 4; i < enumTable.Data.Count; i++)
+            {
+                if (enumTable.Data[i][0] != "")
+                {
+                    string enumName = enumTable.Data[i][0];
+                    Console.WriteLine($"生成枚举{enumName}");
+                    EnumBuilder enumBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("EnumAssembly"), AssemblyBuilderAccess.Run).DefineDynamicModule("EnumModule").DefineEnum(enumTable.Data[i][0], TypeAttributes.Public, typeof(int));
+                    int j = 0;
+                    enumBuilder.DefineLiteral(enumTable.Data[i][1], j);
+                    i++;
+                    j++;
+                    //从这里开始到下一个非空的位置为止全是这个枚举的值
+                    while (enumTable.Data[i][0] == "" && enumTable.Data[i][1] != "")
+                    {
+                        enumBuilder.DefineLiteral(enumTable.Data[i][1], j);
+                        i++;
+                        j++;
+                        if (enumTable.Data[i + 1][0] != "")
+                        {
+                            enumBuilder.DefineLiteral(enumTable.Data[i][1], j);
+                            break;
+                        }
+                    }
+
+                    EnumTypes.Add(enumName, enumBuilder.CreateType());
+                }
+            }
         }
 
         /// <summary>
@@ -115,6 +170,7 @@ namespace CsvParser {
 
             //得放在一个命名空间下
             var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType")).NormalizeWhitespace();
+
 
             //DataManager类声明
             var classDeclaration = SyntaxFactory.ClassDeclaration("DataManager")
@@ -317,8 +373,27 @@ namespace CsvParser {
             //CSV表的第五行为若未填写数据时，使用的默认值
             //CSV表的第六行开始为数据
 
-            List<ClassDeclarationSyntax> classes = new List<ClassDeclarationSyntax>();
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType"));
 
+
+            //所有的枚举类型声明
+            foreach (var enumKVP in EnumTypes) {
+                EnumDeclarationSyntax enumDeclaration = SyntaxFactory.EnumDeclaration(enumKVP.Key).WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
+                // 获取枚举类型的所有字段
+                var fields = enumKVP.Value.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+
+
+                // 添加枚举值
+                foreach (var field in fields) {
+                    var identifier = SyntaxFactory.Identifier(field.Name);
+                    var enumMember = SyntaxFactory.EnumMemberDeclaration(identifier);
+                    enumDeclaration = enumDeclaration.AddMembers(enumMember);
+                }
+
+                namespaceDeclaration = namespaceDeclaration.AddMembers(enumDeclaration);
+            }
+
+            //所有的类声明
             foreach (CSVFile csvFile in csvFiles)
             {
                 string className = csvFile.FileName;
@@ -357,8 +432,9 @@ namespace CsvParser {
                     .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(properties))
                     .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
 
-                classes.Add(classDecl);
+                namespaceDeclaration = namespaceDeclaration.AddMembers(classDecl);
             }
+
 
             // 生成输出文件
             CompilationUnitSyntax output = SyntaxFactory.CompilationUnit()
@@ -368,7 +444,7 @@ namespace CsvParser {
                     SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic")),
                     SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Linq"))
                 }))
-                .WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType")).WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(classes))))
+                .WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(namespaceDeclaration))
                 .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
 
             string outputFile = Path.Combine(_outputDir, "ConfigType.cs");
