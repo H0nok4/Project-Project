@@ -1,0 +1,5 @@
+*,
+int32,string
+ID,SkillName
+ID,技能名称
+1,打击

@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 
 namespace UI.Battle
 {
-    public class BtnBag : ButtonBase {
+    public class BtnRunaway : ButtonBase {
         public override void OnPointerClick(PointerEventData eventData)
         {
             base.OnPointerClick(eventData);
-            Debug.Log("点击了背包按钮");
+            Debug.Log("逃跑按钮被按下");
         }
     }
 
 }
+

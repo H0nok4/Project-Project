@@ -27,6 +27,13 @@ namespace ConfigType
             return PokeGirlBaseDefineDic[ID];
         }
 
+        public List<SkillBaseDefine> SkillBaseDefineList = new List<SkillBaseDefine>();
+        public Dictionary<int, SkillBaseDefine> SkillBaseDefineDic = new Dictionary<int, SkillBaseDefine>();
+        public SkillBaseDefine GetSkillBaseDefineByID(int ID)
+        {
+            return SkillBaseDefineDic[ID];
+        }
+
         public void InitConfigs()
         {
             string ConfigPath = "Assets/Resources/Config/xml/";
@@ -39,6 +46,9 @@ namespace ConfigType
             FileStream PokeGirlBaseStream = File.OpenRead(ConfigPath + "PokeGirlBase.xml");
             XmlSerializer PokeGirlBaseDefineserializer = new XmlSerializer(typeof(List<PokeGirlBaseDefine>));
             PokeGirlBaseDefineList = (List<PokeGirlBaseDefine>)PokeGirlBaseDefineserializer.Deserialize(PokeGirlBaseStream);
+            FileStream SkillBaseStream = File.OpenRead(ConfigPath + "SkillBase.xml");
+            XmlSerializer SkillBaseDefineserializer = new XmlSerializer(typeof(List<SkillBaseDefine>));
+            SkillBaseDefineList = (List<SkillBaseDefine>)SkillBaseDefineserializer.Deserialize(SkillBaseStream);
             InitDictionary();
         }
 
@@ -57,6 +67,11 @@ namespace ConfigType
             foreach (var i in PokeGirlBaseDefineList)
             {
                 PokeGirlBaseDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in SkillBaseDefineList)
+            {
+                SkillBaseDefineDic.Add(i.ID, i);
             }
         }
     }

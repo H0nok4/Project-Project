@@ -24,6 +24,10 @@ public class BattleUnit : BattleBaseUnit
     /// 当前的生命值
     /// </summary>
     public int CurrentHp;
+    /// <summary>
+    /// 首先出战单位
+    /// </summary>
+    public bool IsFirst;
 
     public BattleUnit(PokeGirl pokeGirl)
     {

@@ -7,15 +7,11 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class ButtonBase : UIComponent,IPointerClickHandler
+    public class ButtonBase : UIComponent
     {
         public Action OnClick;
-        public override void InitInstance()
-        {
-            
-        }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public override void OnPointerClick(PointerEventData eventData)
         {
             OnClick?.Invoke();
         }

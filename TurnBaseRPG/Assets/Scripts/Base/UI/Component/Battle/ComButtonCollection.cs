@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace UI.Battle
 {
-    public class BattleSelector : UIComponent {
-        public UIList ListSkillMove;
+    public class ComButtonCollection : UIComponent {
         public override void InitInstance() {
-            ListSkillMove = GetUIListAtChildIndex(1);
+            throw new System.NotImplementedException();
         }
     }
 

@@ -39,4 +39,10 @@ namespace ConfigType
         public string Describe; // 描述 
         public int AttributeID; // 使用的属性基础ID 
     }
+
+    public class SkillBaseDefine
+    {
+        public int ID; // ID 
+        public string SkillName; // 技能名称 
+    }
 }

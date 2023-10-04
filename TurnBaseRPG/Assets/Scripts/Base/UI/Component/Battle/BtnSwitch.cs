@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 namespace UI.Battle
 {
-    public class BtnBag : ButtonBase {
+    public class BtnSwitch : ButtonBase {
         public override void OnPointerClick(PointerEventData eventData)
         {
             base.OnPointerClick(eventData);
-            Debug.Log("点击了背包按钮");
+            Debug.Log("切换按钮被按下");
         }
     }
 
