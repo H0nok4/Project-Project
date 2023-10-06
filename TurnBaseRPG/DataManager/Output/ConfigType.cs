@@ -13,10 +13,24 @@ namespace ConfigType
         Psyche
     }
 
+    public enum SkillTargetType
+    {
+        Self,
+        Other,
+        All
+    }
+
+    public enum SkillLearnTag
+    {
+        All
+    }
+
     public class NPCBaseDefine
     {
         public int ID; // ID 
         public string Name; // 名称 
+        public List<int> BattlePartyID; // 拥有的出战角色ID 
+        public List<int> BattlePartyLevel; // 拥有的出战角色Level 
     }
 
     public class PokeGirlAttributeBaseDefine
@@ -47,6 +61,7 @@ namespace ConfigType
         public string Name; // 名称 
         public string Describe; // 描述 
         public int AttributeID; // 使用的属性基础ID 
+        public List<SkillLearnTag> LearnableSkillTags; // 可以学习的技能种类 
     }
 
     public class SkillBaseDefine
@@ -54,5 +69,10 @@ namespace ConfigType
         public int ID; // ID 
         public string SkillName; // 技能名称 
         public SkillType SkillType; // 技能类型 
+        public string SkillDes; // 技能描述 
+        public SkillTargetType SkillTargetType; // 技能的目标类型 
+        public SkillLearnTag SkillLearnTag; // 可学习技能的类型 
+        public int Cost; // 使用技能的消耗 
+        public int LevelLimit; // 技能的学习等级条件 
     }
 }

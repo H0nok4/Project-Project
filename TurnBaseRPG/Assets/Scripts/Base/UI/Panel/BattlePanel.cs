@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI.Battle;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace UI.Battle
@@ -11,9 +12,13 @@ namespace UI.Battle
         public BattleTopBar PlayerTopBar;
         public BattleTopBar EnemyTopBar;
         public ButtonCollection ButtonCollection;
+        public ComBattleUnit PlayerBattleUnit;
+        public ComBattleUnit EnemyBattleUnit;
         public override void InitInstance() {
             BattleSelector = (BattleSelector)GetUIComponentAtChildIndex(1);
             ButtonCollection = (ButtonCollection)GetUIComponentAtChildIndex(3);
+            PlayerBattleUnit = (ComBattleUnit)GetUIComponentAtChildIndex(4);
+            EnemyBattleUnit = (ComBattleUnit)GetUIComponentAtChildIndex(5);
             PlayerTopBar = (BattleTopBar)GetUIComponentAtChildIndex(7);
             EnemyTopBar = (BattleTopBar)GetUIComponentAtChildIndex(8);
         }
@@ -27,6 +32,21 @@ namespace UI.Battle
         public override void OnInit() {
             Debug.Log("初始化BattlePanel");
             BattleSelector.ListSkillMove.ChildCount = 5;
+        }
+
+        public void InitBattleUnitImage(BattleUnit player,BattleUnit enemy)
+        {
+            //TODO:目前没有图片，先不刷新
+            //PlayerBattleUnit.UnitImage.sprite = 
+            //EnemyBattleUnit.UnitImage.sprite = 
+            Debug.Log("初始化BattleUnitImage");
+        }
+
+        public void InitTopBar(BattleUnit player, BattleUnit enemy)
+        {
+            PlayerTopBar.InitTopBar(player);
+            EnemyTopBar.InitTopBar(enemy);
+            Debug.Log("初始化TopBar");
         }
     }
 

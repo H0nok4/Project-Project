@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IHandleBattleUnit
+public interface IHandleParty
 {
-    public List<BattleUnit> BattleUnits { get; set; }
+    public List<PokeGirl> BattleParty { get; set; }
 }

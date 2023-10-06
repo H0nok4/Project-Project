@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ConfigType;
 using UnityEngine;
 
-public class SkillBase : IBattlePerformable
+public class SkillBase
 {
     public int ID { get; }
 
@@ -15,8 +15,5 @@ public class SkillBase : IBattlePerformable
     {
         ID = id;
     }
-    public virtual void OnPerform(BattleUnit activeUnit, BattleUnit targetUnit)
-    {
-        
-    }
+
 }

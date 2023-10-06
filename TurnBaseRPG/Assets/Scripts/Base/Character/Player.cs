@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBase : ICharacterBase,IHandleBattleUnit
+public class Player : ICharacterBase,IHandleParty
 {
     public string Name { get; set; }
-    public List<BattleUnit> BattleUnits { get; set; } = new List<BattleUnit>();
+    public List<PokeGirl> BattleParty { get; set; } = new List<PokeGirl>();
     public void OnDefeated()
     {
         //TODO:战败了进入战败流程,可能是触发战败事件，事件结束后昏迷回到最近一次注册的安全点

@@ -81,12 +81,19 @@ namespace CsvParser {
                     i++;
                     j++;
                     //从这里开始到下一个非空的位置为止全是这个枚举的值
+                    if (enumTable.Data.Count <= i)
+                    {
+                        //最后只有一行，跳出
+                        EnumTypes.Add(enumName, enumBuilder.CreateType());
+                        break;
+                    }
                     while (enumTable.Data[i][0] == "" && enumTable.Data[i][1] != "")
                     {
                         enumBuilder.DefineLiteral(enumTable.Data[i][1], j);
                         i++;
                         j++;
-                        if (enumTable.Data[i + 1][0] != "")
+
+                        if (i + 1 >= enumTable.Data.Count || enumTable.Data[i + 1][0] != "")
                         {
                             enumBuilder.DefineLiteral(enumTable.Data[i][1], j);
                             break;
@@ -513,9 +520,8 @@ namespace CsvParser {
                                     }
                                     else
                                     {
-                                        Console.WriteLine($"没有找到对应的默认值，{className}的{typeName[j]}，使用类型的默认值");
                                         object defaultValue = Activator.CreateInstance(property.FieldType);
-                                        property.SetValue(instance, ConverPropertyType((string)defaultValue, property.FieldType));
+                                        property.SetValue(instance, ConverPropertyType(defaultValue.ToString(), property.FieldType));
                                     }
                                 }
 
@@ -572,7 +578,27 @@ namespace CsvParser {
             }
             else if (type.IsEnum)
             {
+                if (value == "")
+                {
+                    Console.WriteLine("枚举值是空的，默认返回0");
+                    return Enum.Parse(type,"0");
+                }
                 return Enum.Parse(type, value);
+            }else if (type.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                //列表类型
+                var listObj = Activator.CreateInstance(type);
+                //分割value的值，然后填入列表
+                var values = value.Split(';');
+                foreach (var item in values)
+                {
+                    var itemValue = ConverPropertyType(item, type.GetGenericArguments()[0]); 
+                    MethodInfo addMethod = type.GetMethod("Add"); 
+                    addMethod.Invoke(listObj, new object?[] { itemValue });
+                }
+  
+
+                return listObj;
             }
             else
             {
@@ -590,8 +616,27 @@ namespace CsvParser {
                     return SyntaxFactory.ParseTypeName("float");
                 case "bool":
                     return SyntaxFactory.ParseTypeName("bool");
+                case "int32[]":
+                    return SyntaxFactory.ParseTypeName("List<int>");
+                case "float[]":
+                    return SyntaxFactory.ParseTypeName("List<float>");
+                case "bool[]":
+                    return SyntaxFactory.ParseTypeName("List<bool>");
+                case "string[]":
+                    return SyntaxFactory.ParseTypeName("List<string>");
                 default:
-                    if (EnumTypes.ContainsKey(type))
+                    //TODO:枚举类型或者枚举类型数组
+                    Console.WriteLine($"可能时枚举类型或者枚举数组，type = {type},EnumTypesCount = {EnumTypes.Count}");
+                    if (type.EndsWith("[]"))
+                    {
+                        var enumType = type.Substring(0, type.Length - 2);
+                        if (EnumTypes.ContainsKey(enumType))
+                        {
+                            //枚举类型数组
+                            return SyntaxFactory.ParseTypeName($"List<{enumType}>");
+                        } 
+                    }
+                    else if (EnumTypes.ContainsKey(type))
                     {
                         return SyntaxFactory.ParseTypeName(type);
                     }

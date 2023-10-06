@@ -697,8 +697,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 277528774}
+  - component: {fileID: 277528775}
   m_Layer: 0
-  m_Name: EnemyBattleUnitPosition
+  m_Name: EnemyBattleUnitCom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -725,6 +726,19 @@ RectTransform:
   m_AnchoredPosition: {x: 456, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &277528775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277528773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad4beab79cafef4c864c76c1772b32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitImage: {fileID: 0}
 --- !u!1 &302255882
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +976,8 @@ MonoBehaviour:
   PlayerTopBar: {fileID: 0}
   EnemyTopBar: {fileID: 0}
   ButtonCollection: {fileID: 0}
+  PlayerBattleUnit: {fileID: 0}
+  EnemyBattleUnit: {fileID: 0}
 --- !u!1 &373735528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,8 +2338,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1027494856}
+  - component: {fileID: 1027494857}
   m_Layer: 0
-  m_Name: PlayerBattleUnitPosition
+  m_Name: PlayerBattleUnitCom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2350,6 +2367,19 @@ RectTransform:
   m_AnchoredPosition: {x: -495.30045, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1027494857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027494855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad4beab79cafef4c864c76c1772b32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitImage: {fileID: 0}
 --- !u!224 &1041785134 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6192243634174089321, guid: b02e9ce34be78e242a9ecbf0f2d47886, type: 3}
@@ -2607,6 +2637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1260821967}
+  - component: {fileID: 1260821968}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -2631,6 +2662,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260821968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260821966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0080dcb29528640b7fd732da983b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BattlePanel: {fileID: 310769084}
+  BattleState: 0
 --- !u!1 &1288808916
 GameObject:
   m_ObjectHideFlags: 0

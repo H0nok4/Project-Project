@@ -1,8 +1,8 @@
-*,,,
-int32,string,string,int32
-ID,Name,Describe,AttributeID
-ID,名称,描述,使用的属性基础ID
-,默认的空值,默认的空值,1
-1,测试001,这是用来测试的001号角色,1
-2,Test002,这是用来测试的001号角色,2
-3,,这个不是默认的空值,
+*,,,,
+int32,string,string,int32,SkillLearnTag[]
+ID,Name,Describe,AttributeID,LearnableSkillTags
+ID,名称,描述,使用的属性基础ID,可以学习的技能种类
+,默认的空值,默认的空值,1,All
+1,测试001,这是用来测试的001号角色,1,
+2,Test002,这是用来测试的001号角色,2,
+3,,这个不是默认的空值,,

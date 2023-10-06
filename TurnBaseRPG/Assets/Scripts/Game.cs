@@ -6,6 +6,8 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public UIPanel Test_BattlePanel;
+    public Player Player;
+    public NPCBase TestEnemy;
     public void Awake()
     {
         InitGame();
@@ -19,6 +21,11 @@ public class Game : MonoBehaviour
 
         //TODO:≤‚ ‘
         UIManager.Instance.Show(Test_BattlePanel);
+        Player = new Player();
+        Player.BattleParty.Add(new PokeGirl(1,1));
+        TestEnemy = new NPCTest(1);
+        BattleManager.Instance.SetBattle(Player,TestEnemy);
+
     }
 
 }

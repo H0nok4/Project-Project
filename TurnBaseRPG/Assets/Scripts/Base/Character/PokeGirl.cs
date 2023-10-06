@@ -16,13 +16,42 @@ public class PokeGirl
     public int Exp;
 
     /// <summary>
+    /// 当前是否为出战单位
+    /// </summary>
+    public bool IsActive;
+
+    /// <summary>
+    /// 当前单位是否为阵亡状态
+    /// </summary>
+    public bool IsDead;
+
+    /// <summary>
+    /// 当前的生命值
+    /// </summary>
+    public float CurrentHp;
+    /// <summary>
+    /// 首先出战单位
+    /// </summary>
+    public bool IsFirst;
+
+    /// <summary>
     /// 基础属性和种族值相关
     /// </summary>
     public PokeGirlAttributeBaseDefine AttributeBase =>
         DataManager.Instance.GetPokeGirlAttributeBaseDefineByID(BaseDefine.AttributeID);
 
     public PokeGirlBaseDefine BaseDefine => DataManager.Instance.GetPokeGirlBaseDefineByID(Id);
-    
+
+    public List<SkillBase> EquipedSkills = new List<SkillBase>();
+
+    public PokeGirl(int id, int level)
+    {
+        Id = id;
+        Level = level;
+        CurrentHp = MaxHP;
+        Exp = 0;
+    }
+
     public float Attack
     {
         get

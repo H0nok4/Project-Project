@@ -4,10 +4,20 @@
 		<ID>1</ID>
 		<SkillName>打击</SkillName>
 		<SkillType>Physics</SkillType>
+		<SkillDes>一次基础的物理打击</SkillDes>
+		<SkillTargetType>Other</SkillTargetType>
+		<SkillLearnTag>All</SkillLearnTag>
+		<Cost>2</Cost>
+		<LevelLimit>1</LevelLimit>
 	</SkillBaseDefine>
 	<SkillBaseDefine>
 		<ID>2</ID>
 		<SkillName>心灵打击</SkillName>
 		<SkillType>Psyche</SkillType>
+		<SkillDes>一次基础的心灵打击</SkillDes>
+		<SkillTargetType>Other</SkillTargetType>
+		<SkillLearnTag>All</SkillLearnTag>
+		<Cost>2</Cost>
+		<LevelLimit>1</LevelLimit>
 	</SkillBaseDefine>
 </ArrayOfSkillBaseDefine>

@@ -12,6 +12,38 @@ namespace UI.Battle
             m_Background = GetImageAtChildIndex(0);
             m_valueImage = GetImageAtChildIndex(1);
         }
+
+        public void SetValue(float value)
+        {
+            m_valueImage.transform.localScale = new Vector3(value, 1, 1);
+        }
+
+        public void InitHPBar(BattleUnit unit)
+        {
+            SetValue(unit.PokeGirl.CurrentHp / unit.PokeGirl.MaxHP);
+        }
+
+        public void RefreshHPBar(BattleUnit unit)
+        {
+            //TODO：血量减少了需要动效
+            var currentFillAmount = unit.PokeGirl.CurrentHp / unit.PokeGirl.MaxHP;
+            if (m_valueImage.fillAmount > currentFillAmount)
+            {
+                //TODO:动效减少
+                StartCoroutine(TweenHP(currentFillAmount,m_valueImage.fillAmount));
+            }
+        }
+
+        private IEnumerator TweenHP(float current,float pre)
+        {
+            float value = pre;
+            while (value > current)
+            {
+                SetValue(value);
+                value -= Time.fixedDeltaTime;
+                yield return new WaitForFixedUpdate();
+            }
+        }
     }
 
 }
