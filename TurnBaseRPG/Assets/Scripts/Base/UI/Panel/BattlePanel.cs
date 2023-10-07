@@ -31,7 +31,7 @@ namespace UI.Battle
         }
         public override void OnInit() {
             Debug.Log("初始化BattlePanel");
-            BattleSelector.ListSkillMove.ChildCount = 5;
+            
         }
 
         public void InitBattleUnitImage(BattleUnit player,BattleUnit enemy)
@@ -47,6 +47,18 @@ namespace UI.Battle
             PlayerTopBar.InitTopBar(player);
             EnemyTopBar.InitTopBar(enemy);
             Debug.Log("初始化TopBar");
+        }
+
+        public void InitSkillList(BattleUnit playerUnit)
+        {
+            BattleSelector.ListSkillMove.ChildCount = playerUnit.HandleSkillCards.Count;
+            for (int i = 0; i < playerUnit.HandleSkillCards.Count; i++)
+            {
+                var comSkillCard = (ComSkillMove)BattleSelector.ListSkillMove.ChildList[i];
+                comSkillCard.TxtSkillDes.text = playerUnit.HandleSkillCards[i].Describe;
+                comSkillCard.TxtSkillPointCost.text = playerUnit.HandleSkillCards[i].Cost.ToString();
+                //TODO:刷新技能图标
+            }
         }
     }
 

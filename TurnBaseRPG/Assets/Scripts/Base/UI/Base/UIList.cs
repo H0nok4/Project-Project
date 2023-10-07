@@ -46,6 +46,7 @@ namespace UI
             }
 
             var component = GameObject.Instantiate(ListChildrenInstance).GetComponent<UIComponent>();
+            component.Init();
             AddChild(component);
         }
 

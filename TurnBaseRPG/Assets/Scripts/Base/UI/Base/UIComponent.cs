@@ -9,7 +9,12 @@ using UnityEngine.UI;
 namespace UI
 {
     public abstract class UIComponent : MonoBehaviour, IPointerClickHandler {
-        protected bool _inited = false;
+        public bool Inited = false;
+
+        private void Start()
+        {
+            Init();
+        }
 
         public Image GetImageAtChildIndex(int index) {
             return transform.GetChild(index).GetComponent<Image>();
@@ -32,12 +37,12 @@ namespace UI
         }
 
         public void Init() {
-            if (_inited) {
+            if (Inited) {
                 return;
             }
 
             InitInstance();
-            _inited = true;
+            Inited = true;
         }
 
         public abstract void InitInstance();

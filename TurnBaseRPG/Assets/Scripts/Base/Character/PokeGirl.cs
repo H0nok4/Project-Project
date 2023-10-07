@@ -50,6 +50,13 @@ public class PokeGirl
         Level = level;
         CurrentHp = MaxHP;
         Exp = 0;
+
+        //TODO:Test
+        EquipedSkills.Add(new SkillBase(1));
+        EquipedSkills.Add(new SkillBase(1));
+        EquipedSkills.Add(new SkillBase(1));
+        EquipedSkills.Add(new SkillBase(2));
+        EquipedSkills.Add(new SkillBase(2));
     }
 
     public float Attack

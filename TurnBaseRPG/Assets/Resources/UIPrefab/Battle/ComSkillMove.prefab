@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac60ca763b29d24b8a524584c6ea93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Inited: 0
   ImageSkillIcon: {fileID: 0}
   TxtSkillDes: {fileID: 0}
   TxtSkillPointCost: {fileID: 0}
@@ -413,8 +414,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is Skill Des
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f05c03718bbdf164b8ade1b69ad9ffb8, type: 2}
+  m_sharedMaterial: {fileID: -7082912873020318390, guid: f05c03718bbdf164b8ade1b69ad9ffb8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
