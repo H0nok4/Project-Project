@@ -412,10 +412,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is Skill Des
+  m_text: "\u8FD9\u662F\u4E00\u4E2A\u4E2D\u6587\u5B57\u4F53"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f05c03718bbdf164b8ade1b69ad9ffb8, type: 2}
-  m_sharedMaterial: {fileID: -7082912873020318390, guid: f05c03718bbdf164b8ade1b69ad9ffb8, type: 2}
+  m_sharedMaterial: {fileID: -957580146436937425, guid: f05c03718bbdf164b8ade1b69ad9ffb8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
