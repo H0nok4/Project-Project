@@ -25,6 +25,21 @@ namespace ConfigType
         All
     }
 
+    public enum SkillActionTarget
+    {
+        Target,
+        User,
+        All
+    }
+
+    public enum SkillActionType
+    {
+        Damage,
+        Heal,
+        AddBuff,
+        RemoveBuff
+    }
+
     public class NPCBaseDefine
     {
         public int ID; // ID 
@@ -64,6 +79,16 @@ namespace ConfigType
         public List<SkillLearnTag> LearnableSkillTags; // 可以学习的技能种类 
     }
 
+    public class SkillActionBaseDefine
+    {
+        public int ID; // ID 
+        public string ActionName; // 效果名称（相当于备注） 
+        public SkillActionTarget ActionTarget; // 技能效果目标 
+        public SkillActionType ActionType; // 技能效果类型 
+        public int Value; // 技能效果值(根据不同的效果类型有不同的规则) 
+        public string AdditionClassName; // 额外生效的类名，可以通过反射创建出来，根据不同的技能效果创建不同的基类然后调用不同的虚方法来实现一些复杂的技能效果 
+    }
+
     public class SkillBaseDefine
     {
         public int ID; // ID 
@@ -74,5 +99,6 @@ namespace ConfigType
         public SkillLearnTag SkillLearnTag; // 可学习技能的类型 
         public int Cost; // 使用技能的消耗 
         public int LevelLimit; // 技能的学习等级条件 
+        public List<int> SkillActions; // 技能的效果ID 
     }
 }

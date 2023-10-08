@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSkillActionBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SkillActionBaseDefine>
+		<ID>1</ID>
+		<ActionName>打击</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<Value>2</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>2</ID>
+		<ActionName>心灵打击</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<Value>2</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>3</ID>
+		<ActionName>对目标恢复</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Heal</ActionType>
+		<Value>3</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>4</ID>
+		<ActionName>对使用者恢复</ActionName>
+		<ActionTarget>User</ActionTarget>
+		<ActionType>Heal</ActionType>
+		<Value>3</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>5</ID>
+		<ActionName>自残</ActionName>
+		<ActionTarget>User</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<Value>2</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>6</ID>
+		<ActionName>添加BUFF1</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>AddBuff</ActionType>
+		<Value>10</Value>
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+</ArrayOfSkillActionBaseDefine>

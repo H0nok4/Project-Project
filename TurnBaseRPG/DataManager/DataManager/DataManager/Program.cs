@@ -100,6 +100,11 @@ namespace CsvParser {
                         }
                     }
 
+                    if (enumTable.Data[i][0] != "")
+                    {
+                        i--;
+                    }
+
                     EnumTypes.Add(enumName, enumBuilder.CreateType());
                 }
             }
@@ -520,8 +525,16 @@ namespace CsvParser {
                                     }
                                     else
                                     {
-                                        object defaultValue = Activator.CreateInstance(property.FieldType);
-                                        property.SetValue(instance, ConverPropertyType(defaultValue.ToString(), property.FieldType));
+                                        if (property.FieldType == typeof(string))
+                                        {
+                                            property.SetValue(instance, string.Empty);
+                                        }
+                                        else
+                                        {
+                                            object defaultValue = Activator.CreateInstance(property.FieldType);
+                                            property.SetValue(instance, defaultValue);
+                                        }
+
                                     }
                                 }
 
@@ -560,50 +573,58 @@ namespace CsvParser {
 
         public static object ConverPropertyType(string value, Type type)
         {
-            if (type == typeof(int))
+            try
             {
-                return int.Parse(value);
-            }
-            else if (type == typeof(float))
-            {
-                return float.Parse(value);
-            }
-            else if (type == typeof(bool))
-            {
-                return bool.Parse(value);
-            }
-            else if (type == typeof(string))
-            {
-                return value;
-            }
-            else if (type.IsEnum)
-            {
-                if (value == "")
-                {
-                    Console.WriteLine("枚举值是空的，默认返回0");
-                    return Enum.Parse(type,"0");
+                if (type == typeof(int)) {
+                    return int.Parse(value);
                 }
-                return Enum.Parse(type, value);
-            }else if (type.GetGenericTypeDefinition() == typeof(List<>))
-            {
-                //列表类型
-                var listObj = Activator.CreateInstance(type);
-                //分割value的值，然后填入列表
-                var values = value.Split(';');
-                foreach (var item in values)
-                {
-                    var itemValue = ConverPropertyType(item, type.GetGenericArguments()[0]); 
-                    MethodInfo addMethod = type.GetMethod("Add"); 
-                    addMethod.Invoke(listObj, new object?[] { itemValue });
+                else if (type == typeof(float)) {
+                    return float.Parse(value);
                 }
-  
+                else if (type == typeof(bool)) {
+                    return bool.Parse(value);
+                }
+                else if (type == typeof(string)) {
+                    return value;
+                }
+                else if (type.IsEnum) {
+                    if (value == "") {
+                        Console.WriteLine("枚举值是空的，默认返回0");
+                        return Enum.Parse(type, "0");
+                    }
+                    return Enum.Parse(type, value);
+                }
+                else if (type.GetGenericTypeDefinition() == typeof(List<>)) {
+                    //列表类型
+                    var listObj = Activator.CreateInstance(type);
+                    //分割value的值，然后填入列表
+                    var values = value.Split(';');
+                    foreach (var item in values) {
+                        if (string.IsNullOrEmpty(item))
+                        {
+                            continue;
+                        }
+                        var itemValue = ConverPropertyType(item, type.GetGenericArguments()[0]);
+                        MethodInfo addMethod = type.GetMethod("Add");
+                        addMethod.Invoke(listObj, new object?[] { itemValue });
+                    }
 
-                return listObj;
+
+                    return listObj;
+                }
+                else {
+                    throw new Exception("不支持的类型");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception("不支持的类型");
+                Console.WriteLine($"将字符串转换为对应数据类型时出现错误，类型为:{type},值为:{value}");
+                Console.WriteLine("===========报错堆栈=========");
+                Console.WriteLine(e);
+                Console.WriteLine("============================");
+                throw;
             }
+
         }
 
         static TypeSyntax GetTypeSyntax(string type) {

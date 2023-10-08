@@ -11,3 +11,10 @@ SkillTargetType,Self,
 ,Other,
 ,All,
 SkillLearnTag,All,通用
+SkillActionTarget,Target,对技能目标生效
+,User,对技能使用者生效
+,All,同时对俩方都生效
+SkillActionType,Damage,造成伤害
+,Heal,增加血量
+,AddBuff,附加Buff
+,RemoveBuff,移除Buff

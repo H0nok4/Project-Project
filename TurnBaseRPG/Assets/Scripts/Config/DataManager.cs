@@ -27,6 +27,13 @@ namespace ConfigType
             return PokeGirlBaseDefineDic[ID];
         }
 
+        public List<SkillActionBaseDefine> SkillActionBaseDefineList = new List<SkillActionBaseDefine>();
+        public Dictionary<int, SkillActionBaseDefine> SkillActionBaseDefineDic = new Dictionary<int, SkillActionBaseDefine>();
+        public SkillActionBaseDefine GetSkillActionBaseDefineByID(int ID)
+        {
+            return SkillActionBaseDefineDic[ID];
+        }
+
         public List<SkillBaseDefine> SkillBaseDefineList = new List<SkillBaseDefine>();
         public Dictionary<int, SkillBaseDefine> SkillBaseDefineDic = new Dictionary<int, SkillBaseDefine>();
         public SkillBaseDefine GetSkillBaseDefineByID(int ID)
@@ -46,6 +53,9 @@ namespace ConfigType
             FileStream PokeGirlBaseStream = File.OpenRead(ConfigPath + "PokeGirlBase.xml");
             XmlSerializer PokeGirlBaseDefineserializer = new XmlSerializer(typeof(List<PokeGirlBaseDefine>));
             PokeGirlBaseDefineList = (List<PokeGirlBaseDefine>)PokeGirlBaseDefineserializer.Deserialize(PokeGirlBaseStream);
+            FileStream SkillActionBaseStream = File.OpenRead(ConfigPath + "SkillActionBase.xml");
+            XmlSerializer SkillActionBaseDefineserializer = new XmlSerializer(typeof(List<SkillActionBaseDefine>));
+            SkillActionBaseDefineList = (List<SkillActionBaseDefine>)SkillActionBaseDefineserializer.Deserialize(SkillActionBaseStream);
             FileStream SkillBaseStream = File.OpenRead(ConfigPath + "SkillBase.xml");
             XmlSerializer SkillBaseDefineserializer = new XmlSerializer(typeof(List<SkillBaseDefine>));
             SkillBaseDefineList = (List<SkillBaseDefine>)SkillBaseDefineserializer.Deserialize(SkillBaseStream);
@@ -67,6 +77,11 @@ namespace ConfigType
             foreach (var i in PokeGirlBaseDefineList)
             {
                 PokeGirlBaseDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in SkillActionBaseDefineList)
+            {
+                SkillActionBaseDefineDic.Add(i.ID, i);
             }
 
             foreach (var i in SkillBaseDefineList)
