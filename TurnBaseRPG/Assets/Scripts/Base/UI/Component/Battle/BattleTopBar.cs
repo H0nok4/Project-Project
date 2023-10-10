@@ -21,14 +21,14 @@ namespace UI.Battle
         {
             //m_ImgHead.sprite = unit.Unit.HeadSprite;
             HPBar.InitHPBar(unit);
-            SkillPointTxt.text =  "0" + unit.PokeGirl.MaxSkillPoint;
+            SkillPointTxt.text =  "0" + "/" + unit.PokeGirl.MaxSkillPoint;
         }
 
         public void RefreshTopBar(BattleUnit unit)
         {
             //m_ImgHead.sprite = unit.Unit.HeadSprite;
             HPBar.RefreshHPBar(unit);
-            SkillPointTxt.text = "0" + unit.PokeGirl.MaxSkillPoint;
+            SkillPointTxt.text = "0" + "/" + unit.PokeGirl.MaxSkillPoint;
         }
     }
 

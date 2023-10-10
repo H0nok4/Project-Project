@@ -85,7 +85,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         BattlePanel.InitBattleUnitImage(CurrentPlayerBattleUnit,CurrentEnemyBattleUnit);
         BattlePanel.InitTopBar(CurrentPlayerBattleUnit,CurrentEnemyBattleUnit);
         //TODO:设置UI播放入场表现
-        BattlePanel.InitSkillList(CurrentPlayerBattleUnit);
+        BattlePanel.RefreshSkillList(CurrentPlayerBattleUnit);
         yield break;
     }
 

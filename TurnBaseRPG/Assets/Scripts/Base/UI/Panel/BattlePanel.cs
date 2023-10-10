@@ -49,11 +49,10 @@ namespace UI.Battle
             Debug.Log("≥ı ºªØTopBar");
         }
 
-        public void InitSkillList(BattleUnit playerUnit)
+        public void RefreshSkillList(BattleUnit playerUnit)
         {
             BattleSelector.ListSkillMove.ChildCount = playerUnit.HandleSkillCards.Count;
-            for (int i = 0; i < playerUnit.HandleSkillCards.Count; i++)
-            {
+            for (int i = 0; i < playerUnit.HandleSkillCards.Count; i++) {
                 var comSkillCard = (ComSkillMove)BattleSelector.ListSkillMove.ChildList[i];
                 comSkillCard.Refresh(playerUnit.HandleSkillCards[i]);
             }
