@@ -9,7 +9,6 @@ public class SkillCard : IBattlePerformable {
     //TODO:当前拥有的技能卡
     public int Cost => Define.Cost;
     public SkillBaseDefine Define => DataManager.Instance.GetSkillBaseDefineByID(SkillID);
-
     public string Describe => Define.SkillDes;
     public SkillTargetType TargetType => Define.SkillTargetType;
     public SkillType SkillType => Define.SkillType;

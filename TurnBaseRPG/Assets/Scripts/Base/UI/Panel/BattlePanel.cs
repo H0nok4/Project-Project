@@ -55,9 +55,7 @@ namespace UI.Battle
             for (int i = 0; i < playerUnit.HandleSkillCards.Count; i++)
             {
                 var comSkillCard = (ComSkillMove)BattleSelector.ListSkillMove.ChildList[i];
-                comSkillCard.TxtSkillDes.text = playerUnit.HandleSkillCards[i].Describe;
-                comSkillCard.TxtSkillPointCost.text = playerUnit.HandleSkillCards[i].Cost.ToString();
-                //TODO:刷新技能图标
+                comSkillCard.Refresh(playerUnit.HandleSkillCards[i]);
             }
         }
     }
