@@ -14,9 +14,16 @@ public class SkillCard : IBattlePerformable {
     public SkillTargetType TargetType => Define.SkillTargetType;
     public SkillType SkillType => Define.SkillType;
 
+    public List<SkillActionBase> SkillActions;
+
     public SkillCard(int skillID)
     {
         SkillID = skillID;
+        SkillActions = new List<SkillActionBase>();
+        foreach (var actionID in Define.SkillActions)
+        {
+            SkillActions.Add(new SkillActionBase(actionID));
+        }
     }
 
     public void OnPerform(BattleUnit activeUnit, BattleUnit targetUnit)
