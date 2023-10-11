@@ -109,7 +109,7 @@ public class BattleManager : MonoSingleton<BattleManager>
                 var skill = skillPool.GetCard();
                 if (skill != null)
                 {
-                    unit.HandleSkillCards.Add(skill);
+                    unit.AddSkillCard(skill);
                 }
                 else
                 {
@@ -123,7 +123,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             var card = SkillPools[unit.PokeGirl].GetCard();
             if (card != null)
             {
-                unit.HandleSkillCards.Add(card);
+                unit.AddSkillCard(card);
             }
             else
             {

@@ -17,4 +17,10 @@ public class BattleUnit : BattleBaseUnit
         HandleSkillCards = new List<SkillCard>();
     }
 
+    public void AddSkillCard(SkillCard skillCard)
+    {
+        //TODO:以后需要判断数量等
+        HandleSkillCards.Add(skillCard);
+    }
+
 }
