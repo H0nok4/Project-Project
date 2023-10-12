@@ -2,8 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageModel
+public interface IStageModel {
+
+}
+
+public class StageModel : Singleton<StageModel>, IStageModel
 {
+
+    public virtual void OnEnter()
+    {
+
+    }
+    public virtual void Update()
+    {
+
+    }
+
+    public virtual void LateUpdate()
+    {
+
+    }
+
+    public void FixedUpdate()
+    {
+
+    }
+
+    public virtual void OnExit()
+    {
+
+    }
 
 }
 
@@ -28,7 +56,7 @@ public class StageController : Singleton<StageController>
 
     public StageModel GetStageModel()
     {
-
+        return _currentStage;
     }
     
 }

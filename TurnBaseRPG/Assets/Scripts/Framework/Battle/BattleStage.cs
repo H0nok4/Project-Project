@@ -19,7 +19,7 @@ public enum BattleState
     PlayerLose,
 }
 
-public class BattleManager : MonoSingleton<BattleManager>
+public class BattleStage : StageModel
 {
     //TODO:一场战斗一般由俩名玩家，俩个队伍组成
     private bool _battleStarted;
@@ -61,14 +61,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     }
 
 
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-    }
-
-    private void Update()
+    public override void Update()
     {
         if (_battleStarted)
         {
@@ -102,13 +95,13 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         SkillPools = new Dictionary<PokeGirl, SkillCardPool>();
 
-        SendCards(CurrentPlayerBattleUnit);
-        SendCards(CurrentEnemyBattleUnit);
+        SendCards(CurrentPlayerBattleUnit,3);
+        SendCards(CurrentEnemyBattleUnit,3);
 
 
 
         //TODO:战斗开始
-        StartCoroutine(BattleStart());
+        CoroutineManager.Instance.StartCoroutine(BattleStart());
     }
 
     public IEnumerator BattleStart()
@@ -128,14 +121,14 @@ public class BattleManager : MonoSingleton<BattleManager>
         yield break;
     }
 
-    public bool SendCards(BattleUnit unit)
+    public bool SendCards(BattleUnit unit,int cardNum)
     {
         //TODO:根据玩家当前单位所装备的技能发技能卡，并且数量与手中的卡需要对应，比如带了
         if (!SkillPools.ContainsKey(unit.PokeGirl))
         {
             var skillPool = new SkillCardPool(unit.PokeGirl.EquipedSkills);
             SkillPools.Add(unit.PokeGirl, skillPool);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < cardNum; i++)
             {
                 var skill = skillPool.GetCard();
                 if (skill != null)
@@ -151,15 +144,17 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
         else
         {
-            var card = SkillPools[unit.PokeGirl].GetCard();
-            if (card != null)
+            for (int i = 0; i < cardNum; i++)
             {
-                unit.AddSkillCard(card);
+                var card = SkillPools[unit.PokeGirl].GetCard();
+                if (card != null) {
+                    unit.AddSkillCard(card);
+                }
+                else {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+
         }
 
         return true;
