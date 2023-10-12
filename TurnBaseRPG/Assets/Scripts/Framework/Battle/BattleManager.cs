@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using UI;
 using UI.Battle;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public enum BattleState
 {
@@ -21,6 +22,8 @@ public enum BattleState
 public class BattleManager : MonoSingleton<BattleManager>
 {
     //TODO:一场战斗一般由俩名玩家，俩个队伍组成
+    private bool _battleStarted;
+
     public BattlePanel BattlePanel;
 
     public Player Player;
@@ -39,11 +42,39 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     public BattleState BattleState;
 
+    public bool BattleStarted
+    {
+        get => _battleStarted;
+        set
+        {
+            _battleStarted = value;
+
+            if (_battleStarted)
+            {
+                Debug.Log("开启战斗！");
+            }
+            else
+            {
+                Debug.Log("结束战斗！");
+            }
+        }
+    }
+
+
 
     protected override void Awake()
     {
         base.Awake();
 
+    }
+
+    private void Update()
+    {
+        if (_battleStarted)
+        {
+            //TODO:战斗循环，通过当前的状态
+
+        }
     }
 
     public void SetBattle(Player player, NPCBase enemy)
