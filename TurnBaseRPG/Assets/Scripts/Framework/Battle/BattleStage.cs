@@ -19,7 +19,7 @@ public enum BattleState
     PlayerLose,
 }
 
-public class BattleStage : StageModel
+public class BattleStage : Singleton<BattleStage>,IStageModel
 {
     //TODO:一场战斗一般由俩名玩家，俩个队伍组成
     private bool _battleStarted;
@@ -61,13 +61,33 @@ public class BattleStage : StageModel
     }
 
 
-    public override void Update()
+    public void OnEnter()
+    {
+        
+    }
+
+    public void Update()
     {
         if (_battleStarted)
         {
             //TODO:战斗循环，通过当前的状态
 
         }
+    }
+
+    public void LateUpdate()
+    {
+
+    }
+
+    public void FixedUpdate()
+    {
+
+    }
+
+    public void OnExit()
+    {
+
     }
 
     public void SetBattle(Player player, NPCBase enemy)

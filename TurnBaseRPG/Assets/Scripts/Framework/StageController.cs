@@ -2,59 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IStageModel {
-
-}
-
-public class StageModel : Singleton<StageModel>, IStageModel
+public interface IStageModel
 {
+    public void OnEnter();
 
-    public virtual void OnEnter()
-    {
+    public void Update();
 
-    }
-    public virtual void Update()
-    {
+    public void LateUpdate();
 
-    }
-
-    public virtual void LateUpdate()
-    {
-
-    }
-
-    public void FixedUpdate()
-    {
-
-    }
-
-    public virtual void OnExit()
-    {
-
-    }
-
+    public void FixedUpdate();
+    public void OnExit();
 }
 
 public class StageController : Singleton<StageController> 
 {
-    private StageModel _currentStage;
+    private IStageModel _currentStage;
+
+    public void SetCurrentStage(IStageModel model)
+    {
+        if (_currentStage != null)
+        {
+            _currentStage.OnExit();
+        }
+
+        _currentStage = model;
+
+        _currentStage.OnEnter();
+    }
 
     public void Update()
     {
         //TODO:更新当前的Stage
+        _currentStage.Update();
     }
 
     public void LateUpdate()
     {
         //TODO:在帧的末尾更新Stage
+
+        _currentStage.LateUpdate();
     }
 
     public void FixedUpdate()
     {
         //TODO:物理循环更新当前的Stage
+
+        _currentStage.FixedUpdate();
     }
 
-    public StageModel GetStageModel()
+    public IStageModel GetStageModel()
     {
         return _currentStage;
     }
