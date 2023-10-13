@@ -12,6 +12,8 @@ public class BattleUnit : BattleBaseUnit
 
     public List<SkillCard> HandleSkillCards;
 
+    //TODO:需要将基础值计算为被各种BUFF道具等影响的最终值
+
     public BattleUnit(PokeGirl pokeGirl) {
         PokeGirl = pokeGirl;
         HandleSkillCards = new List<SkillCard>();

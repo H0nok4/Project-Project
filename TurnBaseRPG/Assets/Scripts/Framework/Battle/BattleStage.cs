@@ -11,9 +11,15 @@ using UnityEngine.PlayerLoop;
 public enum BattleState
 {
     BattleStart,
-    SelectAction,
+    //TODO:以后应该会有播剧情阶段，可能会随时插入战斗
+    StartNewTurn,
+    CalculateSpeed,
+    RoundStart,
+    DrawCard,//双方抽卡环节
     PlayerTurn,
+    PerformPlayerAction,
     EnemyTurn,
+    PerformEnemyAction,
     RoundEnd,
     PlayerWin,
     PlayerLose,
@@ -42,6 +48,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public BattleState BattleState;
 
+    public int Round;
+
+    public bool LeftEnd;
+    public bool RightEnd;
+
     public bool BattleStarted
     {
         get => _battleStarted;
@@ -68,10 +79,15 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public void Update()
     {
-        if (_battleStarted)
+        if (!_battleStarted)
         {
             //TODO:战斗循环，通过当前的状态
+            return;
+        }
 
+        if (BattleState == BattleState.CalculateSpeed)
+        {
+            //TODO:计算双方的速度，决定第一回合谁先动手
         }
     }
 
@@ -92,11 +108,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public void SetBattle(Player player, NPCBase enemy)
     {
+
         BattlePanel = UIManager.Instance.Find<BattlePanel>();
 
         PlayerParty = player.BattleParty;
         EnemyParty = enemy.BattleParty;
-        BattleState = BattleState.BattleStart;
 
         CurrentPlayerUnit = PlayerParty.Find((unit) => unit.IsFirst);
         if (CurrentPlayerUnit == null)
@@ -115,8 +131,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
         SkillPools = new Dictionary<PokeGirl, SkillCardPool>();
 
-        SendCards(CurrentPlayerBattleUnit,3);
-        SendCards(CurrentEnemyBattleUnit,3);
+
 
 
 
@@ -126,10 +141,16 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public IEnumerator BattleStart()
     {
+        BattleState = BattleState.BattleStart;
         BattlePanel.InitBattleUnitImage(CurrentPlayerBattleUnit,CurrentEnemyBattleUnit);
         BattlePanel.InitTopBar(CurrentPlayerBattleUnit,CurrentEnemyBattleUnit);
         //TODO:设置UI播放入场表现
         BattlePanel.RefreshSkillList(CurrentPlayerBattleUnit);
+
+        SendCards(CurrentPlayerBattleUnit, 3);
+        SendCards(CurrentEnemyBattleUnit, 3);
+
+        BattleState = BattleState.CalculateSpeed;
         yield break;
     }
 
