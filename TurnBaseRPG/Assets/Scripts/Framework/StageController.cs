@@ -32,12 +32,19 @@ public class StageController : Singleton<StageController>
 
     public void Update()
     {
+        if (_currentStage == null)
+        {
+            return;
+        }
         //TODO:更新当前的Stage
         _currentStage.Update();
     }
 
     public void LateUpdate()
     {
+        if (_currentStage == null) {
+            return;
+        }
         //TODO:在帧的末尾更新Stage
 
         _currentStage.LateUpdate();
@@ -45,6 +52,9 @@ public class StageController : Singleton<StageController>
 
     public void FixedUpdate()
     {
+        if (_currentStage == null) {
+            return;
+        }
         //TODO:物理循环更新当前的Stage
 
         _currentStage.FixedUpdate();

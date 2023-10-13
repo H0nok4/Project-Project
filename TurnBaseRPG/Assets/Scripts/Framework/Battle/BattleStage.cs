@@ -121,7 +121,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
 
         //TODO:Õ½¶·¿ªÊ¼
-        CoroutineManager.Instance.StartCoroutine(BattleStart());
+        CoroutineManager.Instance.CreateCoroutine(BattleStart());
     }
 
     public IEnumerator BattleStart()

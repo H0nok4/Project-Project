@@ -5,12 +5,12 @@ using UnityEngine;
 public class CoroutineManager : MonoSingleton<CoroutineManager>
 {
     // 开启协程
-    public Coroutine StartCoroutine(IEnumerator routine) {
+    public Coroutine CreateCoroutine(IEnumerator routine) {
         return StartCoroutine(routine);
     }
 
     // 停止协程
-    public void StopCoroutine(Coroutine routine) {
+    public void Stop(Coroutine routine) {
         StopCoroutine(routine);
     }
 }

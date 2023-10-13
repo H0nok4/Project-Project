@@ -13,6 +13,21 @@ public class Game : MonoBehaviour
         InitGame();
     }
 
+    public void Update()
+    {
+        StageController.Instance.Update();
+    }
+
+    public void FixedUpdate()
+    {
+        StageController.Instance.FixedUpdate();
+    }
+
+    public void LateUpdate()
+    {
+        StageController.Instance.LateUpdate();
+    }
+
     private void InitGame()
     {
         //TODO:初始化游戏各个模块
