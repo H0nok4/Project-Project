@@ -54,6 +54,11 @@ namespace UI.Battle
             BattleSelector.ListSkillMove.ChildCount = playerUnit.HandleSkillCards.Count;
             for (int i = 0; i < playerUnit.HandleSkillCards.Count; i++) {
                 var comSkillCard = (ComSkillMove)BattleSelector.ListSkillMove.ChildList[i];
+                if (comSkillCard.Skill == playerUnit.HandleSkillCards[i])
+                {
+                    continue;
+                }
+
                 comSkillCard.Refresh(playerUnit.HandleSkillCards[i]);
             }
         }

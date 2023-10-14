@@ -19,6 +19,7 @@ public class BattleUnit : BattleBaseUnit
         HandleSkillCards = new List<SkillCard>();
     }
 
+    public bool IsDead => false;
     public void AddSkillCard(SkillCard skillCard)
     {
         //TODO:以后需要判断数量等

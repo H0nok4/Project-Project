@@ -17,7 +17,13 @@ namespace UI
 
         public int ChildCount {
             get => ChildList.Count;
-            set {
+            set
+            {
+                if (ChildList.Count == value)
+                {
+                    return;
+                }
+
                 if (ChildCount > value) {
                     int num = ChildCount - value;
                     for (int i = 0; i < num; i++) {
@@ -37,6 +43,7 @@ namespace UI
             ChildList.Add(child);
             //TODO:需要加到Context物体下
             child.transform.SetParent(_contentGameObject.transform);
+            child.transform.localPosition = Vector3.zero;
             child.transform.localScale = Vector3.one;
         }
 

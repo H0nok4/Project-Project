@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Base;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +40,7 @@ namespace UI.Battle
             }
 
             Debug.Log($"点击了技能卡,技能卡名称为：{Skill.Define.SkillName}");
+            EventManager.Instance.TriggerEvent<SkillCard>(EventDef.OnClickBattleCard,Skill);
         }
     }
 

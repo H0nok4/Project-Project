@@ -30,6 +30,7 @@ public class Game : MonoBehaviour
 
     private void InitGame()
     {
+        Application.targetFrameRate = 60;
         //TODO:初始化游戏各个模块
         ConfigType.DataManager.Instance.InitConfigs();
         UIManager.Instance.Init();
