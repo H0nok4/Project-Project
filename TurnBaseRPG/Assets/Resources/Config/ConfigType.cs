@@ -40,6 +40,18 @@ namespace ConfigType
         RemoveBuff
     }
 
+    public enum AttributeType
+    {
+        MaxHP,
+        SkillPoint,
+        Attack,
+        SPAttack,
+        Defense,
+        SPDefense,
+        Speed,
+        CriticalChance
+    }
+
     public class NPCBaseDefine
     {
         public int ID; // ID 

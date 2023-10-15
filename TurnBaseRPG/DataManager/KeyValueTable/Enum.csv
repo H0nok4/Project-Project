@@ -18,3 +18,11 @@ SkillActionType,Damage,造成伤害
 ,Heal,增加血量
 ,AddBuff,附加Buff
 ,RemoveBuff,移除Buff
+AttributeType,MaxHP,体力
+,SkillPoint,技能点上限
+,Attack,攻击力
+,SPAttack,技巧值
+,Defense,敏感度（基础值为1.0，百分比减伤或者易伤）
+,SPDefense,忍耐力（基础值为1.0，百分比减特殊类型的伤害或者易伤）
+,Speed,速度
+,CriticalChance,会心率（固定为双倍伤害）

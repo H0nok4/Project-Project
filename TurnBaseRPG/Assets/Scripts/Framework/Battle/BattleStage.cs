@@ -24,6 +24,7 @@ public enum BattleState
     PerformEnemyAction,
     EnemyTurnEnd,
     RoundEnd,
+    PerformRoundEnd,
     PlayerDeadSwitch,
     EnemyDeadSwitch,
     PlayerWin,
@@ -59,6 +60,46 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public bool LeftEnd;
     public bool RightEnd;
+
+    public int PlayerUnitSkillPoint
+    {
+        get => CurrentPlayerBattleUnit.SkillPoint;
+        set
+        {
+            CurrentPlayerBattleUnit.SkillPoint = value;
+            BattleUIManager.SetPlayerSkillPoint(CurrentPlayerBattleUnit);
+        }
+    }
+
+    public int EnemyUnitSkillPoint
+    {
+        get => CurrentEnemyBattleUnit.SkillPoint;
+        set
+        {
+            CurrentEnemyBattleUnit.SkillPoint = value;
+            BattleUIManager.SetEnemySkillPoint(CurrentEnemyBattleUnit);
+        }
+    }
+
+    public int PlayerUnitHP
+    {
+        get => CurrentPlayerBattleUnit.CurrentHP;
+        set
+        {
+            CurrentPlayerBattleUnit.CurrentHP = value;
+            BattleUIManager.SetPlayerHP(CurrentPlayerBattleUnit);
+        }
+    }
+
+    public int EnemyUnitHP
+    {
+        get => CurrentEnemyBattleUnit.CurrentHP;
+        set
+        {
+            CurrentEnemyBattleUnit.CurrentHP = value;
+            BattleUIManager.SetEnemyHP(CurrentEnemyBattleUnit);
+        }
+    }
 
     public bool BattleStarted
     {
@@ -130,24 +171,16 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         else if (BattleState == BattleState.RoundEnd)
         {
             //TODO:可能有每回合结算伤害的BUFF，然后就是BUFF计时减少1回合
-            OnRoundEnd();
+            RoundEnd();
         }
 
 
     }
 
-    private void OnRoundEnd()
+    private IEnumerator OnRoundEnd()
     {
-        Debug.Log("回合结束");
-        //TODO:
-        LeftEnd = false;
-        RightEnd = false;
-
-        //TODO:
-
         BattleState = BattleState.RoundStart;
-
-        BattleUIManager.OnBattleRoundEnd();
+        yield break;
     }
 
     private bool CheckHasDeadUnit()
@@ -263,6 +296,12 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         if (context.Type == PlayerInputContext.InputType.SelectSkill)
         {
             //TODO:演出对应的技能
+            if (context.SkillCard.Cost > PlayerUnitSkillPoint)
+            {
+                //TODO:技能点不足，需要提示
+                Debug.LogError("技能点不足，无法使用这个技能卡");
+                return;
+            }
             OnPlayerSelectSkill(context.SkillCard);
         }else if (context.Type == PlayerInputContext.InputType.SelectEndTurn)
         {
@@ -283,6 +322,10 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private IEnumerator OnPlayerUseSkill(SkillCard skillCard)
     {
+        //TODO:扣除技能点
+        PlayerUnitSkillPoint -= skillCard.Cost;
+
+        //TODO:播放表现
         Debug.Log($"玩家选择了技能，技能名称为：{skillCard.Define.SkillName}");
         Debug.Log("开始播放技能表现——");
         yield return skillCard.OnPerform(CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
@@ -315,6 +358,9 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         BattleUIManager.OnBattleRoundStart();
 
         //TODO:还要恢复技能点
+        PlayerUnitSkillPoint = CurrentPlayerBattleUnit.MaxSkillPoint;
+        EnemyUnitSkillPoint = CurrentEnemyBattleUnit.MaxSkillPoint;
+
         BattleState = BattleState.CalculateSpeed;
 
     }
@@ -322,7 +368,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     private void CalculateSpeed()
     {
         //TODO:临时用基础速度代替下
-        if (CurrentPlayerBattleUnit.PokeGirl.SpeedBase >= CurrentEnemyBattleUnit.PokeGirl.SpeedBase)
+        if (CurrentPlayerBattleUnit.Speed >= CurrentEnemyBattleUnit.Speed)
         {
             Debug.Log("计算速度后，玩家先手");
             BattleState = BattleState.PlayerTurn;
@@ -406,10 +452,17 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         yield break;
     }
 
-    public IEnumerator RoundEnd()
+    public void RoundEnd()
     {
+        Debug.Log("回合结束");
+        //TODO:
+        LeftEnd = false;
+        RightEnd = false;
 
-        yield break;
+        //TODO:
+        CoroutineManager.Instance.CreateCoroutine(OnRoundEnd());
+
+        BattleUIManager.OnBattleRoundEnd();
     }
 
     public bool SendCards(BattleUnit unit,int cardNum)
@@ -417,7 +470,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         //TODO:根据玩家当前单位所装备的技能发技能卡，并且数量与手中的卡需要对应，比如带了
         if (!SkillPools.ContainsKey(unit.PokeGirl))
         {
-            var skillPool = new SkillCardPool(unit.PokeGirl.EquipedSkills);
+            var skillPool = new SkillCardPool(unit.EquipedSkills);
             SkillPools.Add(unit.PokeGirl, skillPool);
             for (int i = 0; i < cardNum; i++)
             {

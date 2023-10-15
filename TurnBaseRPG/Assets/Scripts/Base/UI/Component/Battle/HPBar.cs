@@ -20,13 +20,13 @@ namespace UI.Battle
 
         public void InitHPBar(BattleUnit unit)
         {
-            SetValue(unit.PokeGirl.CurrentHp / unit.PokeGirl.MaxHP);
+            SetValue(unit.CurrentHP / unit.MaxHP);
         }
 
         public void RefreshHPBar(BattleUnit unit)
         {
             //TODO：血量减少了需要动效
-            var currentFillAmount = unit.PokeGirl.CurrentHp / unit.PokeGirl.MaxHP;
+            var currentFillAmount = unit.CurrentHP / unit.CurrentHP;
             if (m_valueImage.fillAmount > currentFillAmount)
             {
                 //TODO:动效减少

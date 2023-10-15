@@ -26,6 +26,45 @@ public class BattleUIManager
         BattlePanel.RefreshSkillList(Stage.CurrentPlayerBattleUnit);
     }
 
+    public void SetPlayerHP(BattleUnit unit)
+    {
+        if (unit == null)
+        {
+            return;
+        }
+
+        BattlePanel.PlayerTopBar.HPBar.SetValue(unit.CurrentHP / unit.MaxHP);
+    }
+
+    public void SetEnemyHP(BattleUnit unit)
+    {
+        if (unit == null)
+        {
+            return;
+        }
+        BattlePanel.EnemyTopBar.HPBar.SetValue(unit.CurrentHP / unit.MaxHP);
+    }
+
+    public void SetPlayerSkillPoint(BattleUnit unit)
+    {
+        if (unit == null)
+        {
+            return;
+        }
+
+        BattlePanel.PlayerTopBar.SetSkillPoint(unit.SkillPoint, unit.MaxSkillPoint);
+    }
+
+    public void SetEnemySkillPoint(BattleUnit unit)
+    {
+        if (unit == null)
+        {
+            return;
+        }
+
+        BattlePanel.EnemyTopBar.SetSkillPoint(unit.SkillPoint,unit.MaxSkillPoint);
+    }
+
     public void OnBattleRoundEnd()
     {
 
@@ -36,9 +75,5 @@ public class BattleUIManager
         BattlePanel.UpdateBattleRound(Stage.Round);
     }
 
-    public void RefreshTopBar()
-    {
-        //BattlePanel.RefreshTopBar();
-    }
 
 }

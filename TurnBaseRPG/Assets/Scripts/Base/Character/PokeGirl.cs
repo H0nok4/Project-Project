@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ConfigType;
+using static UnityEngine.Rendering.DebugUI;
+using System;
 
 [SerializeField]
 public class PokeGirl 
@@ -11,9 +13,9 @@ public class PokeGirl
 
     public string Name;
 
-    public int Level;
+    private int _level;
 
-    public int Exp;
+    private int _exp;
 
     /// <summary>
     /// 当前是否为出战单位
@@ -26,13 +28,25 @@ public class PokeGirl
     public bool IsDead;
 
     /// <summary>
-    /// 当前的生命值
-    /// </summary>
-    public float CurrentHp;
-    /// <summary>
     /// 首先出战单位
     /// </summary>
     public bool IsFirst;
+
+    public int Level
+    { 
+        get => _level;
+        set
+        {
+            _level = value;
+            RefreshState();
+        }
+    }
+
+    public int Exp
+    {
+        get => _level;
+        set => _level = value;
+    }
 
     /// <summary>
     /// 基础属性和种族值相关
@@ -42,110 +56,63 @@ public class PokeGirl
 
     public PokeGirlBaseDefine BaseDefine => DataManager.Instance.GetPokeGirlBaseDefineByID(Id);
 
-    public List<SkillBase> EquipedSkills = new List<SkillBase>();
+    public Dictionary<AttributeType, float> StateDic = new Dictionary<AttributeType, float>();
 
     public PokeGirl(int id, int level)
     {
         Id = id;
         Level = level;
-        CurrentHp = MaxHP;
         Exp = 0;
 
+        RefreshState();
         //TODO:Test
-        EquipedSkills.Add(new SkillBase(1));
-        EquipedSkills.Add(new SkillBase(1));
-        EquipedSkills.Add(new SkillBase(1));
-        EquipedSkills.Add(new SkillBase(2));
-        EquipedSkills.Add(new SkillBase(2));
     }
 
-    public float Attack
+    public void RefreshState()
     {
-        get
-        {
-            //TODO:后面可能有BUFF之类的
-            return AttributeBase.AttackBase + AttributeBase.AttackGrow * Level;
+        StateDic.Clear();
+        var attributeEnums = Enum.GetValues(typeof(AttributeType));
+        foreach (var attributeEnum in attributeEnums) {
+            switch (attributeEnum) {
+                case AttributeType.MaxHP:
+                    StateDic.Add(AttributeType.MaxHP, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    break;
+                case AttributeType.Attack:
+                    StateDic.Add(AttributeType.Attack, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    break;
+                case AttributeType.Defense:
+                    StateDic.Add(AttributeType.Defense, AttributeBase.DefenseBase);
+                    break;
+                case AttributeType.SPAttack:
+                    StateDic.Add(AttributeType.SPAttack, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    break;
+                case AttributeType.SPDefense:
+                    StateDic.Add(AttributeType.SPDefense, AttributeBase.SpDefenseBase + AttributeBase.SpDefenseGrow * (Level - 1));
+                    break;
+                case AttributeType.CriticalChance:
+                    StateDic.Add(AttributeType.CriticalChance, AttributeBase.CriticalChanceBase);
+                    break;
+                case AttributeType.Speed:
+                    StateDic.Add(AttributeType.Speed, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    break;
+                case AttributeType.SkillPoint:
+                    StateDic.Add(AttributeType.SkillPoint,AttributeBase.SkillPointNum);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    public float Defense
+    public float GetStateBaseByAttributeType(AttributeType type)
     {
-        get
+        if (!StateDic.ContainsKey(type))
         {
-            return AttributeBase.DefenseBase + AttributeBase.DefenseGrow * Level;
+            Debug.LogError("需要获取不存在的属性类型");
+            return 0;
         }
-    }
 
-    public float SpAttack
-    {
-        get
-        {
-            return AttributeBase.SpAttackBase + AttributeBase.SpAttackGrow * Level;
-        }
-    }
-
-    public float SpDefense
-    {
-        get
-        {
-            return AttributeBase.SpDefenseBase + AttributeBase.SpDefenseGrow * Level;
-        }
-    }
-
-    public float CriticalChanceBase
-    {
-        get
-        {
-            return AttributeBase.CriticalChanceBase;
-        }
-    }
-
-    public float CriticalDamage
-    {
-        get
-        {
-            return AttributeBase.CriticalDamageBase;
-        }
-    }
-
-    public float MaxHP
-    {
-        get
-        {
-            return AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * Level;
-        }
-    }
-
-    public float MaxSkillPoint
-    {
-        get
-        {
-            return AttributeBase.SkillPointNum;
-        }
-    }
-
-    public float SpeedBase
-    {
-        get
-        {
-            return AttributeBase.SpeedBase;
-        }
-    }
-
-    public float InjuryReductionRate
-    {
-        get
-        {
-            return AttributeBase.InjuryReductionRateBase;
-        }
-    }
-
-    public float InjuryDamageBase
-    {
-        get
-        {
-            return AttributeBase.InjuryDamageBase;
-        }
+        return StateDic[type];
     }
 
 }

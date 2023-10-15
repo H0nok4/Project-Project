@@ -51,6 +51,12 @@ namespace UI.Battle
             Debug.Log("≥ı ºªØTopBar");
         }
 
+        public void RefreshTopBar(BattleUnit player, BattleUnit enemy)
+        {
+            PlayerTopBar.RefreshTopBar(player);
+            EnemyTopBar.RefreshTopBar(enemy);
+        }
+
         public void RefreshSkillList(BattleUnit playerUnit)
         {
             BattleSelector.ListSkillMove.ChildCount = playerUnit.HandleSkillCards.Count;
