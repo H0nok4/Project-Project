@@ -8,5 +8,6 @@ namespace Assets.Scripts.Base {
     public static class EventDef
     {
         public const string OnClickBattleCard = "Event_OnClickBattleCard";
+        public const string OnClickBattleEndTurnButton = "Event_OnClickBattleEndTurnButton";
     }
 }

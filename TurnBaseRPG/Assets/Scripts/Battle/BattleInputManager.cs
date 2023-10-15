@@ -39,6 +39,17 @@ public class BattlePlayerInputManager
     {
         Stage = stage;
         EventManager.Instance.AddListener<SkillCard>(EventDef.OnClickBattleCard,OnClickBattleCard);
+        EventManager.Instance.AddListener(EventDef.OnClickBattleEndTurnButton, OnClickBattleEndTurnButton);
+    }
+
+    private void OnClickBattleEndTurnButton()
+    {
+        if (Stage.BattleState != BattleState.PlayerTurn)
+        {
+            return;
+        }
+
+        SelectEndTurn = true;
     }
 
     public void OnClickBattleCard(SkillCard card)
@@ -58,6 +69,9 @@ public class BattlePlayerInputManager
         if (SelectedSkill)
         {
             context = new PlayerInputContext() { Type = PlayerInputContext.InputType.SelectSkill, SkillCard = skillCard };
+        }else if (SelectEndTurn)
+        {
+            context = new PlayerInputContext() { Type = PlayerInputContext.InputType.SelectEndTurn };
         }
 
         SelectedSkill = false;

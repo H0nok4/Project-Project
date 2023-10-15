@@ -25,8 +25,9 @@ public class SkillCard : IBattlePerformable {
         }
     }
 
-    public void OnPerform(BattleUnit activeUnit, BattleUnit targetUnit)
+    public virtual IEnumerator OnPerform(BattleUnit activeUnit, BattleUnit targetUnit)
     {
-        
+        //TODO:后续可能每个技能都有各自的效果
+        yield return new WaitForSeconds(0.5f);
     }
 }

@@ -138,6 +138,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private void OnRoundEnd()
     {
+        Debug.Log("回合结束");
         //TODO:
         LeftEnd = false;
         RightEnd = false;
@@ -145,6 +146,8 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         //TODO:
 
         BattleState = BattleState.RoundStart;
+
+        BattleUIManager.OnBattleRoundEnd();
     }
 
     private bool CheckHasDeadUnit()
@@ -273,6 +276,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     {
         BattleState = BattleState.PerformPlayerAction;
         CurrentPlayerBattleUnit.HandleSkillCards.Remove(skillCard);
+        SkillPools[CurrentPlayerUnit].ReturnCard(skillCard);
         BattleUIManager.RefreshSkillList();
         CoroutineManager.Instance.CreateCoroutine(OnPlayerUseSkill(skillCard));
     }
@@ -281,7 +285,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     {
         Debug.Log($"玩家选择了技能，技能名称为：{skillCard.Define.SkillName}");
         Debug.Log("开始播放技能表现——");
-        yield return new WaitForSeconds(0.5f);
+        yield return skillCard.OnPerform(CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
         Debug.Log("技能表现播放结束");
 
         BattleState = BattleState.PlayerTurnEnd;
@@ -308,8 +312,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
             SendCards(CurrentEnemyBattleUnit, 1);
         }
 
+        BattleUIManager.OnBattleRoundStart();
+
         //TODO:还要恢复技能点
         BattleState = BattleState.CalculateSpeed;
+
     }
 
     private void CalculateSpeed()

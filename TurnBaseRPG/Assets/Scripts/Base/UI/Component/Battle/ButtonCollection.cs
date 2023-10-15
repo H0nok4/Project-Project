@@ -8,11 +8,13 @@ namespace UI.Battle
         public BtnBag BtnBag;
         public BtnSwitch BtnSwitch;
         public BtnRunaway BtnRunaway;
+        public BtnEndTurn BtnEndTurn;
         public override void InitInstance()
         {
             BtnBag = (BtnBag)GetUIComponentAtChildIndex(0);
             BtnSwitch = (BtnSwitch)GetUIComponentAtChildIndex(1);
             BtnRunaway = (BtnRunaway)GetUIComponentAtChildIndex(2);
+            BtnEndTurn = (BtnEndTurn)GetUIComponentAtChildIndex(3);
         }
     }
 }

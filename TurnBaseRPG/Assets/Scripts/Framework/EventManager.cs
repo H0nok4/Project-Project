@@ -38,6 +38,26 @@ public class EventManager : MonoSingleton<EventManager> {
         myEvent.AddListener(listener);
     }
 
+    public void RemoveListener(string eventName, UnityAction listener) {
+        if (eventDictionary.ContainsKey(eventName)) {
+            foreach (var eventListener in eventDictionary[eventName]) {
+                if (eventListener is MyEvent myEvent) {
+                    myEvent.RemoveListener(listener);
+                }
+            }
+        }
+    }
+
+    public void TriggerEvent(string eventName) {
+        if (eventDictionary.ContainsKey(eventName)) {
+            foreach (var eventListener in eventDictionary[eventName]) {
+                if (eventListener is MyEvent myEvent) {
+                    myEvent.Invoke();
+                }
+            }
+        }
+    }
+
     public void AddListener<T>(string eventName, UnityAction<T> listener) {
         if (!eventDictionary.ContainsKey(eventName)) {
             eventDictionary.Add(eventName, new List<UnityEventBase>());

@@ -18,11 +18,22 @@ public class BattleUIManager
     {
         BattlePanel.InitBattleUnitImage(Stage.CurrentPlayerBattleUnit, Stage.CurrentEnemyBattleUnit);
         BattlePanel.InitTopBar(Stage.CurrentPlayerBattleUnit, Stage.CurrentEnemyBattleUnit);
+        BattlePanel.UpdateBattleRound(Stage.Round);
     }
 
     public void RefreshSkillList()
     {
         BattlePanel.RefreshSkillList(Stage.CurrentPlayerBattleUnit);
+    }
+
+    public void OnBattleRoundEnd()
+    {
+
+    }
+
+    public void OnBattleRoundStart()
+    {
+        BattlePanel.UpdateBattleRound(Stage.Round);
     }
 
     public void RefreshTopBar()

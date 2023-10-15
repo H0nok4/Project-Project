@@ -12,6 +12,7 @@ namespace UI.Battle
         public BattleTopBar PlayerTopBar;
         public BattleTopBar EnemyTopBar;
         public ButtonCollection ButtonCollection;
+        public ComRoundCounter RoundCounter;
         public ComBattleUnit PlayerBattleUnit;
         public ComBattleUnit EnemyBattleUnit;
         public override void InitInstance() {
@@ -19,6 +20,7 @@ namespace UI.Battle
             ButtonCollection = (ButtonCollection)GetUIComponentAtChildIndex(3);
             PlayerBattleUnit = (ComBattleUnit)GetUIComponentAtChildIndex(4);
             EnemyBattleUnit = (ComBattleUnit)GetUIComponentAtChildIndex(5);
+            RoundCounter = (ComRoundCounter)GetUIComponentAtChildIndex(6);
             PlayerTopBar = (BattleTopBar)GetUIComponentAtChildIndex(7);
             EnemyTopBar = (BattleTopBar)GetUIComponentAtChildIndex(8);
         }
@@ -61,6 +63,11 @@ namespace UI.Battle
 
                 comSkillCard.Refresh(playerUnit.HandleSkillCards[i]);
             }
+        }
+
+        public void UpdateBattleRound(int num)
+        {
+            RoundCounter.SetRound(num);
         }
     }
 

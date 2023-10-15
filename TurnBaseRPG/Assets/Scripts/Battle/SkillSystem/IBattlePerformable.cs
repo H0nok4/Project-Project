@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBattlePerformable
 {
-    public void OnPerform(BattleUnit activeUnit,BattleUnit targetUnit);
+    public IEnumerator OnPerform(BattleUnit activeUnit,BattleUnit targetUnit);
 }
