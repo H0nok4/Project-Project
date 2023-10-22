@@ -65,7 +65,7 @@ namespace Battle {
                 result.TargetUnit = sourceUnit;
             }
 
-            if (action.DiffValueOperateTypes.Count == 1) {
+            if (action.DiffValueOperateTypes.Count == 0) {
                 //TODO:只有一个操作
                 switch (action.RelateUnitType[0]) {
                     case ValueRelateUnit.None:

@@ -13,7 +13,7 @@ namespace ConfigType {
         {
             List<T> result = new List<T>();
             // 使用Resources.LoadAll方法加载指定文件夹下的所有Playable文件
-            Object[] loadedObjects = Resources.LoadAll(path, typeof(TimelineAsset));
+            Object[] loadedObjects = Resources.LoadAll(path, typeof(T));
 
             // 将加载的PlayableAsset转换为PlayableAsset数组
             for (int i = 0; i < loadedObjects.Length; i++) {

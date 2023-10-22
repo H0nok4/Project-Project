@@ -137,9 +137,12 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private void PopupDamageText(float value,Transform trans)
     {
-        var go = GameObject.Instantiate(DataManager.Instance.GetUIPrefabByName("DamageText"), trans.position,Quaternion.identity);
+        var go = GameObject.Instantiate(DataManager.Instance.GetUIPrefabByName("DamageText"), Vector3.zero,Quaternion.identity);
         DamageText damageText = go.GetComponent<DamageText>();
         damageText.SetDamage((int)value);
+        go.transform.SetParent(trans);
+        go.transform.localScale = Vector3.one;
+        go.transform.localPosition = Vector3.zero;
     }
 
     public void Update()
@@ -436,6 +439,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         if (CurrentPlayerUnit == null)
         {
             CurrentPlayerUnit = PlayerParty[0];
+
         }
 
         //TODO:可能还会有死亡状态的首发单位，需要判断是否死亡，如果死亡的状态下默认换第一个角色出战
@@ -446,6 +450,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
         CurrentPlayerBattleUnit = new BattleUnit(CurrentPlayerUnit);
         CurrentEnemyBattleUnit = new BattleUnit(CurrentEnemyUnit);
+
+        CurrentPlayerUnitGO.Unit = CurrentPlayerBattleUnit;
+        CurrentEnemyUnitGO.Unit = CurrentEnemyBattleUnit;
+        CurrentPlayerBattleUnit.GO = CurrentPlayerUnitGO;
+        CurrentEnemyBattleUnit.GO = CurrentEnemyUnitGO;
 
         SkillPools = new Dictionary<PokeGirl, SkillCardPool>();
 

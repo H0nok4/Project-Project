@@ -18,8 +18,7 @@ namespace ConfigType {
         public void InitResources()
         {
             string resourcesPath = "Assets/Resources/";
-            SkillTimelineAssets =
-                ResourceLoadManager.Instance.Load<TimelineAsset>("Skill/TimelineData/");
+            SkillTimelineAssets = ResourceLoadManager.Instance.Load<TimelineAsset>("Skill/TimelineData/");
 
             UIPrefabs = ResourceLoadManager.Instance.Load<GameObject>("UIPrefab/Battle/");
 

@@ -50,9 +50,10 @@ public class Game : MonoBehaviour
 
 
         StageController.Instance.SetCurrentStage(BattleStage.Instance);
-        BattleStage.Instance.SetBattle(Player,TestEnemy);
         BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;
         BattleStage.Instance.CurrentEnemyUnitGO = EnemyBattleGO;
+        BattleStage.Instance.SetBattle(Player,TestEnemy);
+
 
     }
 
