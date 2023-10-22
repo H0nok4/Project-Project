@@ -9,5 +9,6 @@ namespace Assets.Scripts.Base {
     {
         public const string OnClickBattleCard = "Event_OnClickBattleCard";
         public const string OnClickBattleEndTurnButton = "Event_OnClickBattleEndTurnButton";
+        public const string PopupDamageText = "Event_PopupDamageText";
     }
 }

@@ -5,7 +5,19 @@
 		<ActionName>打击</ActionName>
 		<ActionTarget>Target</ActionTarget>
 		<ActionType>Damage</ActionType>
-		<Value>2</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>0.5</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 	<SkillActionBaseDefine>
@@ -13,7 +25,19 @@
 		<ActionName>心灵打击</ActionName>
 		<ActionTarget>Target</ActionTarget>
 		<ActionType>Damage</ActionType>
-		<Value>2</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>2</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 	<SkillActionBaseDefine>
@@ -21,7 +45,19 @@
 		<ActionName>对目标恢复</ActionName>
 		<ActionTarget>Target</ActionTarget>
 		<ActionType>Heal</ActionType>
-		<Value>3</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>SpAtk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>3</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 	<SkillActionBaseDefine>
@@ -29,7 +65,19 @@
 		<ActionName>对使用者恢复</ActionName>
 		<ActionTarget>User</ActionTarget>
 		<ActionType>Heal</ActionType>
-		<Value>3</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>SpAtk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>3</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 	<SkillActionBaseDefine>
@@ -37,7 +85,19 @@
 		<ActionName>自残</ActionName>
 		<ActionTarget>User</ActionTarget>
 		<ActionType>Damage</ActionType>
-		<Value>2</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>2</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 	<SkillActionBaseDefine>
@@ -45,7 +105,19 @@
 		<ActionName>添加BUFF1</ActionName>
 		<ActionTarget>Target</ActionTarget>
 		<ActionType>AddBuff</ActionType>
-		<Value>10</Value>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>10</float>
+		</Value>
+		<DifferentValueOperateType />
 		<AdditionClassName />
 	</SkillActionBaseDefine>
 </ArrayOfSkillActionBaseDefine>

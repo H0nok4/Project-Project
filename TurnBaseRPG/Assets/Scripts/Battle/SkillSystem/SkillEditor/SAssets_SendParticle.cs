@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using TimelineExtension;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-namespace Assets.Scripts.Battle.SkillSystem.SkillEditor {
+namespace SkillEditor {
+    [TrackColor(0,0,1)]
     [TrackClipType(typeof(SClip_SendParticle))]
     [TrackBindingType(typeof(Transform))]
-    class SAssets_SendParticle : BaseTrackAsset {
+    public class SAssets_SendParticle : BaseTrackAsset {
 
     }
 }

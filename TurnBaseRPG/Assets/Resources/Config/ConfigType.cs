@@ -52,6 +52,24 @@ namespace ConfigType
         CriticalChance
     }
 
+    public enum ValueOperateType
+    {
+        Add,
+        Sub,
+        Mul,
+        Div
+    }
+
+    public enum ValueRelateUnit
+    {
+        None,
+        Atk,
+        SpAtk,
+        Def,
+        SpDef,
+        Spd
+    }
+
     public class NPCBaseDefine
     {
         public int ID; // ID 
@@ -97,7 +115,11 @@ namespace ConfigType
         public string ActionName; // 效果名称（相当于备注） 
         public SkillActionTarget ActionTarget; // 技能效果目标 
         public SkillActionType ActionType; // 技能效果类型 
-        public int Value; // 技能效果值(根据不同的效果类型有不同的规则) 
+        public List<SkillActionTarget> ActionValueTarget; // 技能效果生效的值的计算对象 
+        public List<ValueOperateType> ActionValueOperateType; // 技能效果生效的值的类型 
+        public List<ValueRelateUnit> ActionValueRelateUnitType; // 技能效果生效的值关连角色的属性类型 
+        public List<float> Value; // 技能效果值(根据不同的效果类型有不同的规则) 
+        public List<ValueOperateType> DifferentValueOperateType; // 多个值之间的计算方式 
         public string AdditionClassName; // 额外生效的类名，可以通过反射创建出来，根据不同的技能效果创建不同的基类然后调用不同的虚方法来实现一些复杂的技能效果 
     }
 
@@ -112,5 +134,6 @@ namespace ConfigType
         public int Cost; // 使用技能的消耗 
         public int LevelLimit; // 技能的学习等级条件 
         public List<int> SkillActions; // 技能的效果ID 
+        public string TimeLineData; // 技能的TimelineData名称 
     }
 }

@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Battle;
 using UI;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Game : MonoBehaviour
 {
     public UIPanel Test_BattlePanel;
     public Player Player;
     public NPCBase TestEnemy;
+
+    public BattleUnitGO PlayBattleGO;
+    public BattleUnitGO EnemyBattleGO;
     public void Awake()
     {
         InitGame();
@@ -33,6 +38,8 @@ public class Game : MonoBehaviour
         Application.targetFrameRate = 60;
         //TODO:初始化游戏各个模块
         ConfigType.DataManager.Instance.InitConfigs();
+        ConfigType.DataManager.Instance.InitResources();
+        BattleStage.Instance.TimeLineDirector = GameObject.Find("BattleManager").GetComponent<PlayableDirector>();
         UIManager.Instance.Init();
 
         //TODO:测试
@@ -40,8 +47,12 @@ public class Game : MonoBehaviour
         Player = new Player();
         Player.BattleParty.Add(new PokeGirl(1,1));
         TestEnemy = new NPCTest(1);
+
+
         StageController.Instance.SetCurrentStage(BattleStage.Instance);
         BattleStage.Instance.SetBattle(Player,TestEnemy);
+        BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;
+        BattleStage.Instance.CurrentEnemyUnitGO = EnemyBattleGO;
 
     }
 

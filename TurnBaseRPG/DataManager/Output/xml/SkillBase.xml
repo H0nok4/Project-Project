@@ -9,7 +9,10 @@
 		<SkillLearnTag>All</SkillLearnTag>
 		<Cost>2</Cost>
 		<LevelLimit>1</LevelLimit>
-		<SkillActions />
+		<SkillActions>
+			<int>1</int>
+		</SkillActions>
+		<TimeLineData>Skill_001</TimeLineData>
 	</SkillBaseDefine>
 	<SkillBaseDefine>
 		<ID>2</ID>
@@ -20,6 +23,9 @@
 		<SkillLearnTag>All</SkillLearnTag>
 		<Cost>2</Cost>
 		<LevelLimit>1</LevelLimit>
-		<SkillActions />
+		<SkillActions>
+			<int>2</int>
+		</SkillActions>
+		<TimeLineData>Skill_002</TimeLineData>
 	</SkillBaseDefine>
 </ArrayOfSkillBaseDefine>

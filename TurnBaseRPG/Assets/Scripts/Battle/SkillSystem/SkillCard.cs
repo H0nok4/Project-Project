@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using ConfigType;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
-public class SkillCard : IBattlePerformable {
+public class SkillCard{
     public int SkillID;
     //TODO:当前拥有的技能卡
     public int Cost => Define.Cost;
@@ -14,6 +16,8 @@ public class SkillCard : IBattlePerformable {
     public SkillType SkillType => Define.SkillType;
 
     public List<SkillActionBase> SkillActions;
+
+    public TimelineAsset TimelineAssets => DataManager.Instance.GetSkillTimelineAssetByName(Define.TimeLineData);
 
     public SkillCard(int skillID)
     {
@@ -25,9 +29,4 @@ public class SkillCard : IBattlePerformable {
         }
     }
 
-    public virtual IEnumerator OnPerform(BattleUnit activeUnit, BattleUnit targetUnit)
-    {
-        //TODO:后续可能每个技能都有各自的效果
-        yield return new WaitForSeconds(0.5f);
-    }
 }

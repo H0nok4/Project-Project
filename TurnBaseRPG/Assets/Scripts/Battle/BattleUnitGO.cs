@@ -9,6 +9,12 @@ namespace Assets.Scripts.Battle {
     public class BattleUnitGO : MonoBehaviour {
         public BattleUnit Unit;
         public SpriteAnimator Animator;
+
+        public BattleUnitGO(BattleUnit unit)
+        {
+            Unit.GO = this;
+            Unit = unit;
+        }
     }
 
     [Serializable]

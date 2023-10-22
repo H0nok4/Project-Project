@@ -7,7 +7,7 @@ public class NPCBase : ICharacterBase, IHandleParty, IInteractive
 {
     public int ID { get; }
     public string Name { get; set; }
-    public ConfigType.NPCBaseDefine Define => DataManager.Instance.GetNPCBaseDefineByID(ID);
+    public NPCBaseDefine Define => DataManager.Instance.GetNPCBaseDefineByID(ID);
     public List<PokeGirl> BattleParty { get; set; }
     public NPCBase(int id)
     {

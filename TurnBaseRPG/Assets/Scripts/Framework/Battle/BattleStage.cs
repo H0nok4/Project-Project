@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
-using JetBrains.Annotations;
+using Assets.Scripts.Base;
+using Assets.Scripts.Battle;
+using Battle;
+using ConfigType;
 using UI;
 using UI.Battle;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.Playables;
 
 public enum BattleState
 {
@@ -52,7 +53,12 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     public BattleUnit CurrentPlayerBattleUnit;
     public BattleUnit CurrentEnemyBattleUnit;
 
+    public BattleUnitGO CurrentPlayerUnitGO;
+    public BattleUnitGO CurrentEnemyUnitGO;
+
     public Dictionary<PokeGirl, SkillCardPool> SkillPools;
+
+    public PlayableDirector TimeLineDirector;
 
     public BattleState BattleState;
 
@@ -119,10 +125,21 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         }
     }
 
+    public SkillTimelineData SkillTimelineData { get; set; }
+
 
     public void OnEnter()
     {
         BattleStarted = true;
+        EventManager.Instance.AddListener<float,Transform>(EventDef.PopupDamageText, PopupDamageText);
+    }
+
+
+    private void PopupDamageText(float value,Transform trans)
+    {
+        var go = GameObject.Instantiate(DataManager.Instance.GetUIPrefabByName("DamageText"), trans.position,Quaternion.identity);
+        DamageText damageText = go.GetComponent<DamageText>();
+        damageText.SetDamage((int)value);
     }
 
     public void Update()
@@ -328,7 +345,10 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         //TODO:播放表现
         Debug.Log($"玩家选择了技能，技能名称为：{skillCard.Define.SkillName}");
         Debug.Log("开始播放技能表现——");
-        yield return skillCard.OnPerform(CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
+        //TODO:计算伤害
+        var timelineData = BattleDetailGenerator.GenerateSkillDetail(skillCard, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
+        SkillTimelineData = timelineData;
+        yield return BattlePerformenceManager.Perform(skillCard.TimelineAssets, timelineData, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
         Debug.Log("技能表现播放结束");
 
         BattleState = BattleState.PlayerTurnEnd;
@@ -401,6 +421,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     public void OnExit()
     {
         BattleStarted = false;
+        EventManager.Instance.RemoveListener<float,Transform>(EventDef.PopupDamageText,PopupDamageText);
     }
 
     public void SetBattle(Player player, NPCBase enemy)

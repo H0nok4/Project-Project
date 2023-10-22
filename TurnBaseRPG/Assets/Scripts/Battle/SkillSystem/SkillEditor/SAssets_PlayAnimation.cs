@@ -1,9 +1,11 @@
 using Assets.Scripts.Battle;
-using Assets.Scripts.Battle.SkillSystem.SkillEditor;
+using TimelineExtension;
 using UnityEngine.Timeline;
+namespace SkillEditor {
+    [TrackColor(0,1,0)]
+    [TrackClipType(typeof(SClip_PlayAnimation))]
+    [TrackBindingType(typeof(BattleUnitGO))]
+    public class SAssets_PlayAnimation : BaseTrackAsset {
 
-[TrackClipType(typeof(SClip_PlayAnimation))]
-[TrackBindingType(typeof(BattleUnitGO))]
-public class SAssets_PlayAnimation : BaseTrackAsset {
-
+    }
 }
