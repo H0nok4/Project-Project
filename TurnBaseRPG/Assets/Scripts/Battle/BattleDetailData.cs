@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Battle {
     public class BattleDetailBase {
@@ -10,6 +11,7 @@ namespace Battle {
         public BattleUnit SourceUnit;
         public BattleUnit TargetUnit;
         public bool IsCritical;
+        public float FinalValue;
 
         public virtual float TrueValue => BaseValue;
 
@@ -22,6 +24,8 @@ namespace Battle {
     {
         //TODO:伤害需要计算公式
         public override bool IsDamage => true;
+
+        public override float TrueValue => FinalValue;
     }
 
     public class HealDetail : BattleDetailBase

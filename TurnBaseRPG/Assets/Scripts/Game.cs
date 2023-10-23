@@ -36,13 +36,13 @@ public class Game : MonoBehaviour
     private void InitGame()
     {
         Application.targetFrameRate = 60;
-        //TODO:³õÊ¼»¯ÓÎÏ·¸÷¸öÄ£¿é
+        //TODO:åˆå§‹åŒ–æ¸¸æˆå„ä¸ªæ¨¡å—
         ConfigType.DataManager.Instance.InitConfigs();
         ConfigType.DataManager.Instance.InitResources();
         BattleStage.Instance.TimeLineDirector = GameObject.Find("BattleManager").GetComponent<PlayableDirector>();
         UIManager.Instance.Init();
 
-        //TODO:²âÊÔ
+        //TODO:æµ‹è¯•
         UIManager.Instance.Show(Test_BattlePanel);
         Player = new Player();
         Player.BattleParty.Add(new PokeGirl(1,1));
@@ -53,8 +53,6 @@ public class Game : MonoBehaviour
         BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;
         BattleStage.Instance.CurrentEnemyUnitGO = EnemyBattleGO;
         BattleStage.Instance.SetBattle(Player,TestEnemy);
-
-
     }
 
 }

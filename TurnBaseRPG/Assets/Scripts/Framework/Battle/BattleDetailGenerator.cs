@@ -1,17 +1,18 @@
-﻿using ConfigType;
+using ConfigType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Battle {
     public class SkillTimelineData
     {
-        public BattleDetailBase TargetDamageDetail;
-        public BattleDetailBase SourceDamageDetail;
-        public BattleDetailBase TargetHealDetail;
-        public BattleDetailBase SourceHealDetail;
+        public DamageDetail TargetDamageDetail;
+        public DamageDetail SourceDamageDetail;
+        public HealDetail TargetHealDetail;
+        public HealDetail SourceHealDetail;
 
     }
     public static class BattleDetailGenerator {
@@ -25,19 +26,21 @@ namespace Battle {
                         //TODO:计算
                         if (skill.SkillActions[i].Target == SkillActionTarget.Target) {
                             result.TargetDamageDetail = CalculateDamageDetail(skill.SkillActions[i], sourceUnit, targetUnit);
-
+                            CalculateDamage(result.TargetDamageDetail);
                         }
                         else if (skill.SkillActions[i].Target == SkillActionTarget.User) {
                             result.SourceDamageDetail = CalculateDamageDetail(skill.SkillActions[i], sourceUnit, sourceUnit);
+                            CalculateDamage(result.SourceDamageDetail);
                         }
+
                         break;
                     case SkillActionType.Heal:
                         if (skill.SkillActions[i].Target == SkillActionTarget.Target) {
-                            result.TargetHealDetail = CalculateDamageDetail(skill.SkillActions[i], sourceUnit, targetUnit);
+                            result.TargetHealDetail = null;//TODO:回血相关
 
                         }
                         else if (skill.SkillActions[i].Target == SkillActionTarget.User) {
-                            result.SourceHealDetail = CalculateDamageDetail(skill.SkillActions[i], sourceUnit, sourceUnit);
+                            result.SourceHealDetail = null;//TODO:回血相关
                         }
                         break;
                     case SkillActionType.AddBuff:
@@ -50,6 +53,16 @@ namespace Battle {
 
 
             return result;
+        }
+
+        public static void CalculateDamage(DamageDetail detail) {
+            if (detail.SourceUnit == null || detail.TargetUnit == null) {
+                Debug.LogError("计算伤害时没有目标");
+                return;
+            }
+
+            //TODO:计算防御减伤还有BUFF
+            detail.FinalValue = detail.BaseValue - detail.TargetUnit.GetAttrValueByType(AttributeType.Defense);
         }
 
         private static DamageDetail CalculateDamageDetail(SkillActionBase action, BattleUnit sourceUnit,

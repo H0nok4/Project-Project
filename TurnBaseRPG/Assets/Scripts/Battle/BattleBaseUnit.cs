@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using UnityEngine;
 
 public class BattleBaseUnit : IBattleUnit
@@ -9,7 +10,7 @@ public class BattleBaseUnit : IBattleUnit
         
     }
 
-    public virtual void Damage()
+    public virtual void Damage(DamageDetail detail)
     {
         
     }

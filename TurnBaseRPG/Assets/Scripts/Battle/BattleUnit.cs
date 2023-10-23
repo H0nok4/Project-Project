@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Battle;
+using Battle;
 using ConfigType;
 using UnityEngine;
 
-//TODO:µ±Ç°Õ½¶·µÄµ¥Î»
+//TODO:å½“å‰æˆ˜æ–—çš„å•ä½
 public class BattleUnit : BattleBaseUnit
 {
     /// <summary>
-    /// µ±Ç°µ¥Î»
+    /// å½“å‰å•ä½
     /// </summary>
     public PokeGirl PokeGirl;
 
@@ -22,7 +23,7 @@ public class BattleUnit : BattleBaseUnit
     public Dictionary<AttributeType, float> AttributeDic;
 
     public List<SkillBase> EquipedSkills = new List<SkillBase>();
-    //TODO:ĞèÒª½«»ù´¡Öµ¼ÆËãÎª±»¸÷ÖÖBUFFµÀ¾ßµÈÓ°ÏìµÄ×îÖÕÖµ
+    //TODO:éœ€è¦å°†åŸºç¡€å€¼è®¡ç®—ä¸ºè¢«å„ç§BUFFé“å…·ç­‰å½±å“çš„æœ€ç»ˆå€¼
 
     public BattleUnitGO GO;
 
@@ -39,10 +40,10 @@ public class BattleUnit : BattleBaseUnit
         EquipedSkills.Add(new SkillBase(2));
     }
 
-    public bool IsDead => false;
+    public bool IsDead => CurrentHP <= 0;
     public void AddSkillCard(SkillCard skillCard)
     {
-        //TODO:ÒÔºóĞèÒªÅĞ¶ÏÊıÁ¿µÈ
+        //TODO:ä»¥åéœ€è¦åˆ¤æ–­æ•°é‡ç­‰
         HandleSkillCards.Add(skillCard);
     }
 
@@ -63,7 +64,7 @@ public class BattleUnit : BattleBaseUnit
 
     public float GetAttrValueByType(AttributeType type)
     {
-        //TODO:ºóÃæ¼ÆËã»¹Òª¼ÓÉÏBUFFµÈÓ°Ïì
+        //TODO:åé¢è®¡ç®—è¿˜è¦åŠ ä¸ŠBUFFç­‰å½±å“
         return AttributeDic[type];
     }
 
@@ -91,6 +92,10 @@ public class BattleUnit : BattleBaseUnit
         }
     }
 
-
-
+    public override void Damage(DamageDetail detail) {
+        CurrentHP -= (int)detail.TrueValue;
+        if (IsDead) {
+            Debug.Log("å•ä½æ”¶åˆ°ä¼¤å®³æ­»äº¡äº†");
+        }
+    }
 }

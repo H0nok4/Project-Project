@@ -13,11 +13,11 @@ using UnityEngine.Playables;
 public enum BattleState
 {
     BattleStart,
-    //TODO:ÒÔºóÓ¦¸Ã»áÓĞ²¥¾çÇé½×¶Î£¬¿ÉÄÜ»áËæÊ±²åÈëÕ½¶·
+    //TODO:ä»¥ååº”è¯¥ä¼šæœ‰æ’­å‰§æƒ…é˜¶æ®µï¼Œå¯èƒ½ä¼šéšæ—¶æ’å…¥æˆ˜æ–—
     FirstRound,
     CalculateSpeed,
     RoundStart,
-//    DrawCard,//Ë«·½³é¿¨»·½Ú
+//    DrawCard,//åŒæ–¹æŠ½å¡ç¯èŠ‚
     PlayerTurn,
     PerformPlayerAction,
     PlayerTurnEnd,
@@ -34,7 +34,7 @@ public enum BattleState
 
 public class BattleStage : Singleton<BattleStage>,IStageModel
 {
-    //TODO:Ò»³¡Õ½¶·Ò»°ãÓÉÁ©ÃûÍæ¼Ò£¬Á©¸ö¶ÓÎé×é³É
+    //TODO:ä¸€åœºæˆ˜æ–—ä¸€èˆ¬ç”±ä¿©åç©å®¶ï¼Œä¿©ä¸ªé˜Ÿä¼ç»„æˆ
     private bool _battleStarted;
 
     //public BattlePanel BattlePanel;
@@ -116,11 +116,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
             if (_battleStarted)
             {
-                Debug.Log("¿ªÆôÕ½¶·£¡");
+                Debug.Log("å¼€å¯æˆ˜æ–—ï¼");
             }
             else
             {
-                Debug.Log("½áÊøÕ½¶·£¡");
+                Debug.Log("ç»“æŸæˆ˜æ–—ï¼");
             }
         }
     }
@@ -149,7 +149,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     {
         if (!_battleStarted)
         {
-            //TODO:Õ½¶·Ñ­»·£¬Í¨¹ıµ±Ç°µÄ×´Ì¬
+            //TODO:æˆ˜æ–—å¾ªç¯ï¼Œé€šè¿‡å½“å‰çš„çŠ¶æ€
             return;
         }
 
@@ -162,27 +162,27 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         }
         else if (BattleState == BattleState.CalculateSpeed)
         {
-            //TODO:¼ÆËãË«·½µÄËÙ¶È£¬¾ö¶¨µÚÒ»»ØºÏË­ÏÈ¶¯ÊÖ
+            //TODO:è®¡ç®—åŒæ–¹çš„é€Ÿåº¦ï¼Œå†³å®šç¬¬ä¸€å›åˆè°å…ˆåŠ¨æ‰‹
             CalculateSpeed();
         }else if (BattleState == BattleState.PlayerTurn)
         {
-            //TODO:µÈ´ıÍæ¼ÒÊäÈëÖ¸Áî
+            //TODO:ç­‰å¾…ç©å®¶è¾“å…¥æŒ‡ä»¤
             CheckPlayerInput();
         }else if (BattleState == BattleState.PerformPlayerAction)
         {
-            //TODO:¸ù¾İÍæ¼ÒÑ¡ÔñµÄĞĞ¶¯£¬ÀıÈçÊ¹ÓÃ¿¨ÅÆ£¬ÇĞ»»µ¥Î»£¬Ê¹ÓÃµÀ¾ßµÈ£¬²¥·Å±íÏÖ
+            //TODO:æ ¹æ®ç©å®¶é€‰æ‹©çš„è¡ŒåŠ¨ï¼Œä¾‹å¦‚ä½¿ç”¨å¡ç‰Œï¼Œåˆ‡æ¢å•ä½ï¼Œä½¿ç”¨é“å…·ç­‰ï¼Œæ’­æ”¾è¡¨ç°
         }
         else if (BattleState == BattleState.PlayerTurnEnd) {
-            //Íæ¼Ò»ØºÏ½áÊø
+            //ç©å®¶å›åˆç»“æŸ
             CheckPlayerTurnEnd();
         }
         else if (BattleState == BattleState.EnemyTurn)
         {
-            //TODO:AIĞĞ¶¯
+            //TODO:AIè¡ŒåŠ¨
             RunAITurn();
         }else if (BattleState == BattleState.PerformEnemyAction)
         {
-            //TODO:¸ù¾İAIÑ¡ÔñµÄĞĞ¶¯£¬ÀıÈçÊ¹ÓÃ¿¨ÅÆ£¬ÇĞ»»µ¥Î»£¬Ê¹ÓÃµÀ¾ßµÈ£¬²¥·Å±íÏÖ
+            //TODO:æ ¹æ®AIé€‰æ‹©çš„è¡ŒåŠ¨ï¼Œä¾‹å¦‚ä½¿ç”¨å¡ç‰Œï¼Œåˆ‡æ¢å•ä½ï¼Œä½¿ç”¨é“å…·ç­‰ï¼Œæ’­æ”¾è¡¨ç°
         }
         else if (BattleState == BattleState.EnemyTurnEnd)
         {
@@ -190,7 +190,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         }
         else if (BattleState == BattleState.RoundEnd)
         {
-            //TODO:¿ÉÄÜÓĞÃ¿»ØºÏ½áËãÉËº¦µÄBUFF£¬È»ºó¾ÍÊÇBUFF¼ÆÊ±¼õÉÙ1»ØºÏ
+            //TODO:å¯èƒ½æœ‰æ¯å›åˆç»“ç®—ä¼¤å®³çš„BUFFï¼Œç„¶åå°±æ˜¯BUFFè®¡æ—¶å‡å°‘1å›åˆ
             RoundEnd();
         }
 
@@ -205,12 +205,12 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private bool CheckHasDeadUnit()
     {
-        //Ã¿´ÎĞĞ¶¯Íê¶¼ĞèÒªÅĞ¶ÏÁ©±ßµÄ´æ»îÇé¿ö£¬¿ÉÄÜ±»´òËÀÁË»òÕß±»Debuff°Ñ×Ô¼ºÌÌËÀÁËÖ®ÀàµÄ
+        //æ¯æ¬¡è¡ŒåŠ¨å®Œéƒ½éœ€è¦åˆ¤æ–­ä¿©è¾¹çš„å­˜æ´»æƒ…å†µï¼Œå¯èƒ½è¢«æ‰“æ­»äº†æˆ–è€…è¢«DebuffæŠŠè‡ªå·±çƒ«æ­»äº†ä¹‹ç±»çš„
         if (CurrentPlayerBattleUnit.IsDead)
         {
             if (!PlayerParty.Exists((unit)=>! unit.IsDead))
             {
-                //TODO:Íæ¼ÒËùÓĞµ¥Î»ÕóÍö£¬½áÊøÕ½¶·
+                //TODO:ç©å®¶æ‰€æœ‰å•ä½é˜µäº¡ï¼Œç»“æŸæˆ˜æ–—
                 BattleState = BattleState.PlayerLose;
             }
             else
@@ -241,20 +241,20 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     private void CheckEnemyTurnEnd()
     {
         if (RightEnd && LeftEnd) {
-            Debug.Log("Á©·½¶¼½áÊøĞĞ¶¯£¬½øÈë»ØºÏ½áËã");
+            Debug.Log("ä¿©æ–¹éƒ½ç»“æŸè¡ŒåŠ¨ï¼Œè¿›å…¥å›åˆç»“ç®—");
             BattleState = BattleState.RoundEnd;
             return;
         }
 
         if (LeftEnd) {
-            Debug.Log("Íæ¼ÒÒÑ¾­½áÊøĞĞ¶¯£¬ÔÙ´Î½øÈëµĞÈËĞĞ¶¯");
+            Debug.Log("ç©å®¶å·²ç»ç»“æŸè¡ŒåŠ¨ï¼Œå†æ¬¡è¿›å…¥æ•Œäººè¡ŒåŠ¨");
             BattleState = global::BattleState.EnemyTurn;
             return;
         }
 
         if (!CheckHasDeadUnit())
         {
-            Debug.Log("Ã»ÓĞËÀÍöµÄ½ÇÉ«£¬½øÈëÍæ¼Ò»ØºÏ");
+            Debug.Log("æ²¡æœ‰æ­»äº¡çš„è§’è‰²ï¼Œè¿›å…¥ç©å®¶å›åˆ");
             BattleState = BattleState.PlayerTurn;
             return;
         }
@@ -265,20 +265,20 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     {
         if (RightEnd && LeftEnd)
         {
-            Debug.Log("Á©·½¶¼½áÊøĞĞ¶¯£¬½øÈë»ØºÏ½áËã");
+            Debug.Log("ä¿©æ–¹éƒ½ç»“æŸè¡ŒåŠ¨ï¼Œè¿›å…¥å›åˆç»“ç®—");
             BattleState = BattleState.RoundEnd;
             return;
         }
 
         if (RightEnd)
         {
-            Debug.Log("µĞÈËÒÑ¾­½áÊøĞĞ¶¯£¬ÔÙ´Î½øÈëÍæ¼ÒĞĞ¶¯");
+            Debug.Log("æ•Œäººå·²ç»ç»“æŸè¡ŒåŠ¨ï¼Œå†æ¬¡è¿›å…¥ç©å®¶è¡ŒåŠ¨");
             BattleState = global::BattleState.PlayerTurn;
             return;
         }
 
         if (!CheckHasDeadUnit()) {
-            Debug.Log("Ã»ÓĞËÀÍöµÄ½ÇÉ«£¬½øÈëµĞÈË»ØºÏ");
+            Debug.Log("æ²¡æœ‰æ­»äº¡çš„è§’è‰²ï¼Œè¿›å…¥æ•Œäººå›åˆ");
             BattleState = BattleState.EnemyTurn;
             return;
         }
@@ -289,13 +289,13 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     {
         if (RightEnd)
         {
-            //ÒÑ¾­Ğû¸æ»ØºÏ½áÊøÁË£¬²»ÔÙ½øÈëµĞÈË»ØºÏ
+            //å·²ç»å®£å‘Šå›åˆç»“æŸäº†ï¼Œä¸å†è¿›å…¥æ•Œäººå›åˆ
             BattleState = BattleState.EnemyTurnEnd;
             return;
         }
         
-        //TODO:²âÊÔÓÃ£¬AIÎŞÄÔ½áÊø»ØºÏ
-        Debug.Log("AI½áÊø»ØºÏ");
+        //TODO:æµ‹è¯•ç”¨ï¼ŒAIæ— è„‘ç»“æŸå›åˆ
+        Debug.Log("AIç»“æŸå›åˆ");
         RightEnd = true;
 
         BattleState = BattleState.EnemyTurnEnd;
@@ -315,17 +315,17 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
         if (context.Type == PlayerInputContext.InputType.SelectSkill)
         {
-            //TODO:Ñİ³ö¶ÔÓ¦µÄ¼¼ÄÜ
+            //TODO:æ¼”å‡ºå¯¹åº”çš„æŠ€èƒ½
             if (context.SkillCard.Cost > PlayerUnitSkillPoint)
             {
-                //TODO:¼¼ÄÜµã²»×ã£¬ĞèÒªÌáÊ¾
-                Debug.LogError("¼¼ÄÜµã²»×ã£¬ÎŞ·¨Ê¹ÓÃÕâ¸ö¼¼ÄÜ¿¨");
+                //TODO:æŠ€èƒ½ç‚¹ä¸è¶³ï¼Œéœ€è¦æç¤º
+                Debug.LogError("æŠ€èƒ½ç‚¹ä¸è¶³ï¼Œæ— æ³•ä½¿ç”¨è¿™ä¸ªæŠ€èƒ½å¡");
                 return;
             }
             OnPlayerSelectSkill(context.SkillCard);
         }else if (context.Type == PlayerInputContext.InputType.SelectEndTurn)
         {
-            //»ØºÏ½áÊøÁË
+            //å›åˆç»“æŸäº†
             LeftEnd = true;
             BattleState = BattleState.PlayerTurnEnd;
         }
@@ -342,17 +342,17 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private IEnumerator OnPlayerUseSkill(SkillCard skillCard)
     {
-        //TODO:¿Û³ı¼¼ÄÜµã
+        //TODO:æ‰£é™¤æŠ€èƒ½ç‚¹
         PlayerUnitSkillPoint -= skillCard.Cost;
 
-        //TODO:²¥·Å±íÏÖ
-        Debug.Log($"Íæ¼ÒÑ¡ÔñÁË¼¼ÄÜ£¬¼¼ÄÜÃû³ÆÎª£º{skillCard.Define.SkillName}");
-        Debug.Log("¿ªÊ¼²¥·Å¼¼ÄÜ±íÏÖ¡ª¡ª");
-        //TODO:¼ÆËãÉËº¦
+        //TODO:æ’­æ”¾è¡¨ç°
+        Debug.Log($"ç©å®¶é€‰æ‹©äº†æŠ€èƒ½ï¼ŒæŠ€èƒ½åç§°ä¸ºï¼š{skillCard.Define.SkillName}");
+        Debug.Log("å¼€å§‹æ’­æ”¾æŠ€èƒ½è¡¨ç°â€”â€”");
+        //TODO:è®¡ç®—ä¼¤å®³
         var timelineData = BattleDetailGenerator.GenerateSkillDetail(skillCard, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
         SkillTimelineData = timelineData;
         yield return BattlePerformenceManager.Perform(skillCard.TimelineAssets, timelineData, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
-        Debug.Log("¼¼ÄÜ±íÏÖ²¥·Å½áÊø");
+        Debug.Log("æŠ€èƒ½è¡¨ç°æ’­æ”¾ç»“æŸ");
 
         BattleState = BattleState.PlayerTurnEnd;
     }
@@ -364,23 +364,23 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         if (firstRound)
         {
             Round = 1;
-            Debug.Log("¿ªÆôµÚÒ»¸ö»ØºÏ");
-            //TODO:µÚÒ»»ØºÏ£¬³é¿¨Òª³é3ÕÅ
+            Debug.Log("å¼€å¯ç¬¬ä¸€ä¸ªå›åˆ");
+            //TODO:ç¬¬ä¸€å›åˆï¼ŒæŠ½å¡è¦æŠ½3å¼ 
             SendCards(CurrentPlayerBattleUnit, 3);
             SendCards(CurrentEnemyBattleUnit, 3);
         }
         else
         {
             Round++;
-            Debug.Log($"¿ªÆôĞÂ»ØºÏ£¬µ±Ç°»ØºÏÊı£º{Round}");
-            //TODO:ÆäËû»ØºÏ£¬³é¿¨Ö»ÓÃ³é1ÕÅ
+            Debug.Log($"å¼€å¯æ–°å›åˆï¼Œå½“å‰å›åˆæ•°ï¼š{Round}");
+            //TODO:å…¶ä»–å›åˆï¼ŒæŠ½å¡åªç”¨æŠ½1å¼ 
             SendCards(CurrentPlayerBattleUnit, 1);
             SendCards(CurrentEnemyBattleUnit, 1);
         }
 
         BattleUIManager.OnBattleRoundStart();
 
-        //TODO:»¹Òª»Ö¸´¼¼ÄÜµã
+        //TODO:è¿˜è¦æ¢å¤æŠ€èƒ½ç‚¹
         PlayerUnitSkillPoint = CurrentPlayerBattleUnit.MaxSkillPoint;
         EnemyUnitSkillPoint = CurrentEnemyBattleUnit.MaxSkillPoint;
 
@@ -390,15 +390,15 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     private void CalculateSpeed()
     {
-        //TODO:ÁÙÊ±ÓÃ»ù´¡ËÙ¶È´úÌæÏÂ
+        //TODO:ä¸´æ—¶ç”¨åŸºç¡€é€Ÿåº¦ä»£æ›¿ä¸‹
         if (CurrentPlayerBattleUnit.Speed >= CurrentEnemyBattleUnit.Speed)
         {
-            Debug.Log("¼ÆËãËÙ¶Èºó£¬Íæ¼ÒÏÈÊÖ");
+            Debug.Log("è®¡ç®—é€Ÿåº¦åï¼Œç©å®¶å…ˆæ‰‹");
             BattleState = BattleState.PlayerTurn;
         }
         else
         {
-            Debug.Log("¼ÆËãËÙ¶Èºó£¬µĞÈËÏÈÊÖ");
+            Debug.Log("è®¡ç®—é€Ÿåº¦åï¼Œæ•Œäººå…ˆæ‰‹");
             BattleState = BattleState.EnemyTurn;
         }
 
@@ -407,7 +407,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public void LateUpdate()
     {
-        //TODO:Ë¢ĞÂUIµÈ
+        //TODO:åˆ·æ–°UIç­‰
 
     }
 
@@ -442,7 +442,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
         }
 
-        //TODO:¿ÉÄÜ»¹»áÓĞËÀÍö×´Ì¬µÄÊ×·¢µ¥Î»£¬ĞèÒªÅĞ¶ÏÊÇ·ñËÀÍö£¬Èç¹ûËÀÍöµÄ×´Ì¬ÏÂÄ¬ÈÏ»»µÚÒ»¸ö½ÇÉ«³öÕ½
+        //TODO:å¯èƒ½è¿˜ä¼šæœ‰æ­»äº¡çŠ¶æ€çš„é¦–å‘å•ä½ï¼Œéœ€è¦åˆ¤æ–­æ˜¯å¦æ­»äº¡ï¼Œå¦‚æœæ­»äº¡çš„çŠ¶æ€ä¸‹é»˜è®¤æ¢ç¬¬ä¸€ä¸ªè§’è‰²å‡ºæˆ˜
         if (CurrentPlayerUnit.IsDead) {
             CurrentPlayerUnit = PlayerParty.Find((unit) => !unit.IsDead);
         }
@@ -458,7 +458,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
         SkillPools = new Dictionary<PokeGirl, SkillCardPool>();
 
-        //TODO:Õ½¶·¿ªÊ¼
+        //TODO:æˆ˜æ–—å¼€å§‹
         CoroutineManager.Instance.CreateCoroutine(BattleStart());
     }
 
@@ -467,13 +467,13 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         BattleState = BattleState.BattleStart;
         BattleUIManager.InitBattle();
 
-        //TODO:ÉèÖÃUI²¥·ÅÈë³¡±íÏÖ
+        //TODO:è®¾ç½®UIæ’­æ”¾å…¥åœºè¡¨ç°
 
         BattleState = BattleState.FirstRound;
         yield break;
     }
 
-    //TODO:¿ªÊ¼Õ½¶·Ê±ºÍÃ¿¸ö»ØºÏ½áÊøÊ±¶¼»á·¢¿¨
+    //TODO:å¼€å§‹æˆ˜æ–—æ—¶å’Œæ¯ä¸ªå›åˆç»“æŸæ—¶éƒ½ä¼šå‘å¡
     public IEnumerator RoundStart()
     {
         BattleState = BattleState.RoundStart;
@@ -484,7 +484,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public void RoundEnd()
     {
-        Debug.Log("»ØºÏ½áÊø");
+        Debug.Log("å›åˆç»“æŸ");
         //TODO:
         LeftEnd = false;
         RightEnd = false;
@@ -497,7 +497,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
 
     public bool SendCards(BattleUnit unit,int cardNum)
     {
-        //TODO:¸ù¾İÍæ¼Òµ±Ç°µ¥Î»Ëù×°±¸µÄ¼¼ÄÜ·¢¼¼ÄÜ¿¨£¬²¢ÇÒÊıÁ¿ÓëÊÖÖĞµÄ¿¨ĞèÒª¶ÔÓ¦£¬±ÈÈç´øÁË
+        //TODO:æ ¹æ®ç©å®¶å½“å‰å•ä½æ‰€è£…å¤‡çš„æŠ€èƒ½å‘æŠ€èƒ½å¡ï¼Œå¹¶ä¸”æ•°é‡ä¸æ‰‹ä¸­çš„å¡éœ€è¦å¯¹åº”ï¼Œæ¯”å¦‚å¸¦äº†
         if (!SkillPools.ContainsKey(unit.PokeGirl))
         {
             var skillPool = new SkillCardPool(unit.EquipedSkills);
