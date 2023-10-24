@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace UI.Battle
     public class HPBar : UIComponent {
         public Image m_Background;
         public Image m_valueImage;
+        public Coroutine TweenCoroutine;
 
         public float Value {
             get {
@@ -33,23 +35,36 @@ namespace UI.Battle
         public void RefreshHPBar(BattleUnit unit)
         {
             //TODO：血量减少了需要动效
-            var currentFillAmount = unit.CurrentHP / unit.CurrentHP;
-            if (m_valueImage.fillAmount > currentFillAmount)
-            {
+            SetValue(unit.CurrentHP / unit.MaxHP);
+        }
+
+        public void RefreshHP(float value,float max) {
+            var targetFillAmount = value / max;
+            if (Mathf.Abs(Value - tweenTargetAmount) > Single.Epsilon) {
                 //TODO:动效减少
-                StartCoroutine(TweenHP(currentFillAmount,m_valueImage.fillAmount));
+                lerpValue = 0;
+                tweenTargetAmount = targetFillAmount;
+                if (TweenCoroutine != null) {
+                    return;
+                }
+
+                tweenTargetAmount = targetFillAmount;
+                TweenCoroutine = StartCoroutine(TweenHP());
             }
         }
 
-        private IEnumerator TweenHP(float current,float pre)
+        private float tweenTargetAmount;
+        private float lerpValue;
+        private IEnumerator TweenHP()
         {
-            float value = pre;
-            while (value > current)
-            {
-                SetValue(value);
-                value -= Time.fixedDeltaTime;
-                yield return new WaitForFixedUpdate();
+            while (Mathf.Abs(Value - tweenTargetAmount) > Single.Epsilon) {
+                var newValue = Mathf.Lerp(Value, tweenTargetAmount, lerpValue);
+                lerpValue += 2 * Time.deltaTime;
+                SetValue(newValue);
+                yield return new WaitForEndOfFrame();
             }
+
+            TweenCoroutine = null;
         }
     }
 
