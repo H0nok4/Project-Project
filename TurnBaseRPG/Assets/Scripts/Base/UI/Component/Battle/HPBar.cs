@@ -8,6 +8,13 @@ namespace UI.Battle
     public class HPBar : UIComponent {
         public Image m_Background;
         public Image m_valueImage;
+
+        public float Value {
+            get {
+                return m_valueImage.transform.localScale.x;
+            }
+            set => SetValue(value);
+        }
         public override void InitInstance() {
             m_Background = GetImageAtChildIndex(0);
             m_valueImage = GetImageAtChildIndex(1);
@@ -25,11 +32,11 @@ namespace UI.Battle
 
         public void RefreshHPBar(BattleUnit unit)
         {
-            //TODO£ºÑªÁ¿¼õÉÙÁËĞèÒª¶¯Ğ§
+            //TODOï¼šè¡€é‡å‡å°‘äº†éœ€è¦åŠ¨æ•ˆ
             var currentFillAmount = unit.CurrentHP / unit.CurrentHP;
             if (m_valueImage.fillAmount > currentFillAmount)
             {
-                //TODO:¶¯Ğ§¼õÉÙ
+                //TODO:åŠ¨æ•ˆå‡å°‘
                 StartCoroutine(TweenHP(currentFillAmount,m_valueImage.fillAmount));
             }
         }

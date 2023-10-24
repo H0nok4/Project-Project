@@ -97,5 +97,6 @@ public class BattleUnit : BattleBaseUnit
         if (IsDead) {
             Debug.Log("单位收到伤害死亡了");
         }
+
     }
 }

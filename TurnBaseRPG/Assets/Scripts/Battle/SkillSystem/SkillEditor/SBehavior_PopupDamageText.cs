@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Base;
+using Assets.Scripts.Battle;
 using Battle;
 using TimelineExtension;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace SkillEditor {
     public class SBehavior_PopupDamageText : BaseBehaviour{
         protected override void OnStart(object binding)
         {
-            //¸ù¾İÉËº¦µÄÀàĞÍĞŞ¸ÄÑÕÉ«£¬±©»÷µÄ×ÖÌå¸ü´ó¸üÏÊÑŞ
+            //æ ¹æ®ä¼¤å®³çš„ç±»å‹ä¿®æ”¹é¢œè‰²ï¼Œæš´å‡»çš„å­—ä½“æ›´å¤§æ›´é²œè‰³
             if (BattleStage.Instance.SkillTimelineData == null)
             {
                 return;
@@ -22,11 +23,12 @@ namespace SkillEditor {
             switch (clip.Type)
             {
                 case PopupDamageType.TargetDamage:
-                    EventManager.Instance.TriggerEvent<float,Transform>(EventDef.PopupDamageText,BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TrueValue * clip.DamagePercentage, BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TargetUnit.GO.transform);
+                    //TODO:å› ä¸ºå¼¹å‡ºä¼¤å®³æ•°å­—è¡€æ¡ä¹Ÿè¦ç›¸åº”æ”¹å˜,åˆ™æ”¾åœ¨è¿™é‡Œä¸€èµ·
+                    EventManager.Instance.TriggerEvent<float, BattleUnitGO>(EventDef.PopupDamageText,BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TrueValue * clip.DamagePercentage, BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TargetUnit.GO);
                     break;
             }
 
-            Debug.Log($"µ¯³öÉËº¦Öµ£ºÎª¸Ã´ÎÉËº¦µÄ£º{clip.DamagePercentage}%");
+            Debug.Log($"å¼¹å‡ºä¼¤å®³å€¼ï¼šä¸ºè¯¥æ¬¡ä¼¤å®³çš„ï¼š{clip.DamagePercentage}%");
         }
     }
 }
