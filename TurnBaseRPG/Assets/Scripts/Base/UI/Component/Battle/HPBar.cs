@@ -40,7 +40,7 @@ namespace UI.Battle
 
         public void RefreshHP(float value,float max) {
             var targetFillAmount = value / max;
-            if (Mathf.Abs(Value - tweenTargetAmount) > Single.Epsilon) {
+            if (Mathf.Abs(Value - targetFillAmount) > Single.Epsilon) {
                 //TODO:动效减少
                 lerpValue = 0;
                 tweenTargetAmount = targetFillAmount;
@@ -48,19 +48,19 @@ namespace UI.Battle
                     return;
                 }
 
-                tweenTargetAmount = targetFillAmount;
                 TweenCoroutine = StartCoroutine(TweenHP());
             }
         }
 
         private float tweenTargetAmount;
         private float lerpValue;
-        private IEnumerator TweenHP()
-        {
-            while (Mathf.Abs(Value - tweenTargetAmount) > Single.Epsilon) {
-                var newValue = Mathf.Lerp(Value, tweenTargetAmount, lerpValue);
-                lerpValue += 2 * Time.deltaTime;
-                SetValue(newValue);
+        private IEnumerator TweenHP() {
+            var value = Mathf.Abs(Value - tweenTargetAmount);
+            while (value > Single.Epsilon) {
+                lerpValue = Mathf.Clamp01(lerpValue);
+                value = Mathf.Lerp(Value, tweenTargetAmount, lerpValue);
+                lerpValue += 0.1f * Time.deltaTime;
+                SetValue(value);
                 yield return new WaitForEndOfFrame();
             }
 

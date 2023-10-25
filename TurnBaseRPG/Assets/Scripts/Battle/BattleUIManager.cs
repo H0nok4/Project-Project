@@ -42,9 +42,9 @@ public class BattleUIManager
     }
 
     public void SetEnemyHP(float decrease, BattleUnit enemyUnit) {
-        var value = BattlePanel.EnemyTopBar.HPBar.Value - (decrease / enemyUnit.MaxHP);
+        var value = (BattlePanel.EnemyTopBar.HPBar.Value - (decrease / enemyUnit.MaxHP)) * enemyUnit.MaxHP;
         //TODO:有BUG
-        BattlePanel.EnemyTopBar.HPBar.RefreshHP(value, enemyUnit.MaxHP);
+        BattlePanel.EnemyTopBar.HPBar.RefreshHP(value , enemyUnit.MaxHP);
     }
 
     public void SetEnemyHP(BattleUnit unit)
