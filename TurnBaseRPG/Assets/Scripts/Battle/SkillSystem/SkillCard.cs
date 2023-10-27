@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 
 public class SkillCard{
     public int SkillID;
-    //TODO:当前拥有的技能卡
+    //TODO:褰撳墠鎷ユ湁鐨勬妧鑳藉崱
     public int Cost => Define.Cost;
     public SkillBaseDefine Define => DataManager.Instance.GetSkillBaseDefineByID(SkillID);
     public string Describe => Define.SkillDes;

@@ -98,6 +98,11 @@ namespace Battle {
                 }  
             }
 
+            //TODO:计算防御减伤
+            result.BaseValue -= targetUnit.GetAttrValueByType(AttributeType.Defense);
+
+            //TODO:计算双方的BUFF
+
             float GetSkillRelateValue(ValueRelateUnit type, ValueOperateType op, BattleUnit unit) {
                 switch (type) {
                     case ValueRelateUnit.Atk:
