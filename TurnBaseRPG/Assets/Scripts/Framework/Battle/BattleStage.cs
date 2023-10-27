@@ -131,25 +131,17 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     public void OnEnter()
     {
         BattleStarted = true;
-        EventManager.Instance.AddListener<float,BattleUnitGO>(EventDef.PopupDamageText, PopupDamageText);
     }
 
-
-    private void PopupDamageText(float value, BattleUnitGO go)
-    {
-        var textGo = GameObject.Instantiate(DataManager.Instance.GetUIPrefabByName("DamageText"), Vector3.zero,Quaternion.identity);
-        DamageText damageText = textGo.GetComponent<DamageText>();
-        damageText.SetDamage((int)value);
-        textGo.transform.SetParent(go.transform);
-        textGo.transform.localScale = Vector3.one;
-        textGo.transform.localPosition = Vector3.zero;
-        //TODO:血条也要相应减少
-        if (go.Unit == CurrentPlayerBattleUnit) {
-            BattleUIManager.SetPlayerHP(value,go.Unit);
-        }else if (go.Unit == CurrentEnemyBattleUnit) {
-            BattleUIManager.SetEnemyHP(value,go.Unit);
-        }
-    }
+    //private void PopupDamageText(float value, BattleUnitGO go)
+    //{
+    //    //TODO:血条也要相应减少
+    //    if (go.Unit == CurrentPlayerBattleUnit) {
+    //        BattleUIManager.SetPlayerHP(value,go.Unit);
+    //    }else if (go.Unit == CurrentEnemyBattleUnit) {
+    //        BattleUIManager.SetEnemyHP(value,go.Unit);
+    //    }
+    //}
 
     public void Update()
     {
@@ -430,7 +422,6 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     public void OnExit()
     {
         BattleStarted = false;
-        EventManager.Instance.RemoveListener<float,BattleUnitGO>(EventDef.PopupDamageText,PopupDamageText);
     }
 
     public void SetBattle(Player player, NPCBase enemy)
