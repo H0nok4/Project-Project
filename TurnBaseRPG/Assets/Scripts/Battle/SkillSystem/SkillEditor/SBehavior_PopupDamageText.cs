@@ -24,7 +24,7 @@ namespace SkillEditor {
             {
                 case PopupDamageType.TargetDamage:
                     //TODO:因为弹出伤害数字血条也要相应改变,则放在这里一起
-                    EventManager.Instance.TriggerEvent<float, BattleUnitGO>(EventDef.PopupDamageText,BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TrueValue * clip.DamagePercentage, BattleStage.Instance.SkillTimelineData.TargetDamageDetail.TargetUnit.GO);
+                    
                     break;
             }
 
