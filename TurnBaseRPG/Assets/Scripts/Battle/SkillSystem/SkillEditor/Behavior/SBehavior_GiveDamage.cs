@@ -10,7 +10,7 @@ using TimelineExtension;
 using UnityEngine;
 
 namespace SkillEditor {
-    public class SBehavior_PopupDamageText : BaseBehaviour{
+    public class SBehavior_GiveDamage : BaseBehaviour{
         protected override void OnStart(object binding)
         {
             //根据伤害的类型修改颜色，暴击的字体更大更鲜艳
@@ -19,15 +19,8 @@ namespace SkillEditor {
                 return;
             }
 
-            var clip = GetData<SClip_PopupDamageText>();
-            switch (clip.Type)
-            {
-                case PopupDamageType.TargetDamage:
-                    //TODO:因为弹出伤害数字血条也要相应改变,则放在这里一起
-                    
-                    break;
-            }
-
+            var clip = GetData<SClip_GiveDamage>();
+            //TODO:根据Clip的类型造成伤害
             Debug.Log($"弹出伤害值：为该次伤害的：{clip.DamagePercentage}%");
         }
     }

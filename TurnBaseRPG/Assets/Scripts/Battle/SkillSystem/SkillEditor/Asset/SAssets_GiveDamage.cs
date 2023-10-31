@@ -12,8 +12,8 @@ using UnityEngine.Timeline;
 namespace SkillEditor {
     [TrackColor(1,0,0)]
     [TrackBindingType(typeof(BattleUnitGO))]
-    [TrackClipType(typeof(SClip_PopupDamageText))]
-    public class SAssets_PopupDamageText : BaseTrackAsset {
+    [TrackClipType(typeof(SClip_GiveDamage))]
+    public class SAssets_GiveDamage : BaseTrackAsset {
 
     }
 }

@@ -9,15 +9,14 @@ using TimelineExtension;
 namespace SkillEditor {
     public enum PopupDamageType
     {
-        TargetDamage,
-        SourceDamage,
-        TargetHeal,
-        SourceHeal
+        Target,
+        Self
     }
-    public class SClip_PopupDamageText : BaseClipAsset<SBehavior_PopupDamageText>
+
+    public class SClip_GiveDamage : BaseClipAsset<SBehavior_GiveDamage>
     {
         public PopupDamageType Type;
         public float DamagePercentage;
-        //TODO:ÑÕÉ«£¿
+        //TODO:é¢œè‰²ï¼Ÿ
     }
 }
