@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 namespace Battle {
-    public  static class BattlePerformenceManager {
+    public  static class BattlePerformanceManager {
 
-        public static IEnumerator Perform(TimelineAsset asset,SkillTimelineData timelineData,BattleUnit sourceUnit,BattleUnit targetUnit)
+        public static IEnumerator Perform(TimelineAsset asset,BattleUnit sourceUnit,BattleUnit targetUnit)
         {
             BattleStage.Instance.TimeLineDirector.playableAsset = asset;
             BattleStage.Instance.TimeLineDirector.Play();

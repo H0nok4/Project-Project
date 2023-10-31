@@ -125,9 +125,6 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         }
     }
 
-    public SkillTimelineData SkillTimelineData { get; set; }
-
-
     public void OnEnter()
     {
         BattleStarted = true;
@@ -347,9 +344,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         Debug.Log($"玩家选择了技能，技能名称为：{skillCard.Define.SkillName}");
         Debug.Log("开始播放技能表现——");
         //TODO:计算伤害
-        var timelineData = BattleDetailGenerator.GenerateSkillDetail(skillCard, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
-        SkillTimelineData = timelineData;
-        yield return BattlePerformenceManager.Perform(skillCard.TimelineAssets, timelineData, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
+        yield return BattlePerformanceManager.Perform(skillCard.TimelineAssets, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
         Debug.Log("技能表现播放结束");
 
         BattleState = BattleState.PlayerTurnEnd;

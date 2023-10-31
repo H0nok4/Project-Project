@@ -1,11 +1,7 @@
 using ConfigType;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Scripts.Battle {
     public class BattleUnitGO : MonoBehaviour {
@@ -27,14 +23,14 @@ namespace Assets.Scripts.Battle {
                 return;
             }
 
-            //TODO:µ¯³öÉËº¦µÄÎÄ×Ö
+            //TODO:å¼¹å‡ºä¼¤å®³çš„æ–‡å­—
             var textGo = GameObject.Instantiate(DataManager.Instance.GetUIPrefabByName("DamageText"), Vector3.zero, Quaternion.identity);
             DamageText damageText = textGo.GetComponent<DamageText>();
             damageText.SetDamage((int)damageEvent.DamagedHP);
             textGo.transform.SetParent(this.transform);
             textGo.transform.localScale = Vector3.one;
             textGo.transform.localPosition = Vector3.zero;
-            //TODO:ÑªÌõ·ÅÔÚÑªÌõ×Ô¼ºµÄÊÂ¼şÀï
+            //TODO:è¡€æ¡æ”¾åœ¨è¡€æ¡è‡ªå·±çš„äº‹ä»¶é‡Œ
             //if (this.Unit == CurrentPlayerBattleUnit) {
             //    BattleUIManager.SetPlayerHP(value, go.Unit);
             //}
@@ -45,7 +41,7 @@ namespace Assets.Scripts.Battle {
 
         private void HandleApplyHeal(BattleEvent_BattleUnitApplyHeal healEvent)
         {
-            //TODO:µ¯³öÖÎÁÆµÄÎÄ×Ö
+            //TODO:å¼¹å‡ºæ²»ç–—çš„æ–‡å­—
         }
 
         public void Dispose()
@@ -56,7 +52,7 @@ namespace Assets.Scripts.Battle {
 
         ~BattleUnitGO()
         {
-            Debug.Log("Ïú»ÙÒ»¸öBattleUnitGO");
+            Debug.Log("é”€æ¯ä¸€ä¸ªBattleUnitGO");
             Dispose();
         }
     }

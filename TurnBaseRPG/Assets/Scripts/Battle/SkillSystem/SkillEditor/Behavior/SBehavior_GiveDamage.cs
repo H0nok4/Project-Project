@@ -11,17 +11,16 @@ using UnityEngine;
 
 namespace SkillEditor {
     public class SBehavior_GiveDamage : BaseBehaviour{
-        protected override void OnStart(object binding)
-        {
+        protected override void OnStart(object binding) {
+            BattleEvent_BattleUnitApplyDamage data = new BattleEvent_BattleUnitApplyDamage();
             //根据伤害的类型修改颜色，暴击的字体更大更鲜艳
-            if (BattleStage.Instance.SkillTimelineData == null)
-            {
-                return;
-            }
-
+            
             var clip = GetData<SClip_GiveDamage>();
             //TODO:根据Clip的类型造成伤害
-            Debug.Log($"弹出伤害值：为该次伤害的：{clip.DamagePercentage}%");
+
+
+            EventManager.Instance.TriggerEvent<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName, data);
+            Debug.Log($"弹出伤害值：为该次伤害的：{clip}%");
         }
     }
 }

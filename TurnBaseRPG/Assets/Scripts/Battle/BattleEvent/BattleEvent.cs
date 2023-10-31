@@ -6,10 +6,12 @@ public class BattleEvent_BattleUnitApplyDamage : BattleEventBase
 {
     public const string EventName = "BattleEvent_BattleUnitApplyDamage";
     public BattleUnit Unit;
+    public BattleUnit Source;
     //public int BeforeDamagedHP;
     //public int AfterDamagedHP;
     public int DamagedHP;
-    //TODO:可能再判断暴击之类的
+    //TODO:鍙兘鍐嶅垽鏂毚鍑讳箣绫荤殑
+    public bool IsCritical;
 
     public static void Trigger(BattleUnit unit,int damage)
     {
