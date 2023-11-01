@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Battle {
+    [Serializable]
     public class BattleUnitGO : MonoBehaviour {
         public BattleUnit Unit;
         public SpriteAnimator Animator;

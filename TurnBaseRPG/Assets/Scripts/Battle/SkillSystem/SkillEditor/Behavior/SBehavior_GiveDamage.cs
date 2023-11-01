@@ -17,7 +17,13 @@ namespace SkillEditor {
             
             var clip = GetData<SClip_GiveDamage>();
             //TODO:根据Clip的类型造成伤害
-
+            var bindingData = (BattleUseSkillDetail) binding;
+            switch (clip.TargetType) {
+                case SkillActionTarget.Target:
+                    break;
+                case SkillActionTarget.Self:
+                    break;
+            }
 
             EventManager.Instance.TriggerEvent<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName, data);
             Debug.Log($"弹出伤害值：为该次伤害的：{clip}%");

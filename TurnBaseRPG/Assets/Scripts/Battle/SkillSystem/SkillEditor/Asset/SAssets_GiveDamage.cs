@@ -10,8 +10,15 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 namespace SkillEditor {
+    [Serializable]
+    public class BattleUseSkillDetail {
+        public BattleUnitGO Source;
+        public BattleUnitGO Target;
+        public SkillCard Skill;
+    }
+
     [TrackColor(1,0,0)]
-    [TrackBindingType(typeof(BattleUnitGO))]
+    [TrackBindingType(typeof(BattleUseSkillDetail))]
     [TrackClipType(typeof(SClip_GiveDamage))]
     public class SAssets_GiveDamage : BaseTrackAsset {
 

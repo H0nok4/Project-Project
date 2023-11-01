@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ConfigType;
@@ -6,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
+[Serializable]
 public class SkillCard{
     public int SkillID;
     //TODO:当前拥有的技能卡
