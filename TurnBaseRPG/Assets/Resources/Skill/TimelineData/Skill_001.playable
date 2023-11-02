@@ -30,15 +30,7 @@ MonoBehaviour:
   TargetType: 0
   Actions:
   - FromWhere: 0
-    AttributeType: 0
-    OperateType: 0
-    Value: 0
-  - FromWhere: 0
-    AttributeType: 0
-    OperateType: 0
-    Value: 0
-  - FromWhere: 0
-    AttributeType: 0
+    AttributeType: 2
     OperateType: 0
     Value: 0
 --- !u!114 &-4053936970903829233

@@ -10,7 +10,7 @@ public class BattleBaseUnit : IBattleUnit
         
     }
 
-    public virtual void Damage(DamageDetail detail)
+    public virtual void ApplyDamage(float detail)
     {
         
     }

@@ -7,7 +7,7 @@ public interface IBattleUnit
 {
     public void OnDead();
 
-    public void ApplyDamage(DamageDetail detail);
+    public void ApplyDamage(float detail);
 
     public void AfterDamage(bool killed, IBattleUnit damagedUnit);
 

@@ -20,12 +20,13 @@ namespace SkillEditor {
             var bindingData = (BattleUseSkillDetail) binding;
             switch (clip.TargetType) {
                 case SkillActionTarget.Target:
+                    bindingData.Target.Unit.ApplyDamage(clip.CalculateDamage(bindingData.Source.Unit,bindingData.Target.Unit));
                     break;
                 case SkillActionTarget.Self:
                     break;
             }
 
-            EventManager.Instance.TriggerEvent<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName, data);
+            EventManager.Instance.TriggerEvent(BattleEvent_BattleUnitApplyDamage.EventName, data);
             Debug.Log($"弹出伤害值：为该次伤害的：{clip}%");
         }
     }

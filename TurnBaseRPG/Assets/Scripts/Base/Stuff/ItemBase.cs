@@ -8,7 +8,6 @@ public class ItemBase
     public string Description;
     public string Icon;
 
-    public GoodsType Type;
     public int ID;
     public int Num;
 }
