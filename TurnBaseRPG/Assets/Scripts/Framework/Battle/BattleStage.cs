@@ -344,7 +344,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         Debug.Log($"玩家选择了技能，技能名称为：{skillCard.Define.SkillName}");
         Debug.Log("开始播放技能表现——");
         //TODO:计算伤害
-        yield return BattlePerformanceManager.Perform(skillCard.TimelineAssets, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
+        yield return BattlePerformanceManager.Perform(new BattleUseSkillDetail(){Source = CurrentPlayerBattleUnit.GO,Target = CurrentEnemyBattleUnit.GO,Skill = skillCard}, CurrentPlayerBattleUnit, CurrentEnemyBattleUnit);
         Debug.Log("技能表现播放结束");
 
         BattleState = BattleState.PlayerTurnEnd;

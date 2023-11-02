@@ -92,8 +92,8 @@ public class BattleUnit : BattleBaseUnit
         }
     }
 
-    public override void ApplyDamage(float value) {
-        CurrentHP -= (int)value;
+    public override void ApplyDamage(int value) {
+        CurrentHP -= value;
         if (IsDead) {
             Debug.Log("单位收到伤害死亡了");
         }

@@ -12,15 +12,18 @@ using UnityEngine.Timeline;
 namespace Battle {
     public  static class BattlePerformanceManager {
 
-        public static IEnumerator Perform(TimelineAsset asset,BattleUnit sourceUnit,BattleUnit targetUnit)
-        {
-            BattleStage.Instance.TimeLineDirector.playableAsset = asset;
-            BattleStage.Instance.TimeLineDirector.Play();
+        public static IEnumerator Perform(BattleUseSkillDetail skillDetail,BattleUnit sourceUnit,BattleUnit targetUnit) {
+            List<string> nameList = new List<string>();
+            BattleStage.Instance.TimeLineDirector.playableAsset = skillDetail.Skill.TimelineAssets;
+            foreach (var playableBinding in BattleStage.Instance.TimeLineDirector.playableAsset.outputs) {
+                BattleStage.Instance.TimeLineDirector.SetGenericBinding(playableBinding.sourceObject, skillDetail);
+            }
 
+            BattleStage.Instance.TimeLineDirector.Play();
             //TODO:给TimelineData绑定数据
 
-            Debug.Log($"开始播放技能的表现，技能表现时常为：{asset.duration}");
-            yield return new WaitForSeconds((float)asset.duration);
+            Debug.Log($"开始播放技能的表现，技能表现时常为：{skillDetail.Skill.TimelineAssets.duration}");
+            yield return new WaitForSeconds((float)skillDetail.Skill.TimelineAssets.duration);
             BattleStage.Instance.TimeLineDirector.Stop();
         }
     }

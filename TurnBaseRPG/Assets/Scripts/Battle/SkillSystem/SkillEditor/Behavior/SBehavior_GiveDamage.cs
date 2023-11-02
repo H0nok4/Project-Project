@@ -18,16 +18,21 @@ namespace SkillEditor {
             var clip = GetData<SClip_GiveDamage>();
             //TODO:根据Clip的类型造成伤害
             var bindingData = (BattleUseSkillDetail) binding;
+            var damageValue = (int)clip.CalculateDamage(bindingData.Source.Unit, bindingData.Target.Unit);
             switch (clip.TargetType) {
                 case SkillActionTarget.Target:
-                    bindingData.Target.Unit.ApplyDamage(clip.CalculateDamage(bindingData.Source.Unit,bindingData.Target.Unit));
+                    bindingData.Target.Unit.ApplyDamage(damageValue);
                     break;
                 case SkillActionTarget.Self:
                     break;
             }
 
+
+            BattleEvent_BattleUnitApplyDamage.Trigger(bindingData.Target.Unit,damageValue);
             EventManager.Instance.TriggerEvent(BattleEvent_BattleUnitApplyDamage.EventName, data);
-            Debug.Log($"弹出伤害值：为该次伤害的：{clip}%");
+            Debug.Log($"弹出伤害值：{damageValue}");
         }
+
+
     }
 }

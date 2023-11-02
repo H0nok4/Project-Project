@@ -41,10 +41,25 @@ namespace SkillEditor {
                 }
 
                 var attributeValue = unit.AttributeDic[skillDamageAction.AttributeType];
-                
+
+                result += GetValueByOp(attributeValue, skillDamageAction.OperateType, skillDamageAction.Value);
 
             }
+
             return result;
+        }
+
+        private float GetValueByOp(float value, ValueOperateType op, float opValue) {
+            switch (op) {
+                case ValueOperateType.Add:
+                    return value + opValue;
+                case ValueOperateType.Div:
+                    return value - opValue;
+                case ValueOperateType.Mul:
+                    return value * opValue;
+                default:
+                    return value / opValue;
+            }
         }
     }
 }

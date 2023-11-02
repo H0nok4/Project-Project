@@ -16,7 +16,7 @@ public class PlayerInputContext
 
     public InputType Type;
     public SkillCard SkillCard;
-    //TODO:��������Ϣ
+    //TODO:其他的信息
 }
 
 public class BattlePlayerInputManager
@@ -27,14 +27,14 @@ public class BattlePlayerInputManager
     public SkillCard skillCard;
 
     public bool SelectedItem;
-    //TODO:������Ϣ
+    //TODO:道具信息
 
     public bool SelectedSwitchTarget;
 
     public bool SelectedRun;
 
     public bool SelectEndTurn;
-    //TODO:Ŀ����Ϣ
+    //TODO:目标信息
     public BattlePlayerInputManager(BattleStage stage)
     {
         Stage = stage;
@@ -54,8 +54,10 @@ public class BattlePlayerInputManager
 
     public void OnClickBattleCard(SkillCard card)
     {
+        Debug.Log("触发了点击了技能卡事件");
         if (Stage.BattleState != BattleState.PlayerTurn)
         {
+            Debug.Log("当前不是玩家回合,跳出");
             return;
         }
 
