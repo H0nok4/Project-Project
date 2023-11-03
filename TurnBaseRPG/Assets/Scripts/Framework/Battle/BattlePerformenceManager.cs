@@ -14,17 +14,20 @@ namespace Battle {
 
         public static IEnumerator Perform(BattleUseSkillDetail skillDetail,BattleUnit sourceUnit,BattleUnit targetUnit) {
             List<string> nameList = new List<string>();
-            BattleStage.Instance.TimeLineDirector.playableAsset = skillDetail.Skill.TimelineAssets;
+            var timelineObject = GameObject.Instantiate(skillDetail.Skill.TimelineObject);
+            BattleStage.Instance.TimeLineDirector = timelineObject.GetComponent<PlayableDirector>();
+            BattleStage.Instance.TimeLineDirector.Play();
+            //TODO:给TimelineData绑定数据
             foreach (var playableBinding in BattleStage.Instance.TimeLineDirector.playableAsset.outputs) {
                 BattleStage.Instance.TimeLineDirector.SetGenericBinding(playableBinding.sourceObject, skillDetail);
             }
 
-            BattleStage.Instance.TimeLineDirector.Play();
-            //TODO:给TimelineData绑定数据
 
-            Debug.Log($"开始播放技能的表现，技能表现时常为：{skillDetail.Skill.TimelineAssets.duration}");
-            yield return new WaitForSeconds((float)skillDetail.Skill.TimelineAssets.duration);
+            Debug.Log($"开始播放技能的表现，技能表现时常为：{BattleStage.Instance.TimeLineDirector.playableAsset.duration}");
+            yield return new WaitForSeconds((float)BattleStage.Instance.TimeLineDirector.playableAsset.duration);
             BattleStage.Instance.TimeLineDirector.Stop();
+            BattleStage.Instance.TimeLineDirector = null;
+            GameObject.Destroy(timelineObject);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,22 +10,21 @@ using UnityEngine.Timeline;
 namespace ConfigType {
     public partial class DataManager {
 
-        public List<TimelineAsset> SkillTimelineAssets = new List<TimelineAsset>();
-        public Dictionary<string, TimelineAsset> SkillTimelineAssetsDic = new Dictionary<string, TimelineAsset>();
+        public List<GameObject> SkillTimelineAssets = new List<GameObject>();
+        public Dictionary<string, GameObject> SkillTimelineAssetsDic = new Dictionary<string, GameObject>();
 
         public List<GameObject> UIPrefabs = new List<GameObject>();
         public Dictionary<string, GameObject> UIPrefabsDic = new Dictionary<string, GameObject>();
         public void InitResources()
         {
-            string resourcesPath = "Assets/Resources/";
-            SkillTimelineAssets = ResourceLoadManager.Instance.Load<TimelineAsset>("Skill/TimelineData/");
+            SkillTimelineAssets = ResourceLoadManager.Instance.Load<GameObject>("Skill/Prefab/");
 
             UIPrefabs = ResourceLoadManager.Instance.Load<GameObject>("UIPrefab/Battle/");
 
             InitResourceDictionary();
         }
 
-        public TimelineAsset GetSkillTimelineAssetByName(string name)
+        public GameObject GetSkillTimelineAssetByName(string name)
         {
             if (SkillTimelineAssetsDic.ContainsKey(name))
             {

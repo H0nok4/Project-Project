@@ -19,7 +19,7 @@ public class SkillCard{
 
     public List<SkillActionBase> SkillActions;
 
-    public TimelineAsset TimelineAssets => DataManager.Instance.GetSkillTimelineAssetByName(Define.TimeLineData);
+    public GameObject TimelineObject => DataManager.Instance.GetSkillTimelineAssetByName(Define.TimeLineData);
 
     public SkillCard(int skillID)
     {
