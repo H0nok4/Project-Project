@@ -12,10 +12,14 @@ using UnityEngine.Timeline;
 namespace Battle {
     public  static class BattlePerformanceManager {
 
-        public static IEnumerator Perform(BattleUseSkillDetail skillDetail,BattleUnit sourceUnit,BattleUnit targetUnit) {
+        public static IEnumerator Perform(SkillCard skill,BattleUnit sourceUnit,BattleUnit targetUnit) {
             List<string> nameList = new List<string>();
-            var timelineObject = GameObject.Instantiate(skillDetail.Skill.TimelineObject);
+            var timelineObject = GameObject.Instantiate(skill.TimelineObject);
             BattleStage.Instance.TimeLineDirector = timelineObject.GetComponent<PlayableDirector>();
+            var skillDetail = timelineObject.AddComponent<BattleUseSkillDetail>();
+            skillDetail.Skill = skill;
+            skillDetail.Source = sourceUnit.GO;
+            skillDetail.Target = targetUnit.GO;
             BattleStage.Instance.TimeLineDirector.Play();
             //TODO:给TimelineData绑定数据
             foreach (var playableBinding in BattleStage.Instance.TimeLineDirector.playableAsset.outputs) {

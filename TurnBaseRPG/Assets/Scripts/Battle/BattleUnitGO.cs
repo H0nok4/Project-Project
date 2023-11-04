@@ -13,8 +13,11 @@ namespace Assets.Scripts.Battle {
         {
             Unit.GO = this;
             Unit = unit;
-            EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName,HandleApplyDamage);
-            EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyHeal>(BattleEvent_BattleUnitApplyHeal.EventName,HandleApplyHeal);
+        }
+
+        public void Init() {
+            EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName, HandleApplyDamage);
+            EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyHeal>(BattleEvent_BattleUnitApplyHeal.EventName, HandleApplyHeal);
         }
 
         private void HandleApplyDamage(BattleEvent_BattleUnitApplyDamage damageEvent)
