@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Battle;
+using Battle;
 using UI;
 using UnityEngine;
 using UnityEngine.Playables;

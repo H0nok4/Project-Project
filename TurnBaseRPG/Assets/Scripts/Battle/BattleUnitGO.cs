@@ -1,13 +1,15 @@
 using ConfigType;
 using System;
 using System.Collections.Generic;
+using UI.Battle;
 using UnityEngine;
 
-namespace Assets.Scripts.Battle {
+namespace Battle {
     [Serializable]
     public class BattleUnitGO : MonoBehaviour {
         public BattleUnit Unit;
         public SpriteAnimator Animator;
+        public BattleTopBar Bind_TopBar;
 
         public BattleUnitGO(BattleUnit unit)
         {
@@ -18,6 +20,11 @@ namespace Assets.Scripts.Battle {
         public void Init() {
             EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyDamage>(BattleEvent_BattleUnitApplyDamage.EventName, HandleApplyDamage);
             EventManager.Instance.AddListener<BattleEvent_BattleUnitApplyHeal>(BattleEvent_BattleUnitApplyHeal.EventName, HandleApplyHeal);
+        }
+
+        public void BindingUI(BattleTopBar topBar)
+        {
+            Bind_TopBar = topBar;
         }
 
         private void HandleApplyDamage(BattleEvent_BattleUnitApplyDamage damageEvent)
@@ -35,12 +42,7 @@ namespace Assets.Scripts.Battle {
             textGo.transform.localScale = Vector3.one;
             textGo.transform.localPosition = Vector3.zero;
             //TODO:血条放在血条自己的事件里
-            //if (this.Unit == CurrentPlayerBattleUnit) {
-            //    BattleUIManager.SetPlayerHP(value, go.Unit);
-            //}
-            //else if (go.Unit == CurrentEnemyBattleUnit) {
-            //    BattleUIManager.SetEnemyHP(value, go.Unit);
-            //}
+            Bind_TopBar.UpdateHP(damageEvent.DamagedHP,Unit.MaxHP);
         }
 
         private void HandleApplyHeal(BattleEvent_BattleUnitApplyHeal healEvent)

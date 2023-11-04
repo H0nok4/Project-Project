@@ -1,4 +1,4 @@
-using Assets.Scripts.Battle;
+using Battle;
 using TimelineExtension;
 using UnityEngine.Timeline;
 

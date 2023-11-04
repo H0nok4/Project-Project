@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Base;
-using Assets.Scripts.Battle;
 using Battle;
 using ConfigType;
 using UI;
@@ -37,7 +36,6 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
     //TODO:一场战斗一般由俩名玩家，俩个队伍组成
     private bool _battleStarted;
 
-    //public BattlePanel BattlePanel;
     public BattleUIManager BattleUIManager;
     public BattlePlayerInputManager InputManager;
 
@@ -130,16 +128,6 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         BattleStarted = true;
     }
 
-    //private void PopupDamageText(float value, BattleUnitGO go)
-    //{
-    //    //TODO:血条也要相应减少
-    //    if (go.Unit == CurrentPlayerBattleUnit) {
-    //        BattleUIManager.SetPlayerHP(value,go.Unit);
-    //    }else if (go.Unit == CurrentEnemyBattleUnit) {
-    //        BattleUIManager.SetEnemyHP(value,go.Unit);
-    //    }
-    //}
-
     public void Update()
     {
         if (!_battleStarted)
@@ -187,6 +175,9 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         {
             //TODO:可能有每回合结算伤害的BUFF，然后就是BUFF计时减少1回合
             RoundEnd();
+        }else if (BattleState == BattleState.EnemyDeadSwitch)
+        {
+
         }
 
 
@@ -206,10 +197,12 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
             if (!PlayerParty.Exists((unit)=>! unit.IsDead))
             {
                 //TODO:玩家所有单位阵亡，结束战斗
+                Debug.Log("玩家单位全阵亡，结束");
                 BattleState = BattleState.PlayerLose;
             }
             else
             {
+                Debug.Log("玩家单位阵亡后还有存活的，进入切换单位状态");
                 BattleState = BattleState.PlayerDeadSwitch;
             }
 
@@ -220,10 +213,13 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         {
             if (EnemyParty.Exists((unit) => !unit.IsDead))
             {
+                Debug.Log("敌方单位全阵亡，玩家胜利");
                 BattleState = BattleState.PlayerWin;
             }
             else
             {
+
+                Debug.Log("敌人单位阵亡后还有存活的，进入敌人切换单位状态");
                 BattleState = BattleState.EnemyDeadSwitch;
             }
 
@@ -277,7 +273,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
             BattleState = BattleState.EnemyTurn;
             return;
         }
-     
+
     }
 
     private void RunAITurn()
@@ -322,6 +318,11 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         {
             //回合结束了
             LeftEnd = true;
+            BattleState = BattleState.PlayerTurnEnd;
+        }else if (context.Type == PlayerInputContext.InputType.SelectSwitchTarget)
+        {
+            LeftEnd = true;
+            //TODO:切换出当前选择的单位
             BattleState = BattleState.PlayerTurnEnd;
         }
     }
@@ -448,6 +449,8 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         CurrentEnemyUnitGO.Unit = CurrentEnemyBattleUnit;
         CurrentPlayerBattleUnit.GO = CurrentPlayerUnitGO;
         CurrentEnemyBattleUnit.GO = CurrentEnemyUnitGO;
+        CurrentPlayerUnitGO.BindingUI(BattleUIManager.BattlePanel.PlayerTopBar);
+        CurrentEnemyUnitGO.BindingUI(BattleUIManager.BattlePanel.EnemyTopBar);
 
         SkillPools = new Dictionary<PokeGirl, SkillCardPool>();
 

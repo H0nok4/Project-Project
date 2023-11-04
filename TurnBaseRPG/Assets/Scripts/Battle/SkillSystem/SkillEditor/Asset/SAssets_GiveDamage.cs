@@ -1,12 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scripts.Battle;
-using Battle;
 using TimelineExtension;
-using UnityEngine;
 using UnityEngine.Timeline;
 
 namespace SkillEditor {

@@ -1,4 +1,4 @@
-using Assets.Scripts.Battle;
+using Battle;
 using UnityEngine;
 
 public class BattleUseSkillDetail : MonoBehaviour {

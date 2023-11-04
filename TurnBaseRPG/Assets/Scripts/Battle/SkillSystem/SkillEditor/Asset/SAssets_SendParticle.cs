@@ -1,5 +1,5 @@
 
-using Assets.Scripts.Battle;
+using Battle;
 using TimelineExtension;
 using UnityEngine;
 using UnityEngine.Timeline;

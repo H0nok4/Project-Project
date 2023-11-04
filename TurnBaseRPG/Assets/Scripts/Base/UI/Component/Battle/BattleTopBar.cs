@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace UI.Battle
 {
@@ -29,6 +30,11 @@ namespace UI.Battle
             //m_ImgHead.sprite = unit.Unit.HeadSprite;
             HPBar.RefreshHPBar(unit);
             SkillPointTxt.text = unit.SkillPoint + "/" + unit.MaxSkillPoint;
+        }
+
+        public void UpdateHP(int decrease, float max) {
+            var value = HPBar.Value - (decrease / max);
+            HPBar.RefreshHP(value, max);
         }
 
         public void SetSkillPoint(int current,int max)
