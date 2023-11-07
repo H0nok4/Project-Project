@@ -8,7 +8,7 @@ using System;
 [SerializeField]
 public class PokeGirl 
 {
-    //½ÇÉ«ÀàÖĞ£¬ĞèÒª»ù´¡ÊôĞÔÖµ£¬¼ÆËãÉı¼¶ºóµÄÊôĞÔÖµ£¬¸öÌåÖµ£¬ÖÖ×åÖµ£¬ÀàËÆPokemonÄÇÑùµÄ½ÇÉ«Àà
+    //è§’è‰²ç±»ä¸­ï¼Œéœ€è¦åŸºç¡€å±æ€§å€¼ï¼Œè®¡ç®—å‡çº§åçš„å±æ€§å€¼ï¼Œä¸ªä½“å€¼ï¼Œç§æ—å€¼ï¼Œç±»ä¼¼Pokemoné‚£æ ·çš„è§’è‰²ç±»
     public int Id;
 
     public string Name;
@@ -18,17 +18,17 @@ public class PokeGirl
     private int _exp;
 
     /// <summary>
-    /// µ±Ç°ÊÇ·ñÎª³öÕ½µ¥Î»
+    /// å½“å‰æ˜¯å¦ä¸ºå‡ºæˆ˜å•ä½
     /// </summary>
     public bool IsActive;
 
     /// <summary>
-    /// µ±Ç°µ¥Î»ÊÇ·ñÎªÕóÍö×´Ì¬
+    /// å½“å‰å•ä½æ˜¯å¦ä¸ºé˜µäº¡çŠ¶æ€
     /// </summary>
     public bool IsDead;
 
     /// <summary>
-    /// Ê×ÏÈ³öÕ½µ¥Î»
+    /// é¦–å…ˆå‡ºæˆ˜å•ä½
     /// </summary>
     public bool IsFirst;
 
@@ -49,7 +49,7 @@ public class PokeGirl
     }
 
     /// <summary>
-    /// »ù´¡ÊôĞÔºÍÖÖ×åÖµÏà¹Ø
+    /// åŸºç¡€å±æ€§å’Œç§æ—å€¼ç›¸å…³
     /// </summary>
     public PokeGirlAttributeBaseDefine AttributeBase =>
         DataManager.Instance.GetPokeGirlAttributeBaseDefineByID(BaseDefine.AttributeID);
@@ -78,13 +78,13 @@ public class PokeGirl
                     StateDic.Add(AttributeType.MaxHP, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
                     break;
                 case AttributeType.Attack:
-                    StateDic.Add(AttributeType.Attack, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    StateDic.Add(AttributeType.Attack, AttributeBase.AttackBase + AttributeBase.AttackGrow * (Level - 1));
                     break;
                 case AttributeType.Defense:
-                    StateDic.Add(AttributeType.Defense, AttributeBase.DefenseBase);
+                    StateDic.Add(AttributeType.Defense, AttributeBase.DefenseBase + AttributeBase.DefenseGrow * (Level - 1));
                     break;
                 case AttributeType.SPAttack:
-                    StateDic.Add(AttributeType.SPAttack, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    StateDic.Add(AttributeType.SPAttack, AttributeBase.AttackBase + AttributeBase.AttackGrow * (Level - 1));
                     break;
                 case AttributeType.SPDefense:
                     StateDic.Add(AttributeType.SPDefense, AttributeBase.SpDefenseBase + AttributeBase.SpDefenseGrow * (Level - 1));
@@ -93,7 +93,7 @@ public class PokeGirl
                     StateDic.Add(AttributeType.CriticalChance, AttributeBase.CriticalChanceBase);
                     break;
                 case AttributeType.Speed:
-                    StateDic.Add(AttributeType.Speed, AttributeBase.MaxHpBase + AttributeBase.MaxHpGrow * (Level - 1));
+                    StateDic.Add(AttributeType.Speed, AttributeBase.SpeedBase + AttributeBase.SpeedGrow * (Level - 1));
                     break;
                 case AttributeType.SkillPoint:
                     StateDic.Add(AttributeType.SkillPoint,AttributeBase.SkillPointNum);
@@ -108,7 +108,7 @@ public class PokeGirl
     {
         if (!StateDic.ContainsKey(type))
         {
-            Debug.LogError("ĞèÒª»ñÈ¡²»´æÔÚµÄÊôĞÔÀàĞÍ");
+            Debug.LogError("éœ€è¦è·å–ä¸å­˜åœ¨çš„å±æ€§ç±»å‹");
             return 0;
         }
 

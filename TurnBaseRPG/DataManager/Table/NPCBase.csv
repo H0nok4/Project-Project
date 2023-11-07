@@ -4,5 +4,4 @@ ID,Name,BattlePartyID,BattlePartyLevel
 ID,名称,拥有的出战角色ID,拥有的出战角色Level
 ,默认的空值,1;1,1;2
 1,测试NPC1,1;1,1;2
-2,测试NPC2,,
-3,,,
+2,测试NPC2,1,1

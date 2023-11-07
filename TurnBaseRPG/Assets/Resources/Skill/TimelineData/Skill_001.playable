@@ -32,7 +32,7 @@ MonoBehaviour:
   - FromWhere: 0
     AttributeType: 2
     OperateType: 0
-    Value: 0
+    Value: 10
 --- !u!114 &-4053936970903829233
 MonoBehaviour:
   m_ObjectHideFlags: 1

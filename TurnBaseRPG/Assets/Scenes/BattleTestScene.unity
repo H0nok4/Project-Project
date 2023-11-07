@@ -2708,7 +2708,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1041616579}
   - component: {fileID: 1041616581}
-  - component: {fileID: 1041616582}
   m_Layer: 0
   m_Name: PlayerBattleUnitGameObject
   m_TagString: Untagged
@@ -2754,27 +2753,7 @@ MonoBehaviour:
       Sprite: {fileID: 0}
     - Name: 
       Sprite: {fileID: 0}
---- !u!320 &1041616582
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041616578}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: ac0d84ed24f0b6647b54d8ddf221f62c, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -4053936970903829233, guid: ac0d84ed24f0b6647b54d8ddf221f62c, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 4739051094190486909, guid: ac0d84ed24f0b6647b54d8ddf221f62c, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
+  Bind_TopBar: {fileID: 0}
 --- !u!224 &1041785134 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6192243634174089321, guid: b02e9ce34be78e242a9ecbf0f2d47886, type: 3}
@@ -3033,7 +3012,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1260821967}
-  - component: {fileID: 1260821968}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -3056,31 +3034,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &1260821968
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260821966}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: ac0d84ed24f0b6647b54d8ddf221f62c, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: -4053936970903829233, guid: ac0d84ed24f0b6647b54d8ddf221f62c, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &1288808916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,6 +3399,7 @@ MonoBehaviour:
     Animations:
     - Name: 
       Sprite: {fileID: 0}
+  Bind_TopBar: {fileID: 0}
 --- !u!1 &1477633812
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ namespace UI.Battle
         }
 
         public void UpdateHP(int decrease, float max) {
-            var value = HPBar.Value - (decrease / max);
+            var value = (HPBar.Value * max) - decrease;
             HPBar.RefreshHP(value, max);
         }
 
