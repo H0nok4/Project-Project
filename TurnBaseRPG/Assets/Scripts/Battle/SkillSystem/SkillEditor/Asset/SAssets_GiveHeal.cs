@@ -4,7 +4,7 @@ using UnityEngine.Timeline;
 
 namespace SkillEditor {
     [TrackClipType(typeof(SClip_GiveHeal))]
-    [TrackBindingType(typeof(BattleUnitGO))]
+    [TrackBindingType(typeof(BattleUseSkillDetail))]
     class SAssets_GiveHeal :BaseTrackAsset {
     }
 }

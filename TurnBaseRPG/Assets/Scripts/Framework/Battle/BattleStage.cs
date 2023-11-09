@@ -159,6 +159,9 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
             //玩家回合结束
             CheckPlayerTurnEnd();
         }
+        else if (BattleState == BattleState.PlayerDeadSwitch) {
+
+        }
         else if (BattleState == BattleState.EnemyTurn)
         {
             //TODO:AI行动
@@ -177,10 +180,19 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
             RoundEnd();
         }else if (BattleState == BattleState.EnemyDeadSwitch)
         {
-
+            AIDeadSwitch();
         }
 
 
+    }
+
+    private void AIDeadSwitch() {
+        //TODO:直接切换到下一个单位
+    }
+
+    private IEnumerator PerformAIDeadSwitch(BattleUnit unit) {
+
+        yield break;
     }
 
     private IEnumerator OnRoundEnd()
@@ -264,7 +276,7 @@ public class BattleStage : Singleton<BattleStage>,IStageModel
         if (RightEnd)
         {
             Debug.Log("敌人已经结束行动，再次进入玩家行动");
-            BattleState = global::BattleState.PlayerTurn;
+            BattleState = BattleState.PlayerTurn;
             return;
         }
 
