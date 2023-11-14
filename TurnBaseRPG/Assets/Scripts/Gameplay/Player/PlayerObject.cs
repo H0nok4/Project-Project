@@ -11,9 +11,10 @@ public class PlayerObject : MonoBehaviour
     }
 
     public void HandleMove() {
+        int moveSpeed = 5;
         if (Input.GetKeyDown(KeyCode.W)) {
             //TODO:向上移动
-
+            //transform.Translate();
         }
         else if (Input.GetKeyDown(KeyCode.D)) {
 
