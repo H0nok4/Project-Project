@@ -7,24 +7,31 @@ public class PlayerObject : MonoBehaviour
 
     public void Update() {
         //TODO:后面需要一个专门的地方处理输入
+
+    }
+
+    public void FixedUpdate() {
         HandleMove();
     }
 
     public void HandleMove() {
         int moveSpeed = 5;
-        if (Input.GetKeyDown(KeyCode.W)) {
+        Vector3 moveVec = Vector3.zero;
+        if (Input.GetKey(KeyCode.W)) {
             //TODO:向上移动
-            //transform.Translate();
+            moveVec = Vector3.up;
         }
-        else if (Input.GetKeyDown(KeyCode.D)) {
+        else if (Input.GetKey(KeyCode.D)) {
+            moveVec = Vector3.right;
+        }
+        else if (Input.GetKey(KeyCode.S)) {
+            moveVec = Vector3.down;
+        }
+        else if (Input.GetKey(KeyCode.A)) {
+            moveVec = Vector3.left;
+        }
 
-        }
-        else if (Input.GetKeyDown(KeyCode.S)) {
-
-        }
-        else if (Input.GetKeyDown(KeyCode.A)) {
-
-        }
+        transform.Translate(moveVec * moveSpeed * Time.fixedDeltaTime);
     }
 
     public void HandleInteract() {

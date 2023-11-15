@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using ConfigType;
 using UnityEngine;
 
-public class NPCBase : ICharacterBase, IHandleParty, IInteractive
-{
+public class NPCBase : WorldObject,ICharacterBase, IHandleParty {
     public int ID { get; }
     public string Name { get; set; }
     public NPCBaseDefine Define => DataManager.Instance.GetNPCBaseDefineByID(ID);
