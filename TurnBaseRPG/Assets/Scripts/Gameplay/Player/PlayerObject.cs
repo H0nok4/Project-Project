@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerObject : WorldObject {
     private Player _player;
     public override void InitObject() {
-        
+        //TODO:需要获得玩家的实例
     }
 
     public void Update() {

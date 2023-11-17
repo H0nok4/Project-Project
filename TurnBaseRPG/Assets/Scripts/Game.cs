@@ -45,7 +45,7 @@ public class Game : MonoBehaviour
         UIManager.Instance.Show(Test_BattlePanel);
         Player = new Player();
         Player.BattleParty.Add(new PokeGirl(1,1));
-        TestEnemy = new NPCTest(1);
+        TestEnemy = new NPCTest(){ID = 1};
 
         StageController.Instance.SetCurrentStage(BattleStage.Instance);
         BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;

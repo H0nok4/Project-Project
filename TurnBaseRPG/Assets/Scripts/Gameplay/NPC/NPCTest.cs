@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class NPCTest : NPCBase
 {
-    public NPCTest(int id) : base(id)
-    {
 
-    }
 }
