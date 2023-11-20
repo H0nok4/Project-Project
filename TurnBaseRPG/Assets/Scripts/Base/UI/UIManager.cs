@@ -11,7 +11,7 @@ namespace UI
         public Canvas UICanvas;
 
         public void Init() {
-            UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
+            UICanvas = GameObject.Find("UICanvas")?.GetComponent<Canvas>();
         }
 
         public void Show(int uiUID) {

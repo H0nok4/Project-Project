@@ -13,6 +13,8 @@ public class Game : MonoBehaviour
 
     public BattleUnitGO PlayBattleGO;
     public BattleUnitGO EnemyBattleGO;
+
+    public bool BattleTest;
     public void Awake()
     {
         InitGame();
@@ -41,18 +43,22 @@ public class Game : MonoBehaviour
         ConfigType.DataManager.Instance.InitResources();
         UIManager.Instance.Init();
 
-        //TODO:测试
-        UIManager.Instance.Show(Test_BattlePanel);
-        Player = new Player();
-        Player.BattleParty.Add(new PokeGirl(1,1));
-        TestEnemy = new NPCTest(){ID = 1};
 
-        StageController.Instance.SetCurrentStage(BattleStage.Instance);
-        BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;
-        BattleStage.Instance.CurrentEnemyUnitGO = EnemyBattleGO;
-        PlayBattleGO.Init();
-        EnemyBattleGO.Init();
-        BattleStage.Instance.SetBattle(Player,TestEnemy);
+        if (BattleTest) {
+            //TODO:测试
+            UIManager.Instance.Show(Test_BattlePanel);
+            Player = new Player();
+            Player.BattleParty.Add(new PokeGirl(1, 1));
+            TestEnemy = new NPCTest() { ID = 1 };
+
+            StageController.Instance.SetCurrentStage(BattleStage.Instance);
+            BattleStage.Instance.CurrentPlayerUnitGO = PlayBattleGO;
+            BattleStage.Instance.CurrentEnemyUnitGO = EnemyBattleGO;
+            PlayBattleGO.Init();
+            EnemyBattleGO.Init();
+            BattleStage.Instance.SetBattle(Player, TestEnemy);
+        }
+
     }
 
 }

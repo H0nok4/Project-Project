@@ -4,8 +4,9 @@ using ConfigType;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NPCBase : WorldObject,ICharacterBase, IHandleParty{
-    public int ID { get; set; }
+public class NPCBase : WorldObject,ICharacterBase, IHandleParty {
+    [SerializeField] 
+    public int ID;
     public string Name { get; set; }
     public NPCBaseDefine Define => DataManager.Instance.GetNPCBaseDefineByID(ID);
     public List<PokeGirl> BattleParty { get; set; }
@@ -18,7 +19,7 @@ public class NPCBase : WorldObject,ICharacterBase, IHandleParty{
             BattleParty.Add(new PokeGirl(Define.BattlePartyID[i], Define.BattlePartyLevel[i]));
         }
 
-        TriggerCollider2D = transform.Find("TriggerObject").GetComponent<Collider2D>();
+        TriggerCollider2D = transform.GetComponent<Collider2D>();
     }
 
     public virtual void OnDefeated()
