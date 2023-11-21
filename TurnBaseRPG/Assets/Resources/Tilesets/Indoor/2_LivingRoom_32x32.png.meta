@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -12346,12 +12346,11 @@ TextureImporter:
       2_LivingRoom_32x32_194: -808449372
       2_LivingRoom_32x32_357: 1464138034
       2_LivingRoom_32x32_317: -621311263
+      2_LivingRoom_32x32_366: -1371016982
+      2_LivingRoom_32x32_418: -1548572079
       2_LivingRoom_32x32_463: 529316563
       2_LivingRoom_32x32_446: 1299941785
-      2_LivingRoom_32x32_243: 825430476
-      2_LivingRoom_32x32_366: -1371016982
       2_LivingRoom_32x32_145: 1973456113
-      2_LivingRoom_32x32_418: -1548572079
       2_LivingRoom_32x32_13: -403729894
       2_LivingRoom_32x32_24: -34122701
       2_LivingRoom_32x32_330: -438211816
@@ -12360,11 +12359,12 @@ TextureImporter:
       2_LivingRoom_32x32_404: 1676035387
       2_LivingRoom_32x32_486: -781564869
       2_LivingRoom_32x32_540: 935372078
+      2_LivingRoom_32x32_243: 825430476
       2_LivingRoom_32x32_504: 208516543
       2_LivingRoom_32x32_387: -1603139553
       2_LivingRoom_32x32_213: 2118089055
-      2_LivingRoom_32x32_433: -263119839
       2_LivingRoom_32x32_100: -279347510
+      2_LivingRoom_32x32_433: -263119839
       2_LivingRoom_32x32_6: -255435898
       2_LivingRoom_32x32_49: -2030009545
       2_LivingRoom_32x32_322: -1533654322

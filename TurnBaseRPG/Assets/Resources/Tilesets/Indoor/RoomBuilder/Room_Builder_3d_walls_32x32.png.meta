@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -24466,8 +24466,8 @@ TextureImporter:
       Room_Builder_3d_walls_32x32_154: -1637907598
       Room_Builder_3d_walls_32x32_611: -1843243016
       Room_Builder_3d_walls_32x32_213: 559485193
-      Room_Builder_3d_walls_32x32_103: 798198904
       Room_Builder_3d_walls_32x32_301: 1761981377
+      Room_Builder_3d_walls_32x32_103: 798198904
       Room_Builder_3d_walls_32x32_325: -226454766
       Room_Builder_3d_walls_32x32_931: 1065210985
       Room_Builder_3d_walls_32x32_644: 532720984
@@ -24617,30 +24617,30 @@ TextureImporter:
       Room_Builder_3d_walls_32x32_1067: -514929876
       Room_Builder_3d_walls_32x32_180: 1244970591
       Room_Builder_3d_walls_32x32_615: -616401422
-      Room_Builder_3d_walls_32x32_52: -1761669399
-      Room_Builder_3d_walls_32x32_77: 963632846
-      Room_Builder_3d_walls_32x32_848: -989280837
-      Room_Builder_3d_walls_32x32_232: 208036898
-      Room_Builder_3d_walls_32x32_296: 1748742307
       Room_Builder_3d_walls_32x32_889: -225394445
+      Room_Builder_3d_walls_32x32_848: -989280837
+      Room_Builder_3d_walls_32x32_77: 963632846
+      Room_Builder_3d_walls_32x32_52: -1761669399
+      Room_Builder_3d_walls_32x32_296: 1748742307
+      Room_Builder_3d_walls_32x32_232: 208036898
       Room_Builder_3d_walls_32x32_900: 402571725
       Room_Builder_3d_walls_32x32_1087: -1087464402
       Room_Builder_3d_walls_32x32_298: 308050207
       Room_Builder_3d_walls_32x32_107: 2049662256
       Room_Builder_3d_walls_32x32_680: 655144072
-      Room_Builder_3d_walls_32x32_730: 1737687903
-      Room_Builder_3d_walls_32x32_779: 880970927
-      Room_Builder_3d_walls_32x32_270: -145625768
       Room_Builder_3d_walls_32x32_806: 210759053
+      Room_Builder_3d_walls_32x32_779: 880970927
+      Room_Builder_3d_walls_32x32_730: 1737687903
+      Room_Builder_3d_walls_32x32_270: -145625768
       Room_Builder_3d_walls_32x32_729: 1938258678
-      Room_Builder_3d_walls_32x32_958: -711698635
+      Room_Builder_3d_walls_32x32_1029: 415837232
       Room_Builder_3d_walls_32x32_970: 1645492943
       Room_Builder_3d_walls_32x32_876: -308040931
       Room_Builder_3d_walls_32x32_473: 690317953
       Room_Builder_3d_walls_32x32_1099: 1949286381
       Room_Builder_3d_walls_32x32_1142: 1836297711
-      Room_Builder_3d_walls_32x32_1029: 415837232
       Room_Builder_3d_walls_32x32_1149: -1582490033
+      Room_Builder_3d_walls_32x32_958: -711698635
       Room_Builder_3d_walls_32x32_510: 1723204336
       Room_Builder_3d_walls_32x32_999: 524626863
       Room_Builder_3d_walls_32x32_977: -1183715290
@@ -24923,9 +24923,9 @@ TextureImporter:
       Room_Builder_3d_walls_32x32_815: 994868880
       Room_Builder_3d_walls_32x32_1008: 2008320088
       Room_Builder_3d_walls_32x32_603: 683357783
-      Room_Builder_3d_walls_32x32_707: 367272754
-      Room_Builder_3d_walls_32x32_334: -219612272
       Room_Builder_3d_walls_32x32_1064: 65281834
+      Room_Builder_3d_walls_32x32_334: -219612272
+      Room_Builder_3d_walls_32x32_707: 367272754
       Room_Builder_3d_walls_32x32_616: 808118033
       Room_Builder_3d_walls_32x32_799: 1682644126
       Room_Builder_3d_walls_32x32_16: -1600583408
@@ -24940,26 +24940,26 @@ TextureImporter:
       Room_Builder_3d_walls_32x32_166: -1096304928
       Room_Builder_3d_walls_32x32_705: 1179875819
       Room_Builder_3d_walls_32x32_56: 1784448619
-      Room_Builder_3d_walls_32x32_330: -823931585
-      Room_Builder_3d_walls_32x32_234: -2073362740
-      Room_Builder_3d_walls_32x32_783: -1472896387
       Room_Builder_3d_walls_32x32_1089: 1360229765
+      Room_Builder_3d_walls_32x32_234: -2073362740
+      Room_Builder_3d_walls_32x32_330: -823931585
       Room_Builder_3d_walls_32x32_940: 1174172667
       Room_Builder_3d_walls_32x32_1057: 1497122828
       Room_Builder_3d_walls_32x32_268: 84228312
+      Room_Builder_3d_walls_32x32_783: -1472896387
       Room_Builder_3d_walls_32x32_353: -251350029
-      Room_Builder_3d_walls_32x32_816: 1124201340
       Room_Builder_3d_walls_32x32_1082: 651353337
+      Room_Builder_3d_walls_32x32_816: 1124201340
       Room_Builder_3d_walls_32x32_674: 1134627836
       Room_Builder_3d_walls_32x32_726: -1674224243
       Room_Builder_3d_walls_32x32_201: 452853597
       Room_Builder_3d_walls_32x32_792: -82814746
       Room_Builder_3d_walls_32x32_751: -928506910
-      Room_Builder_3d_walls_32x32_101: -1927795672
-      Room_Builder_3d_walls_32x32_834: 1288963865
-      Room_Builder_3d_walls_32x32_84: -424598364
-      Room_Builder_3d_walls_32x32_254: -1110722470
       Room_Builder_3d_walls_32x32_812: -1223768174
+      Room_Builder_3d_walls_32x32_101: -1927795672
+      Room_Builder_3d_walls_32x32_84: -424598364
+      Room_Builder_3d_walls_32x32_834: 1288963865
+      Room_Builder_3d_walls_32x32_254: -1110722470
       Room_Builder_3d_walls_32x32_375: 32386986
       Room_Builder_3d_walls_32x32_1051: -1334057890
       Room_Builder_3d_walls_32x32_381: -436495696
@@ -24975,11 +24975,11 @@ TextureImporter:
       Room_Builder_3d_walls_32x32_905: 1688957865
       Room_Builder_3d_walls_32x32_89: -1453746466
       Room_Builder_3d_walls_32x32_583: 1654417593
-      Room_Builder_3d_walls_32x32_989: -1832557006
       Room_Builder_3d_walls_32x32_1139: -1530647115
       Room_Builder_3d_walls_32x32_789: -1898259333
       Room_Builder_3d_walls_32x32_828: 583604010
       Room_Builder_3d_walls_32x32_492: -16342284
+      Room_Builder_3d_walls_32x32_989: -1832557006
       Room_Builder_3d_walls_32x32_313: -383429366
       Room_Builder_3d_walls_32x32_1116: -2063702140
       Room_Builder_3d_walls_32x32_273: 1575476560

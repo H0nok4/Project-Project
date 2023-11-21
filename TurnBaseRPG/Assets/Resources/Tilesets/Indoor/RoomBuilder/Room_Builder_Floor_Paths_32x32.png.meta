@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -6838,23 +6838,23 @@ TextureImporter:
       Room_Builder_Floor_Paths_32x32_264: 1124435940
       Room_Builder_Floor_Paths_32x32_250: 763679208
       Room_Builder_Floor_Paths_32x32_161: 1304332732
+      Room_Builder_Floor_Paths_32x32_293: -1188281848
       Room_Builder_Floor_Paths_32x32_32: 1478830554
       Room_Builder_Floor_Paths_32x32_101: 1011624962
       Room_Builder_Floor_Paths_32x32_16: -944579839
       Room_Builder_Floor_Paths_32x32_106: 1205472194
-      Room_Builder_Floor_Paths_32x32_287: -623711598
       Room_Builder_Floor_Paths_32x32_214: 1056674872
       Room_Builder_Floor_Paths_32x32_45: -1680783052
+      Room_Builder_Floor_Paths_32x32_287: -623711598
+      Room_Builder_Floor_Paths_32x32_226: -1145380219
+      Room_Builder_Floor_Paths_32x32_190: 1506839653
       Room_Builder_Floor_Paths_32x32_307: -1421503922
-      Room_Builder_Floor_Paths_32x32_63: -1968559836
+      Room_Builder_Floor_Paths_32x32_95: 571985732
       Room_Builder_Floor_Paths_32x32_91: 1042294596
       Room_Builder_Floor_Paths_32x32_149: -1710260141
-      Room_Builder_Floor_Paths_32x32_95: 571985732
-      Room_Builder_Floor_Paths_32x32_190: 1506839653
-      Room_Builder_Floor_Paths_32x32_226: -1145380219
-      Room_Builder_Floor_Paths_32x32_293: -1188281848
-      Room_Builder_Floor_Paths_32x32_304: 1008862936
       Room_Builder_Floor_Paths_32x32_270: 855947954
+      Room_Builder_Floor_Paths_32x32_304: 1008862936
+      Room_Builder_Floor_Paths_32x32_63: -1968559836
       Room_Builder_Floor_Paths_32x32_139: -852816114
       Room_Builder_Floor_Paths_32x32_168: 1921054419
       Room_Builder_Floor_Paths_32x32_215: 1913288272
@@ -6893,15 +6893,15 @@ TextureImporter:
       Room_Builder_Floor_Paths_32x32_221: 183435936
       Room_Builder_Floor_Paths_32x32_98: 47730159
       Room_Builder_Floor_Paths_32x32_89: 692105844
-      Room_Builder_Floor_Paths_32x32_212: 227077007
       Room_Builder_Floor_Paths_32x32_239: 1753807782
+      Room_Builder_Floor_Paths_32x32_255: -858223677
       Room_Builder_Floor_Paths_32x32_216: -1187316237
       Room_Builder_Floor_Paths_32x32_265: -1625544616
       Room_Builder_Floor_Paths_32x32_209: -1484163663
+      Room_Builder_Floor_Paths_32x32_212: 227077007
       Room_Builder_Floor_Paths_32x32_60: -215393792
-      Room_Builder_Floor_Paths_32x32_123: 1381120715
       Room_Builder_Floor_Paths_32x32_62: 1736466283
-      Room_Builder_Floor_Paths_32x32_255: -858223677
+      Room_Builder_Floor_Paths_32x32_123: 1381120715
       Room_Builder_Floor_Paths_32x32_171: -169743785
       Room_Builder_Floor_Paths_32x32_313: 1737429560
       Room_Builder_Floor_Paths_32x32_151: -1600070500

@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -25019,17 +25019,17 @@ TextureImporter:
       1_Generic_32x32_965: 1156247158
       1_Generic_32x32_209: -74716175
       1_Generic_32x32_20: 1574538334
-      1_Generic_32x32_832: -1375596291
+      1_Generic_32x32_1043: -1945271696
       1_Generic_32x32_55: 1919544276
       1_Generic_32x32_383: -335633975
-      1_Generic_32x32_866: -152316730
       1_Generic_32x32_918: 2012049448
-      1_Generic_32x32_1043: -1945271696
+      1_Generic_32x32_832: -1375596291
       1_Generic_32x32_1126: 1479748933
       1_Generic_32x32_271: 1747533964
       1_Generic_32x32_1151: -536270450
       1_Generic_32x32_492: 1653374279
       1_Generic_32x32_253: 1146377128
+      1_Generic_32x32_866: -152316730
       1_Generic_32x32_379: 928794744
       1_Generic_32x32_509: -1225855801
       1_Generic_32x32_331: 370733200
@@ -25136,13 +25136,13 @@ TextureImporter:
       1_Generic_32x32_352: -114532224
       1_Generic_32x32_802: -495718980
       1_Generic_32x32_336: -367467637
-      1_Generic_32x32_339: -665537099
-      1_Generic_32x32_18: -1763025042
       1_Generic_32x32_634: 991479522
+      1_Generic_32x32_18: -1763025042
       1_Generic_32x32_997: -1755079232
       1_Generic_32x32_499: 1924472488
       1_Generic_32x32_922: -1664359958
       1_Generic_32x32_638: 322565017
+      1_Generic_32x32_339: -665537099
       1_Generic_32x32_1141: -2035577249
       1_Generic_32x32_156: 502301126
       1_Generic_32x32_496: 175567841
@@ -25167,31 +25167,31 @@ TextureImporter:
       1_Generic_32x32_126: 448102917
       1_Generic_32x32_278: 749383299
       1_Generic_32x32_833: -119174021
-      1_Generic_32x32_736: 1698831808
       1_Generic_32x32_999: 1823055717
       1_Generic_32x32_374: -776967220
-      1_Generic_32x32_882: 1563952306
       1_Generic_32x32_1106: -2144994952
+      1_Generic_32x32_736: 1698831808
+      1_Generic_32x32_882: 1563952306
       1_Generic_32x32_805: 946656552
       1_Generic_32x32_996: 622961285
       1_Generic_32x32_1087: 210635331
       1_Generic_32x32_289: -498666693
-      1_Generic_32x32_631: -1460391422
+      1_Generic_32x32_580: -1532511045
       1_Generic_32x32_98: -60983990
       1_Generic_32x32_747: 461507588
       1_Generic_32x32_71: -322954634
       1_Generic_32x32_1118: -1075724373
+      1_Generic_32x32_631: -1460391422
       1_Generic_32x32_315: 604117099
       1_Generic_32x32_9: 121531236
       1_Generic_32x32_197: 1921836332
       1_Generic_32x32_114: -22618229
-      1_Generic_32x32_580: -1532511045
       1_Generic_32x32_594: -1805244848
       1_Generic_32x32_753: 1305960783
       1_Generic_32x32_189: 260692452
+      1_Generic_32x32_919: -1664668560
       1_Generic_32x32_778: -158592213
       1_Generic_32x32_1156: -1209212484
-      1_Generic_32x32_919: -1664668560
       1_Generic_32x32_222: -1288235241
       1_Generic_32x32_980: -725420592
       1_Generic_32x32_809: -739850907
@@ -25201,17 +25201,17 @@ TextureImporter:
       1_Generic_32x32_282: 1265026220
       1_Generic_32x32_762: -1769095708
       1_Generic_32x32_763: -939312532
-      1_Generic_32x32_712: -147176425
       1_Generic_32x32_930: -823560757
+      1_Generic_32x32_712: -147176425
       1_Generic_32x32_851: -312804693
       1_Generic_32x32_159: 1711508737
       1_Generic_32x32_561: -848979670
       1_Generic_32x32_186: -1065868422
-      1_Generic_32x32_888: -1533454570
       1_Generic_32x32_914: -1168486203
+      1_Generic_32x32_888: -1533454570
       1_Generic_32x32_407: -1118168599
-      1_Generic_32x32_1020: 1571093024
       1_Generic_32x32_984: -560313696
+      1_Generic_32x32_1020: 1571093024
       1_Generic_32x32_1158: 1267736135
       1_Generic_32x32_998: -186734028
       1_Generic_32x32_841: -460556750
@@ -25420,10 +25420,11 @@ TextureImporter:
       1_Generic_32x32_696: -36825782
       1_Generic_32x32_135: -1990321530
       1_Generic_32x32_858: -828049946
+      1_Generic_32x32_1173: -1084971856
       1_Generic_32x32_301: -1578216326
       1_Generic_32x32_780: -592063450
-      1_Generic_32x32_1059: -95619989
       1_Generic_32x32_165: 1463080320
+      1_Generic_32x32_1059: -95619989
       1_Generic_32x32_327: -1645863619
       1_Generic_32x32_51: 328770888
       1_Generic_32x32_690: 1281545365
@@ -25434,15 +25435,14 @@ TextureImporter:
       1_Generic_32x32_903: -747562515
       1_Generic_32x32_765: -539007839
       1_Generic_32x32_27: -1777853729
-      1_Generic_32x32_1173: -1084971856
       1_Generic_32x32_371: -1594101656
       1_Generic_32x32_241: 810506273
       1_Generic_32x32_828: 996055674
       1_Generic_32x32_441: -111660519
       1_Generic_32x32_485: 458211987
-      1_Generic_32x32_931: -1808075754
       1_Generic_32x32_960: -1307090542
       1_Generic_32x32_1038: 1774525346
+      1_Generic_32x32_931: -1808075754
       1_Generic_32x32_556: 1431007551
       1_Generic_32x32_116: -520405200
       1_Generic_32x32_820: -286141099
@@ -25454,13 +25454,13 @@ TextureImporter:
       1_Generic_32x32_262: 1224448508
       1_Generic_32x32_426: 1868258042
       1_Generic_32x32_4: -1945020467
-      1_Generic_32x32_141: 499304602
-      1_Generic_32x32_137: -1748893608
       1_Generic_32x32_995: 992633528
+      1_Generic_32x32_141: 499304602
+      1_Generic_32x32_1056: -2097206244
       1_Generic_32x32_448: -1301665439
       1_Generic_32x32_682: -356231683
-      1_Generic_32x32_1056: -2097206244
       1_Generic_32x32_1077: -308549671
+      1_Generic_32x32_137: -1748893608
       1_Generic_32x32_392: 884896661
       1_Generic_32x32_264: 1791608983
       1_Generic_32x32_853: 415174512
@@ -25471,14 +25471,14 @@ TextureImporter:
       1_Generic_32x32_715: 968212682
       1_Generic_32x32_61: -484811843
       1_Generic_32x32_52: 984974952
-      1_Generic_32x32_377: -123415636
       1_Generic_32x32_559: 271155674
+      1_Generic_32x32_377: -123415636
       1_Generic_32x32_234: 757811116
-      1_Generic_32x32_63: -816812565
       1_Generic_32x32_254: -219720845
       1_Generic_32x32_1013: -1407145436
-      1_Generic_32x32_1112: -1552019901
+      1_Generic_32x32_63: -816812565
       1_Generic_32x32_1018: -1979646600
+      1_Generic_32x32_1112: -1552019901
       1_Generic_32x32_269: -2066551880
       1_Generic_32x32_233: -1447434032
       1_Generic_32x32_614: 125377704
@@ -25498,15 +25498,15 @@ TextureImporter:
       1_Generic_32x32_158: 1777691561
       1_Generic_32x32_316: -1890915061
       1_Generic_32x32_651: -1126647098
-      1_Generic_32x32_613: -1844657420
+      1_Generic_32x32_721: -731648734
       1_Generic_32x32_270: -1295481025
       1_Generic_32x32_489: 368026577
-      1_Generic_32x32_59: -1414890413
-      1_Generic_32x32_149: -1750081662
       1_Generic_32x32_889: 2105793067
-      1_Generic_32x32_721: -731648734
+      1_Generic_32x32_149: -1750081662
       1_Generic_32x32_1170: -1816542497
+      1_Generic_32x32_59: -1414890413
       1_Generic_32x32_957: -852099209
+      1_Generic_32x32_613: -1844657420
       1_Generic_32x32_279: 541238159
       1_Generic_32x32_879: -2025490941
       1_Generic_32x32_148: -1141755725
@@ -25530,8 +25530,8 @@ TextureImporter:
       1_Generic_32x32_970: 1153843859
       1_Generic_32x32_1145: -1811331923
       1_Generic_32x32_522: -1054501593
-      1_Generic_32x32_895: 977072540
       1_Generic_32x32_1031: 1920535649
+      1_Generic_32x32_895: 977072540
       1_Generic_32x32_283: -654118782
       1_Generic_32x32_7: 584013606
       1_Generic_32x32_202: 361188020

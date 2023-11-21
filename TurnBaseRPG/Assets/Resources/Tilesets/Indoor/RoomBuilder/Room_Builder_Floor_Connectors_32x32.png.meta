@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -3302,9 +3302,10 @@ TextureImporter:
       Room_Builder_Floor_Connectors_32x32_72: -90428642
       Room_Builder_Floor_Connectors_32x32_96: 207131601
       Room_Builder_Floor_Connectors_32x32_106: 1581759451
+      Room_Builder_Floor_Connectors_32x32_111: -2039320078
       Room_Builder_Floor_Connectors_32x32_107: -1253282274
       Room_Builder_Floor_Connectors_32x32_143: -1140206435
-      Room_Builder_Floor_Connectors_32x32_111: -2039320078
+      Room_Builder_Floor_Connectors_32x32_138: -2127816073
       Room_Builder_Floor_Connectors_32x32_10: -1049392201
       Room_Builder_Floor_Connectors_32x32_88: -1263550732
       Room_Builder_Floor_Connectors_32x32_93: 2090850585
@@ -3313,7 +3314,6 @@ TextureImporter:
       Room_Builder_Floor_Connectors_32x32_95: 892248458
       Room_Builder_Floor_Connectors_32x32_128: -1808704774
       Room_Builder_Floor_Connectors_32x32_135: -738446189
-      Room_Builder_Floor_Connectors_32x32_138: -2127816073
       Room_Builder_Floor_Connectors_32x32_142: 788853071
       Room_Builder_Floor_Connectors_32x32_37: -1516823125
       Room_Builder_Floor_Connectors_32x32_56: 1679004880

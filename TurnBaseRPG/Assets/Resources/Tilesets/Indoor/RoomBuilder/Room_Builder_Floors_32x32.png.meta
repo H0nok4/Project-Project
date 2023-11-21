@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -9541,10 +9541,10 @@ TextureImporter:
       Room_Builder_Floors_32x32_176: 34435797
       Room_Builder_Floors_32x32_393: 99763927
       Room_Builder_Floors_32x32_37: 956414458
-      Room_Builder_Floors_32x32_249: -147120145
       Room_Builder_Floors_32x32_258: -316843690
-      Room_Builder_Floors_32x32_291: 1577448558
+      Room_Builder_Floors_32x32_249: -147120145
       Room_Builder_Floors_32x32_6: 1683494338
+      Room_Builder_Floors_32x32_291: 1577448558
       Room_Builder_Floors_32x32_206: -162825733
       Room_Builder_Floors_32x32_351: 1529423486
       Room_Builder_Floors_32x32_297: 1827405116
@@ -9607,6 +9607,7 @@ TextureImporter:
       Room_Builder_Floors_32x32_68: -678024802
       Room_Builder_Floors_32x32_188: -1215746290
       Room_Builder_Floors_32x32_222: 272918487
+      Room_Builder_Floors_32x32_314: 487472506
       Room_Builder_Floors_32x32_171: -530000680
       Room_Builder_Floors_32x32_287: -1524989377
       Room_Builder_Floors_32x32_78: 1259748025
@@ -9617,7 +9618,6 @@ TextureImporter:
       Room_Builder_Floors_32x32_5: 1604165417
       Room_Builder_Floors_32x32_16: -1382702391
       Room_Builder_Floors_32x32_141: -806700401
-      Room_Builder_Floors_32x32_314: 487472506
       Room_Builder_Floors_32x32_79: 76445525
       Room_Builder_Floors_32x32_169: 546256804
       Room_Builder_Floors_32x32_41: 642566048
@@ -9660,7 +9660,6 @@ TextureImporter:
       Room_Builder_Floors_32x32_173: 1648813071
       Room_Builder_Floors_32x32_17: -194916435
       Room_Builder_Floors_32x32_54: 477305442
-      Room_Builder_Floors_32x32_235: 483694391
       Room_Builder_Floors_32x32_371: -680603739
       Room_Builder_Floors_32x32_353: -1618933295
       Room_Builder_Floors_32x32_375: 210005908
@@ -9669,6 +9668,7 @@ TextureImporter:
       Room_Builder_Floors_32x32_34: 2066695525
       Room_Builder_Floors_32x32_46: 779362656
       Room_Builder_Floors_32x32_3: -1131984897
+      Room_Builder_Floors_32x32_235: 483694391
       Room_Builder_Floors_32x32_209: -405125478
       Room_Builder_Floors_32x32_274: 322704885
       Room_Builder_Floors_32x32_106: -1619331192

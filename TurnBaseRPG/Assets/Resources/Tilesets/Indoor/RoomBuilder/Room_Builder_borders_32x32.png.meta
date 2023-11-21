@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -5089,10 +5089,10 @@ TextureImporter:
       Room_Builder_borders_32x32_12: 587731574
       Room_Builder_borders_32x32_77: 2080935352
       Room_Builder_borders_32x32_94: 1157669029
-      Room_Builder_borders_32x32_116: -922220624
       Room_Builder_borders_32x32_200: -514796810
-      Room_Builder_borders_32x32_128: 1359060117
+      Room_Builder_borders_32x32_116: -922220624
       Room_Builder_borders_32x32_176: -1575450769
+      Room_Builder_borders_32x32_128: 1359060117
       Room_Builder_borders_32x32_2: -1432757216
       Room_Builder_borders_32x32_226: 1860074227
       Room_Builder_borders_32x32_171: -246360676
@@ -5168,8 +5168,8 @@ TextureImporter:
       Room_Builder_borders_32x32_87: 1518710719
       Room_Builder_borders_32x32_157: -32761760
       Room_Builder_borders_32x32_10: 2338251
-      Room_Builder_borders_32x32_185: -949808991
       Room_Builder_borders_32x32_224: -205839488
+      Room_Builder_borders_32x32_185: -949808991
       Room_Builder_borders_32x32_66: 1930118680
       Room_Builder_borders_32x32_191: 963980273
       Room_Builder_borders_32x32_16: -117085262

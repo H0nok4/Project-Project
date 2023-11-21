@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -5439,10 +5439,10 @@ TextureImporter:
       Room_Builder_Arched_Entryways_32x32_249: -1833734579
       Room_Builder_Arched_Entryways_32x32_246: -112298828
       Room_Builder_Arched_Entryways_32x32_1: 1311312116
-      Room_Builder_Arched_Entryways_32x32_8: 96112463
-      Room_Builder_Arched_Entryways_32x32_112: -945348886
-      Room_Builder_Arched_Entryways_32x32_159: -149439901
       Room_Builder_Arched_Entryways_32x32_243: -1150838745
+      Room_Builder_Arched_Entryways_32x32_8: 96112463
+      Room_Builder_Arched_Entryways_32x32_159: -149439901
+      Room_Builder_Arched_Entryways_32x32_112: -945348886
       Room_Builder_Arched_Entryways_32x32_154: 211719622
       Room_Builder_Arched_Entryways_32x32_203: 2091929504
       Room_Builder_Arched_Entryways_32x32_48: 519054720
@@ -5480,16 +5480,16 @@ TextureImporter:
       Room_Builder_Arched_Entryways_32x32_84: 1857452041
       Room_Builder_Arched_Entryways_32x32_224: 1789914222
       Room_Builder_Arched_Entryways_32x32_21: -1434318697
+      Room_Builder_Arched_Entryways_32x32_212: 2054628557
       Room_Builder_Arched_Entryways_32x32_206: 721679875
       Room_Builder_Arched_Entryways_32x32_50: -391096088
-      Room_Builder_Arched_Entryways_32x32_57: -1417072339
       Room_Builder_Arched_Entryways_32x32_77: -1019133514
+      Room_Builder_Arched_Entryways_32x32_57: -1417072339
       Room_Builder_Arched_Entryways_32x32_200: 1953922118
-      Room_Builder_Arched_Entryways_32x32_212: 2054628557
-      Room_Builder_Arched_Entryways_32x32_233: 6791052
-      Room_Builder_Arched_Entryways_32x32_38: 536048178
       Room_Builder_Arched_Entryways_32x32_236: 1425533604
+      Room_Builder_Arched_Entryways_32x32_38: 536048178
       Room_Builder_Arched_Entryways_32x32_106: -1421530870
+      Room_Builder_Arched_Entryways_32x32_233: 6791052
       Room_Builder_Arched_Entryways_32x32_242: -1569549457
       Room_Builder_Arched_Entryways_32x32_209: -1513388689
       Room_Builder_Arched_Entryways_32x32_229: -1464599597
@@ -5550,8 +5550,8 @@ TextureImporter:
       Room_Builder_Arched_Entryways_32x32_72: 1973056391
       Room_Builder_Arched_Entryways_32x32_197: 1835808859
       Room_Builder_Arched_Entryways_32x32_62: 2116700395
-      Room_Builder_Arched_Entryways_32x32_70: 520851729
       Room_Builder_Arched_Entryways_32x32_174: 1490931998
+      Room_Builder_Arched_Entryways_32x32_70: 520851729
       Room_Builder_Arched_Entryways_32x32_16: 2113386056
       Room_Builder_Arched_Entryways_32x32_10: -1251467587
       Room_Builder_Arched_Entryways_32x32_55: -1573687369
