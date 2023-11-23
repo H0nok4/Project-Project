@@ -4,7 +4,7 @@ using ConfigType;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NPCBase : WorldObject,ICharacterBase, IHandleParty {
+public class NPCBase : WorldObject,ICharacterBase, IHandleParty, IInteractive {
     [SerializeField] 
     public int ID;
     public string Name { get; set; }
@@ -42,25 +42,41 @@ public class NPCBase : WorldObject,ICharacterBase, IHandleParty {
 
     }
 
-    public virtual void OnTriggerEnter2D(Collider2D col) {
+    public void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             Debug.Log("玩家进入范围内");
+            OnPlayerEnterTrigger();
         }
-
-        ;
-        
     }
-    public virtual void OnTrigger()
+
+    public virtual void OnPlayerEnterTrigger() {
+        EventManager.Instance.TriggerEvent<IInteractive>(EventDef.PlayerEnterNPCTrigger,this);
+    }
+
+    public void OnTriggerExit2D(Collider2D col) {
+        if (col.gameObject.CompareTag("Player")) {
+            Debug.Log("玩家离开范围内");
+            OnPlayerExitTrigger();
+        }
+    }
+
+    public virtual void OnPlayerExitTrigger() {
+        EventManager.Instance.TriggerEvent<IInteractive>(EventDef.PlayerExitNPCTrigger,this);
+    }
+
+    public bool CanContact => true;
+
+    public override void OnTrigger()
     {
 
     }
 
-    public virtual void OnDestroy()
+    public override void OnDestroy()
     {
 
     }
 
-    public virtual void OnSpawn()
+    public override void OnSpawn()
     {
 
     }

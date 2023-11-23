@@ -13,6 +13,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour {
                     instance = singletonObject.AddComponent<T>();
                     singletonObject.name = typeof(T).ToString();
                     DontDestroyOnLoad(singletonObject);
+                    
                 }
             }
 

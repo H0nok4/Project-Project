@@ -1,12 +1,14 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public interface IInteractive
-{
-    public void OnTrigger();
 
-    public void OnDestroy();
+public interface IInteractive {
+    public bool CanContact { get; }
+    public void OnTrigger() {
 
-    public void OnSpawn();
+    }
 }
+

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Base;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +9,7 @@ namespace UI.Battle
         public override void OnPointerClick(PointerEventData eventData)
         {
             base.OnPointerClick(eventData);
-            Debug.Log("½áÊø»ØºÏ°´Å¥±»°´ÏÂ");
+            Debug.Log("ç»“æŸå›åˆæŒ‰é’®è¢«æŒ‰ä¸‹");
             EventManager.Instance.TriggerEvent(EventDef.OnClickBattleEndTurnButton);
         }
     }

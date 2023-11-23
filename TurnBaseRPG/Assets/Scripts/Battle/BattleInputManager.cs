@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Base;
 using UnityEngine;
 
 public class PlayerInputContext

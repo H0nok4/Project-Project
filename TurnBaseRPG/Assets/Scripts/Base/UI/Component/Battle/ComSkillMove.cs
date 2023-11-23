@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Base;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,7 +23,7 @@ namespace UI.Battle
         public void Refresh(SkillCard skill)
         {
             Skill = skill;
-            //TODO:ºóÃæ»¹ÒªË¢ĞÂÌùÍ¼
+            //TODO:åé¢è¿˜è¦åˆ·æ–°è´´å›¾
             //ImageSkillIcon.sprite =
             TxtSkillDes.text = skill.Define.SkillDes;
             TxtSkillPointCost.text = skill.Define.Cost.ToString();
@@ -34,12 +33,12 @@ namespace UI.Battle
         {
             if (Skill == null)
             {
-                //TODO:µã»÷¼¼ÄÜ¿¨µÄÊ±ºòÃ»ÓĞ
-                Debug.LogError("µã»÷¼¼ÄÜ¿¨Ê±Ã»ÓĞ¼¼ÄÜ");
+                //TODO:ç‚¹å‡»æŠ€èƒ½å¡çš„æ—¶å€™æ²¡æœ‰
+                Debug.LogError("ç‚¹å‡»æŠ€èƒ½å¡æ—¶æ²¡æœ‰æŠ€èƒ½");
                 return;
             }
 
-            Debug.Log($"µã»÷ÁË¼¼ÄÜ¿¨,¼¼ÄÜ¿¨Ãû³ÆÎª£º{Skill.Define.SkillName}");
+            Debug.Log($"ç‚¹å‡»äº†æŠ€èƒ½å¡,æŠ€èƒ½å¡åç§°ä¸ºï¼š{Skill.Define.SkillName}");
             EventManager.Instance.TriggerEvent<SkillCard>(EventDef.OnClickBattleCard,Skill);
         }
     }
