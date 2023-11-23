@@ -162,7 +162,7 @@ public class EventManager : MonoSingleton<EventManager> {
         }
     }
 
-    // 添加更多重载方法以支持不同数量的泛型参数
+    // 娣诲姞鏇村閲嶈浇鏂规硶浠ユ敮鎸佷笉鍚屾暟閲忕殑娉涘瀷鍙傛暟
     public void AddListener<T1, T2, T3>(string eventName, UnityAction<T1, T2, T3> listener) {
         if (!eventDictionary.ContainsKey(eventName)) {
             eventDictionary.Add(eventName, new List<UnityEventBase>());
