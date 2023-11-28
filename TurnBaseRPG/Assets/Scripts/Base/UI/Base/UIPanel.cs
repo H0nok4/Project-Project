@@ -77,7 +77,7 @@ namespace UI
                 return uiComponent;
             }
             catch (Exception e) {
-                Debug.LogError($"获取UIComponent时出现错误，错误Index为：{index},{e}");
+                Debug.LogError($"鑾峰彇UIComponent鏃跺嚭鐜伴敊璇紝閿欒Index涓猴細{index},{e}");
                 throw;
             }
 

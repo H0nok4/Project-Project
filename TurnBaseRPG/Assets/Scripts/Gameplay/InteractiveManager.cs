@@ -6,7 +6,7 @@ public class InteractiveManager : MonoSingleton<InteractiveManager> {
     public List<IInteractive> InteractiveObject = new List<IInteractive>();
 
     public void Start() {
-        EventManager.Instance.AddListener<IInteractive>(EventDef.PlayerEnterNPCTrigger, AddNPCInteract);
+        EventManager.Instance.AddListener<IInteractive>(EventDef.PlayerEnterNPCTrigger,AddNPCInteract);
         EventManager.Instance.AddListener<IInteractive>(EventDef.PlayerExitNPCTrigger,RemoveNPCInteract);
     }
 
