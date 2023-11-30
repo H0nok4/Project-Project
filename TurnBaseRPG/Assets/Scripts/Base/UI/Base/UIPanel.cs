@@ -8,6 +8,8 @@ using UnityEngine.UI;
 namespace UI
 {
     public abstract class UIPanel : MonoBehaviour {
+        public RectTransform Rect;
+
         private bool _inited = false;
 
         protected bool _disposed = false;
@@ -35,6 +37,7 @@ namespace UI
 
         private void Init() {
             InitInstance();
+            Rect = GetComponent<RectTransform>();
             OnInit();
 
             _inited = true;

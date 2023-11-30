@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 public class Game : MonoBehaviour
 {
     public UIPanel Test_BattlePanel;
+    public UIPanel Test_MainPanel;
     public Player Player;
     public NPCBase TestEnemy;
 
@@ -42,7 +43,7 @@ public class Game : MonoBehaviour
         ConfigType.DataManager.Instance.InitConfigs();
         ConfigType.DataManager.Instance.InitResources();
         UIManager.Instance.Init();
-
+        UIManager.Instance.Show(Test_MainPanel);
 
         if (BattleTest) {
             //TODO:测试

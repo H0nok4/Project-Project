@@ -19,12 +19,17 @@ namespace UI
         }
 
         public void Show(UIPanel uiPanel) {
+            var panelObject = GameObject.Instantiate(uiPanel, Vector3.zero, Quaternion.identity);
+            
             if (UIStack.Count > 0) {
                 var topPanel = UIStack.Last();
                 topPanel.Hide();
             }
-            UIStack.Add(uiPanel);
-            uiPanel.Show();
+            UIStack.Add(panelObject);
+            panelObject.Show();
+
+            panelObject.Rect.SetParent(UICanvas.transform);
+            panelObject.Rect.localPosition = Vector3.zero;
         }
 
         public void CloseCurrent() {
