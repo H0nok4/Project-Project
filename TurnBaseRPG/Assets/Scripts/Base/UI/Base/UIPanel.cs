@@ -85,6 +85,11 @@ namespace UI
             }
 
         }
+        public UIList GetUIListAtChildIndex(int index) {
+            var uiList = transform.GetChild(index).GetComponent<UIList>();
+            uiList.Init();
+            return uiList;
+        }
 
         public abstract void InitInstance();
     }

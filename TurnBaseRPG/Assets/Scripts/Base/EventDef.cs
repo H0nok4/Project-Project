@@ -11,5 +11,7 @@ public static class EventDef {
     public const string PopupDamageText = "Event_PopupDamageText";
     public const string PlayerEnterNPCTrigger = "Event_PlayerEnterNPCTrigger";
     public const string PlayerExitNPCTrigger = "Event_PlayerExitNPCTrigger";
+    public const string OnAddInteract = "Event_OnAddInteract";
+    public const string OnRemoveInteract = "Event_OnRemoveInteract";
 }
 

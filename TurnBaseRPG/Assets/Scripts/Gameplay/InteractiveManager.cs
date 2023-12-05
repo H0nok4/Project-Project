@@ -16,6 +16,7 @@ public class InteractiveManager : MonoSingleton<InteractiveManager> {
         }
         InteractiveObject.Add(obj);
         Debug.Log($"增加一个互动弹窗,当前玩家靠近了{InteractiveObject.Count}个可互动物体");
+        EventManager.Instance.TriggerEvent(EventDef.OnAddInteract);
     }
 
     private void RemoveNPCInteract(IInteractive obj) {
@@ -25,6 +26,7 @@ public class InteractiveManager : MonoSingleton<InteractiveManager> {
 
         InteractiveObject.Remove(obj);
         Debug.Log($"移除一个互动弹窗,当前玩家靠近了{InteractiveObject.Count}个可互动物体");
+        EventManager.Instance.TriggerEvent(EventDef.OnAddInteract);
     }
 
 }

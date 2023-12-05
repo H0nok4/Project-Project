@@ -12,7 +12,7 @@ namespace UI
         private GameObject _contentGameObject;
         private GridLayoutGroup _contentLayoutGroup;
 
-        [Header("ÁĞ±íÊ¹ÓÃµÄ×ÓÎïÌå£¨ÁÙÊ±£©")]
+        [Header("åˆ—è¡¨ä½¿ç”¨çš„å­ç‰©ä½“ï¼ˆä¸´æ—¶ï¼‰")]
         public GameObject ListChildrenInstance;
 
         public int ChildCount {
@@ -41,7 +41,7 @@ namespace UI
 
         public void AddChild(UIComponent child) {
             ChildList.Add(child);
-            //TODO:ĞèÒª¼Óµ½ContextÎïÌåÏÂ
+            //TODO:éœ€è¦åŠ åˆ°Contextç‰©ä½“ä¸‹
             child.transform.SetParent(_contentGameObject.transform);
             child.transform.localPosition = Vector3.zero;
             child.transform.localScale = Vector3.one;
@@ -73,7 +73,7 @@ namespace UI
         public void RemoveChild(UIComponent child) {
             var removed = ChildList.Remove(child);
             child.transform.SetParent(null);
-            //TODO:ĞèÒªÍ¶Èëµ½¶ÔÏó³ØÖĞ£¬»òÕßÖ±½ÓÏú»Ù,ÕâÀïÏÈÖ±½ÓÏú»Ù
+            //TODO:éœ€è¦æŠ•å…¥åˆ°å¯¹è±¡æ± ä¸­ï¼Œæˆ–è€…ç›´æ¥é”€æ¯,è¿™é‡Œå…ˆç›´æ¥é”€æ¯
             if (removed) {
                 Destroy(child.gameObject);
             }
@@ -93,8 +93,10 @@ namespace UI
         public override void InitInstance() {
             _contentGameObject = transform.GetChild(0).GetChild(0).gameObject;
             _contentLayoutGroup = _contentGameObject.GetComponent<GridLayoutGroup>();
-
-            //TODO:Çå¿ÕÒ»ÏÂÏÖÓĞµÄChild
+            if (_contentLayoutGroup is null) {
+                //TODO:åé¢è¦å¯ä»¥é€‰æ‹©é™„åŠ å“ªç§æ’åˆ—ç»„ä»¶
+            }
+            //TODO:æ¸…ç©ºä¸€ä¸‹ç°æœ‰çš„Child
             var childCount = _contentGameObject.transform.childCount;
             for (int i = childCount - 1; i >= 0; i--) {
                 var child = _contentGameObject.transform.GetChild(i).gameObject;
