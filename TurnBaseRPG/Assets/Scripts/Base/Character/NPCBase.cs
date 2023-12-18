@@ -7,7 +7,8 @@ using UnityEngine;
 public class NPCBase : WorldObject,ICharacterBase, IHandleParty, IInteractive {
     [SerializeField] 
     public int ID;
-    public string Name { get; set; }
+
+    public string Name => Define.Name;
     public NPCBaseDefine Define => DataManager.Instance.GetNPCBaseDefineByID(ID);
     public List<PokeGirl> BattleParty { get; set; }
 
@@ -64,6 +65,7 @@ public class NPCBase : WorldObject,ICharacterBase, IHandleParty, IInteractive {
         EventManager.Instance.TriggerEvent<IInteractive>(EventDef.PlayerExitNPCTrigger,this);
     }
 
+    public string ShowName => Define.Name;
     public bool CanContact => true;
 
     public override void OnTrigger()

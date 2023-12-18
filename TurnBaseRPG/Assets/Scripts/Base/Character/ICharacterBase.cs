@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICharacterBase
 {
-    public string Name { get; set; }
+    public string Name { get;}
 
     public void OnDefeated();
 

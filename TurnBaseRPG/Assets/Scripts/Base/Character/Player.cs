@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Player : ICharacterBase,IHandleParty
 {
-    public string Name { get; set; }
+    public string Name { get;}
     public List<PokeGirl> BattleParty { get; set; } = new List<PokeGirl>();
     public void OnDefeated()
     {
-        //TODO:Õ½°ÜÁË½øÈëÕ½°ÜÁ÷³Ì,¿ÉÄÜÊÇ´¥·¢Õ½°ÜÊÂ¼ş£¬ÊÂ¼ş½áÊøºó»èÃÔ»Øµ½×î½üÒ»´Î×¢²áµÄ°²È«µã
+        //TODO:æˆ˜è´¥äº†è¿›å…¥æˆ˜è´¥æµç¨‹,å¯èƒ½æ˜¯è§¦å‘æˆ˜è´¥äº‹ä»¶ï¼Œäº‹ä»¶ç»“æŸåæ˜è¿·å›åˆ°æœ€è¿‘ä¸€æ¬¡æ³¨å†Œçš„å®‰å…¨ç‚¹
     }
 
     public void OnVictory()
     {
-        //TODO:Ê¤ÀûÁË½øÈëÊ¤ÀûÁ÷³Ì
+        //TODO:èƒœåˆ©äº†è¿›å…¥èƒœåˆ©æµç¨‹
     }
 
     public void OnBattleStart()
     {
-        //TODO:¿ÉÄÜÓĞÊ²Ã´µÀ¾ß»òÕßÊÂ¼ş»áÔÚÕ½¶·¿ªÊ¼Ê±´¥·¢
+        //TODO:å¯èƒ½æœ‰ä»€ä¹ˆé“å…·æˆ–è€…äº‹ä»¶ä¼šåœ¨æˆ˜æ–—å¼€å§‹æ—¶è§¦å‘
     }
 
     public void OnBattleEnd()
     {
-        //TODO:Í¬Àí£¬¿ÉÄÜÓĞÊ²Ã´µÀ¾ß»òÕßÊÂ¼ş»áÔÚÕ½¶·½áÊøÊ±´¥·¢
+        //TODO:åŒç†ï¼Œå¯èƒ½æœ‰ä»€ä¹ˆé“å…·æˆ–è€…äº‹ä»¶ä¼šåœ¨æˆ˜æ–—ç»“æŸæ—¶è§¦å‘
     }
 }
