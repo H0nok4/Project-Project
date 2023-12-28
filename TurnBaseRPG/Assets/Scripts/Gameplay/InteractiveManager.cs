@@ -24,7 +24,7 @@ public class InteractiveManager : MonoSingleton<InteractiveManager> {
             return;
         }
 
-a        InteractiveObject.Remove(obj);
+        InteractiveObject.Remove(obj);
         Debug.Log($"移除一个互动弹窗,当前玩家靠近了{InteractiveObject.Count}个可互动物体");
         EventManager.Instance.TriggerEvent(EventDef.OnRemoveInteract);
     }
